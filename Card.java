@@ -20,6 +20,7 @@ public class Card {
     private Suit suit;
     private String image;
     private int value;
+    protected ArrayList<Card> deck = new ArrayList<Card>();
 
     /** Creates a new instance of Card */
     public Card() {

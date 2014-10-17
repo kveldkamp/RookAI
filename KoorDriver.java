@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 
 public class KoorDriver {
    
@@ -9,13 +11,6 @@ public class KoorDriver {
       players[2] = new NPC();
       players[3] = new RPC();
 
-<<<<<<< HEAD
-   
-      Player [] players = new Player[4];
-      players[0] = new NPC();
-      players[1] = new NPC();
-      players[2] = new NPC();
-      players[3] = new RPC();
       
       //make the 44 cards with assigned values
       //deal the cards to the players
@@ -40,7 +35,7 @@ public class KoorDriver {
       
   }
       
- }
+}
 
 
 //      Player [] players = new Player[4];
@@ -58,9 +53,24 @@ public class KoorDriver {
 
 }
 
-=======
       
+      
+public void makeDeck(){
+    	  for(enum suit=0;suit<4;suit++)
+    	  {
+    		  for(int i=0;i<14;i++){
+    			  Card card = new Card(i,suit);
+    			  deck.push(card);
+    			   
+    		  }
+    		  
+      }
+    	  System.out.println(deck);
+
+    	  //make rook card
+    	  // Card card = new Card(rookStuff)
+} 
       
    }
 }
->>>>>>> FETCH_HEAD
+
