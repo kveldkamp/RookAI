@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class RPC extends Player {
+public class RPC extends NPC {
 
    Scanner scan = new Scanner(System.in);
 
