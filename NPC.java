@@ -28,7 +28,7 @@ public class NPC extends Player {
     /**
      * The amount that we bid, if we were the winning bidder.
      */
-    protected int bidAmount;
+    private int bidAmount;
 
     //begin methods
 
@@ -112,41 +112,28 @@ public class NPC extends Player {
      * New system:  Count rank of cards, boost for multiplicity of suit, and decide then.
      */
     public void bidOrPass(boolean bid) {
-    	//COMMENT THIS OUT IF NECESSARY
-        Random generator = new Random();
+        /*Random generator = new Random();
         int num = generator.nextInt(2);
         if (num == 1) {
             bidding = false;
-        }
-        //ENDHERE
+        }*/
         //handValue = determineHandStrength();
         //longestSuitLength = longestSuit();
-        else{
-        	bidding = bid;
-        
-        }
+        bidding = bid;
     }
 
     /**
      * Choose an amount to bid.
      * @param highBid The current high bid.
      * @return The amount to bid.
-     * 
-     * We need to make sure that 100 <= highBid <= 200
      */
     public int bid(int highBid) {
         // bid 100 if we're the first to bid, otherwise bid the high bid + 5
         if(highBid == 0) {
             return 100;
         } else {
-        	if(highBid <= 195)
-        		return highBid + 5;
-        	else{
-      		   System.out.println("Ur bid was not in range");
-      		   return 0;
-        	}
+            return highBid + 5;
         }
-        
     }
 
     /**
@@ -156,7 +143,6 @@ public class NPC extends Player {
     public void setHighBidder(int amount) {
         //setBidWinner();
         bidAmount = amount;
-        System.out.println("bidamount is" + bidAmount);
     }
 
     /**

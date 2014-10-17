@@ -42,8 +42,6 @@ public class Player {
      * The name of the player that is displayed on the GUI
      */
     protected String name;
-    
-    protected int bidAmount;
 
     /** Creates a new instance of Player */
     public Player() {
@@ -109,28 +107,6 @@ public class Player {
     public boolean getBidStatus () {
         return bidding;
     }
-    //Maybe delete later
-    public int bid(int highBid) {
-        // bid 100 if we're the first to bid, otherwise bid the high bid + 5
-    	return 0;	
-    }
-    
-    public void bidOrPass(boolean bid) {
-    	System.out.println("This is a fail");
-    	
-    }
-    //end
-    
-    public void setHighBidder(int amount) {
-        //setBidWinner();
-        //bidAmount = amount;
-    }
-    
-    public int playFollowLeadCard(Card trick[]){
-    	return 0;
-    }
-    
-
 
     /**
      * Retrieves a specific card from a player objects hand array using a index that is passed into the function.
