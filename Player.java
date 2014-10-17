@@ -479,4 +479,31 @@ public class Player {
                 return false;
         return true;
     }
+    
+   public int lead(){return 0;}
+   
+   public int playFollowLeadCard(Card trick[]) {return 0;}
+   
+    public int getValidFollowMaxIndex(Card trick[]){return 0;}
+    
+    public Card[] getValidFollowCards(Card trick[]){return new Card[15];}
+
+   
+   //Play method to move play to the left, check validity of and play card
+    //remove card from players hand, reorganize hand
+    //add what was played to current trick array
+    public Card[] Play(Card trick[], int IndexOfPlayer)
+    {
+      int indexToPlay=playFollowLeadCard(trick);
+      Card cardToPlay = hand[indexToPlay];
+      trick[IndexOfPlayer]=cardToPlay;
+      hand[indexToPlay]= null;
+      System.out.println("Check value being passed in to sort "+ getValidFollowMaxIndex(hand));//check value being passed in to sort Hand()
+      sortHand(getValidFollowMaxIndex(hand));
+      
+      return trick;
+    }
+
+   
+
 }

@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class RPC extends NPC {
+public class RPC extends Player {
 
    Scanner scan = new Scanner(System.in);
 
@@ -24,7 +24,7 @@ public class RPC extends NPC {
      * @param trick The cards that have been played already in the current trick.
      * @return The position in our hand of the card chosen.
      */
-    public int playFollowLeadCard(Card trick[]) {
+      public int playFollowLeadCard(Card trick[]) {
         // track acceptable responses and figure out play.
         Card[] validCards = new Card[15];
         int maxIndex = -1;
@@ -50,4 +50,5 @@ public class RPC extends NPC {
         return cardToPlay;
      }
 
-}
+
+   }

@@ -610,9 +610,9 @@ public class NPC extends Player {
 			// compile list of cards in hand, have rules based on list
 			for (int i = 0; i<15; i++) {
 				if (hand[i] != null) {
-                                        maxIndex++;
-                                        validFollowCards[maxIndex] = hand[i];
-                                        card = hand[i];
+                 maxIndex++;
+                 validFollowCards[maxIndex] = hand[i];
+                 card = hand[i];
 				}
 			}
         }
