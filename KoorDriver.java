@@ -10,8 +10,12 @@ public class KoorDriver {
       players[1] = new NPC();
       players[2] = new NPC();
       players[3] = new RPC();
+<<<<<<< HEAD
 
       
+=======
+            
+>>>>>>> FETCH_HEAD
       //make the 44 cards with assigned values
       //deal the cards to the players
       Card [] currentTrick = new Card[4];
@@ -38,23 +42,18 @@ public class KoorDriver {
 }
 
 
-//      Player [] players = new Player[4];
-//      players[0] = new NPC();
-//      players[1] = new NPC();
-//      players[2] = new NPC();
-//      players[3] = new RPC();
 	   
-	   Game game = new Game();
-	   game.Bidding();
+	   //Game game = new Game();
+	   //game.Bidding();
       
-   }
+ 
    
    
 
-}
 
       
       
+<<<<<<< HEAD
 public void makeDeck(){
     	  for(enum suit=0;suit<4;suit++)
     	  {
@@ -74,3 +73,6 @@ public void makeDeck(){
    }
 }
 
+=======
+  
+>>>>>>> FETCH_HEAD
