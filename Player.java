@@ -38,6 +38,7 @@ public class Player {
      * States true if the player is still bidding and false if the player has passed
      */
     protected boolean bidding = true;
+    int bidAmount;
     /**
      * The name of the player that is displayed on the GUI
      */
@@ -487,7 +488,13 @@ public class Player {
     public int getValidFollowMaxIndex(Card trick[]){return 0;}
     
     public Card[] getValidFollowCards(Card trick[]){return new Card[15];}
+    
+    public void bidOrPass(boolean bid){}
+    public int bid(int highBid){
+    	return 0;
+    }
 
+    public void setHighBidder(int amount){}
    
    //Play method to move play to the left, check validity of and play card
     //remove card from players hand, reorganize hand

@@ -112,14 +112,16 @@ public class NPC extends Player {
      * New system:  Count rank of cards, boost for multiplicity of suit, and decide then.
      */
     public void bidOrPass(boolean bid) {
-        /*Random generator = new Random();
+        Random generator = new Random();
         int num = generator.nextInt(2);
         if (num == 1) {
             bidding = false;
-        }*/
+        }
         //handValue = determineHandStrength();
         //longestSuitLength = longestSuit();
-        bidding = bid;
+        else{
+        	bidding = bid;
+        }
     }
 
     /**

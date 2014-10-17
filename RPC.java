@@ -1,8 +1,61 @@
 import java.util.*;
 
-public class RPC extends NPC {
+public class RPC extends Player {
 
    Scanner scan = new Scanner(System.in);
+   
+   /**
+    * Choose an amount to bid.
+    * @param highBid: The current high bid.
+    * @return The amount to bid.
+    */
+   public int bid(int highBid) {
+	   System.out.println("Enter your bid, your bid needs to be higher than the current high in multiples of 5: " + highBid);
+	   int bid = scan.nextInt();
+	   //throw exceptions if it's not a multiple of 5, below 100, or above 200 or if its not a number. 
+	   if(bid >= 100 && bid <= 200 && bid%5 == 0){
+		   return bid;
+	   }
+	   else{
+		   System.out.println("Ur bid was not in range");
+		   return 0;
+	   }
+   }
+   
+   /**
+    * Give player option to bid or pass
+    * @param bid
+    * @return none
+    */
+   public void bidOrPass(boolean bid) {
+   	//COMMENT THIS OUT IF NECESSARY
+	   if(bid == true){
+       System.out.println("Input 1 if you'd like to bid, 0 if you'd like to pass");
+       int num = scan.nextInt(2);
+       if (num == 0) {
+           bidding = false;
+       }
+       //ENDHERE
+       //handValue = determineHandStrength();
+       //longestSuitLength = longestSuit();
+//       else{
+//    	   bidding = bid;
+//       }
+	   }
+
+   }
+
+   /*
+    * (non-Javadoc)
+    * @see NPC#setHighBidder(int)
+    */
+   public void setHighBidder(int amount) {
+       //setBidWinner();
+       bidAmount = amount;
+       System.out.println("bidamount is" + bidAmount);
+   }
+   
+   
 
    public Card.Suit chooseTrump() {
       System.out.println("Hello");
