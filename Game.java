@@ -104,7 +104,7 @@ public class Game {
 		  }
 		 
 //		  System.out.println(deck.get(9).getValue());
-//		  System.out.println(deck.get(9).getScore());
+//	  System.out.println(deck.get(9).getScore());
 	
 		  long seed = System.nanoTime();
 		  Collections.shuffle(deck, new Random(seed));
