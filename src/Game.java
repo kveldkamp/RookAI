@@ -1,3 +1,7 @@
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+
 /*
  * Game.java
  *
@@ -8,6 +12,7 @@ public class Game {
 	Player [] players = new Player[4];
 	int winner = 0;  
 	Card [] currentTrick = new Card[4];
+	protected ArrayList<Card> deck = new ArrayList<Card>();
 	
 	
 	public Game(){
@@ -80,19 +85,34 @@ public class Game {
 	  }
 	}
 	
-//	public void makeDeck(){
-//	  for(enum suit=0;suit<4;suit++)
-//	  {
-//		  for(int i=0;i<14;i++){
-//			  Card card = new Card(i,suit);
-//			  deck.push(card);
-//			   
-//		  }
-//		  
-//}
-//	  System.out.println(deck);
-//
-//	  //make rook card
-//	  // Card card = new Card(rookStuff)
-//} 
+/** 
+ * makeDeck method iterates through all suits (skipping NOSUIT) and creates 1-14 in each suit
+ * deck is filled and shuffled after completion of this method
+ */
+	public void makeDeck(){
+		
+		  for (Card.Suit suit : Card.Suit.values()){
+			if(suit!=Card.Suit.NOSUIT){
+				
+				for(int i=1;i<=14;i++){
+				  	Card card = new Card();
+				  	card.setCard(suit,i);
+				  	deck.add(card);
+				  	
+				  	}
+			 }
+		  }
+		 
+//		  System.out.println(deck.get(9).getValue());
+//		  System.out.println(deck.get(9).getScore());
+	
+		  long seed = System.nanoTime();
+		  Collections.shuffle(deck, new Random(seed));
+		  
+	  }	  
+	
+	
+	
 }
+
+

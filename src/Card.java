@@ -20,7 +20,7 @@ public class Card {
     private Suit suit;
     private String image;
     private int value;
-    protected ArrayList<Card> deck = new ArrayList<Card>();
+    
 
     /** Creates a new instance of Card */
     public Card() {
@@ -83,6 +83,7 @@ public class Card {
     public Suit getSuit () {
         return suit;
     }
+    
 
     /**
 	 * Determines the score for taking the card as part of a trick.
