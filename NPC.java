@@ -28,7 +28,6 @@ public class NPC extends Player {
     /**
      * The amount that we bid, if we were the winning bidder.
      */
-    private int bidAmount;
 
     //begin methods
 

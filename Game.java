@@ -48,7 +48,7 @@ public class Game {
 		       		  players[i].setHighBidder(highBid);
 		       		  players[i].winningBiddingTeam = true;
 		       		  winner = i; //This holds the winning bidder
-		       		  System.out.println(players[i].bidAmount);
+		       		  System.out.println(players[i].bidAmount); //This does not output the high bid correctly
 		       		  break;
 		       	  	}  
 		     		  
