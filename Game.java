@@ -91,20 +91,29 @@ public class Game {
  */
 	public void makeDeck(){
 		
+		
+		//reminder, add in some code to add the value from 0-44 but also keep the card number
 		  for (Card.Suit suit : Card.Suit.values()){
 			if(suit!=Card.Suit.NOSUIT){
 				
 				for(int i=1;i<=14;i++){
+					if(i==1){
 				  	Card card = new Card();
 				  	card.setCard(suit,i);
 				  	deck.add(card);
-				  	
+					}
+						if(i>4){
+						Card card = new Card();
+					  	card.setCard(suit,i);
+					  	deck.add(card);
+						}
 				  	}
+				  	
 			 }
 		  }
 		 
-//		  System.out.println(deck.get(9).getValue());
-//	  System.out.println(deck.get(9).getScore());
+		  System.out.println(deck.get(0).getValue());
+	  System.out.println(deck.get(0).getScore());
 	
 		  long seed = System.nanoTime();
 		  Collections.shuffle(deck, new Random(seed));
