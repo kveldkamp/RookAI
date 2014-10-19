@@ -111,6 +111,7 @@ public class NPC extends Player {
      * New system:  Count rank of cards, boost for multiplicity of suit, and decide then.
      */
     public void bidOrPass(boolean bid) {
+    	//50/50 chance of bid or pass
         Random generator = new Random();
         int num = generator.nextInt(2);
         if (num == 1) {
@@ -121,6 +122,7 @@ public class NPC extends Player {
         else{
         	bidding = bid;
         }
+        
     }
 
     /**
@@ -132,7 +134,9 @@ public class NPC extends Player {
         // bid 100 if we're the first to bid, otherwise bid the high bid + 5
         if(highBid == 0) {
             return 100;
-        } else {
+        }
+        //Make sure highbid won't exceed 200
+        else{
             return highBid + 5;
         }
     }

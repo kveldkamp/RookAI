@@ -4,22 +4,42 @@ public class RPC extends Player {
 
    Scanner scan = new Scanner(System.in);
    
+   
+   /**
+    * Choose a suit to be the trump (called if we win the bidding).
+    * @return The chosen suit.
+    */
+
+   
    /**
     * Choose an amount to bid.
     * @param highBid: The current high bid.
     * @return The amount to bid.
     */
    public int bid(int highBid) {
-	   System.out.println("Enter your bid, your bid needs to be higher than the current high in multiples of 5: " + highBid);
-	   int bid = scan.nextInt();
-	   //throw exceptions if it's not a multiple of 5, below 100, or above 200 or if its not a number. 
-	   if(bid >= 100 && bid <= 200 && bid%5 == 0){
-		   return bid;
-	   }
-	   else{
-		   System.out.println("Ur bid was not in range");
-		   return 0;
-	   }
+	   System.out.println("Enter your bid, your bid needs to be between 100-200 and higher than the current high in multiples of 5: " + highBid);
+	   int bid = 0;
+	   
+	   boolean validinput = false;
+	   //loop until they give a valid input within the range & multiple of 5 & greater than highbid
+	    while (!validinput) {
+	        try {
+	        	Scanner scanbid = new Scanner(System.in);
+	            bid = scanbid.nextInt();
+	            if (bid < 100 || bid > 200 || bid%5 != 0 || bid <= highBid) {
+	                System.out.println("Not in range/multiple of 5/higher than highbid, try again:");
+	            }
+	            else {
+	               validinput = true;
+	            }
+	        }
+	        //Throws exception if a number isn't inputted
+	        catch (InputMismatchException I) {
+	            System.out.println("Not a number, try again:");
+	        }
+	    }   
+	    return bid;
+	   
    }
    
    /**
@@ -28,19 +48,13 @@ public class RPC extends Player {
     * @return none
     */
    public void bidOrPass(boolean bid) {
-   	//COMMENT THIS OUT IF NECESSARY
+	   //This does not throw exceptions for out of range (0-1) or InputMismatch: shouldn't matter with a GUI
 	   if(bid == true){
-       System.out.println("Input 1 if you'd like to bid, 0 if you'd like to pass");
+		   System.out.println("Input 1 if you'd like to bid, 0 if you'd like to pass");
        int num = scan.nextInt(2);
        if (num == 0) {
            bidding = false;
-       }
-       //ENDHERE
-       //handValue = determineHandStrength();
-       //longestSuitLength = longestSuit();
-//       else{
-//    	   bidding = bid;
-//       }
+       	}
 	   }
 
    }
@@ -56,10 +70,27 @@ public class RPC extends Player {
    }
    
    
-
+   /**
+    * Give player option of choosing trump
+    * @param none
+    * @return the Trump Card Suit
+    */
    public Card.Suit chooseTrump() {
-      System.out.println("Hello");
-      return Card.Suit.NOSUIT;
+      System.out.println("Please pick the trump color: RED, BLUE, GREEN, BLACK");
+      boolean trumpvalid = false;
+      Card.Suit trumpcolor = null;
+      while(!trumpvalid){
+	        try {
+	        	Scanner scantrump = new Scanner(System.in);
+	        	trumpcolor = Card.Suit.valueOf(scantrump.nextLine());
+	        	trumpvalid = true;
+      
+	        }
+	        catch(IllegalArgumentException I) {
+	            System.out.println("Not a suit color, try again:");
+	        }
+      }
+      return trumpcolor;
    }
    
    // Returns the index of the card to be led in the hand

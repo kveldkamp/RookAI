@@ -12,6 +12,7 @@ public class Game {
 	Player [] players = new Player[4];
 	int winner = 0;  
 	Card [] currentTrick = new Card[4];
+	Card.Suit trumpcolor; 
 	protected ArrayList<Card> deck = new ArrayList<Card>();
 	
 	
@@ -30,38 +31,62 @@ public class Game {
 	public void Bidding(){
 		   //Issue 1: You have to bid again if every other player passes
 		   int highBid = 0;
-		   boolean bidwon = false; 
+		   boolean bidwon = false;
+		   bidwonloop:
 		   while(bidwon == false){
 		 	  int bidders = 4;
 		 	  for(int i = 0; i < players.length; i++){
+		 		  	  //This is called even if all the others passed: a bit should be set by default
+		 		  if(highBid <= 195 && bidders > 1){
 		 			  players[i].bidOrPass(players[i].bidding);
+		 			  //sets high bid or decrements bidders based on their bidding value
 		     		  if(players[i].bidding == true){
-		     			  highBid = players[i].bid(highBid);
-		     			  System.out.println("Bid Made");
-		     			  System.out.println("highBid: " + highBid);
-		     		  }
-		     		  else{
-		     			  System.out.println("This player passed...");
-		     			  bidders--;
+		     				  highBid = players[i].bid(highBid);
+		     				  winner = i; //Holds winner of bid
+		     				  //System.out.println("Bid Made");
+		     				  //System.out.println("highBid: " + highBid);
 		     			  
 		     		  }
+		     		  else{
+		     			  //System.out.println("This player passed...");
+		     			  bidders--;
+		     		  }
+		 		  }
+     			  
+		 		  if(highBid > 195 || bidders == 1){
 		     		//Only one bidder left; set winning bidder
-		       	  	if(bidders == 1){
+		       	  	//if(bidders == 1){
 		       		  bidwon = true;
-		       		  System.out.println("last bidder won");
-		       		  System.out.println("High bid is this at fin: " + highBid);
-		       		  players[i].setHighBidder(highBid);
-		       		  players[i].winningBiddingTeam = true;
-		       		  winner = i; //This holds the winning bidder
-		       		  System.out.println(players[i].bidAmount); //This does not output the high bid correctly
-		       		  break;
-		       	  	}  
-		     		  
-		     	}
-
-		 	  
-		   }
-		  
+		       		  //Set the high bidder with the highBid; winner holds the index of winner
+		       		  for(int b = 0; b < players.length; b++){
+			     		  if(players[b].bidding == true){
+			     			  //If everyone passed but one, set highBid to default to 100
+			     			  if(highBid == 0){
+			     				  highBid = 100;
+			     			  }
+			     			  System.out.println("last bidder won: player " + b);
+				       		  System.out.println("Are they bidding?: " + players[b].bidding);
+				       		  System.out.println("High bid is this at end: " + highBid);
+				       		  players[b].setHighBidder(highBid);
+				       		  players[b].winningBiddingTeam = true;
+				       		  //Set trump color
+				       		  trumpcolor = players[b].chooseTrump();
+				       		  System.out.println("Trump card: " + trumpcolor);
+				       		  //Set trump card for all players
+				       		  for(int a = 0; a < players.length; a++){
+				       			  players[a].setTrump(trumpcolor);
+				       			  //System.out.println("Player " + a + "knows that trump is " + players[a].getTrump());
+				       		  }
+				       		  
+				       		  
+				       		  //Need to set their teammate as winning as well
+				       		  //winner = b; //This holds the index of the winning player
+				       		  break bidwonloop;
+			     		  }
+		       		  }
+		       	  }   
+		     }
+		  }
 		  System.out.println("Done with bidding"); 
 	}
 		

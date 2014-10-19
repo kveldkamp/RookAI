@@ -186,6 +186,12 @@ public class Player {
     public Card.Suit getTrump() {
         return trumpSuit;
     }
+    
+    //Empty method: RPC and NPC override
+    public Card.Suit chooseTrump() {
+        System.out.println("This is in generic player class");
+        return Card.Suit.NOSUIT;
+    }
 
     /**
      * Store the data from a card played, received from GamePlayController,
