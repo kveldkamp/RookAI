@@ -20,6 +20,7 @@ public class Card {
     private Suit suit;
     private String image;
     private int value;
+    private int cardVal;
     
 
     /** Creates a new instance of Card */
@@ -107,4 +108,63 @@ public class Card {
 			}
 		}
 	}
+    /**
+     * Sets the physical number of the card based on it's "rank" just so that we have a function where we 
+     * actually know what cards a player actually has
+     */
+    public void setCardVal(){
+    	
+    	switch(getRank()){
+    		case 0:
+    			cardVal = 5;
+    		break;
+    		case 1:
+    			cardVal = 6;
+    		break;
+    		case 2:
+    			cardVal = 7;
+    		break;
+    		case 3:
+    			cardVal = 8;
+    		break;
+    		case 4:
+    			cardVal = 9;
+    		break;
+    		case 5:
+    			cardVal = 10;
+    		break;
+    		case 6:
+    			cardVal = 44;
+    		break;
+    		case 7:
+    			cardVal = 11;
+    		break;
+    		case 8:
+    			cardVal = 12;
+    		break;
+    		case 9:
+    			cardVal = 13;
+    		break;
+    		case 10:
+    			cardVal = 14;
+    		break;
+    		case 11:
+    			cardVal = 1;
+    		break;
+    		default:
+    			cardVal = 0;
+    			
+    	}
+    }
+    
+    
+    /**
+     * 
+     * @returns the actual number that would be on the physical card
+     */
+    public int getCardVal(){
+    	return cardVal;
+    }
 }
+
+

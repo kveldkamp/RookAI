@@ -115,37 +115,73 @@ public class Game {
  * deck is filled and shuffled after completion of this method
  */
 	public void makeDeck(){
-		
-		
-		//reminder, add in some code to add the value from 0-44 but also keep the card number
-		  for (Card.Suit suit : Card.Suit.values()){
-			if(suit!=Card.Suit.NOSUIT){
 				
-				for(int i=1;i<=14;i++){
-					if(i==1){
-				  	Card card = new Card();
-				  	card.setCard(suit,i);
-				  	deck.add(card);
-					}
-						if(i>4){
-						Card card = new Card();
-					  	card.setCard(suit,i);
-					  	deck.add(card);
-						}
-				  	}
-				  	
-			 }
-		  }
-		 
-		  System.out.println(deck.get(0).getValue());
-	  System.out.println(deck.get(0).getScore());
-	
-		  long seed = System.nanoTime();
-		  Collections.shuffle(deck, new Random(seed));
+		for(int i=0;i<44;i++){
+					
+			Card card = new Card();
+			
+			int temp = i % 4;
+			
+			if(temp==0){
+				card.setCard(Card.Suit.RED,i);
+			}
+					
+			else if(temp==1){
+			card.setCard(Card.Suit.BLUE,i);
+			}
+					
+			else if(temp==2){
+				card.setCard(Card.Suit.GREEN,i);
+			}
+					
+			else if(temp==3){
+				card.setCard(Card.Suit.BLACK,i);
+				}
+			
+			card.setCardVal();
+			deck.add(card);
+		}
+		
+		//specific code for rook card
+		Card card = new Card();
+		card.setCard(Card.Suit.NOSUIT,44);
+		card.setCardVal();
+		deck.add(card);
+		
+		//"shuffling" the deck
+		long seed = System.nanoTime();
+		Collections.shuffle(deck, new Random(seed));
+		  
 		  
 	  }	  
 	
+//public void dealCards(){
+//	Card[] hand1 = new Card[deck.get(0),deck.get(1),deck.get(2),deck.get(3),deck.get(4),deck.get(5),deck.get(6),deck.get(7),deck.get(8),deck.get(9)];
+//	Card[] hand2 = new Card[10];
+//	Card[] hand3 = new Card[10];
+//	Card[] hand4 = new Card[10];
+//	
+//	for(int i=0;i<40;i++){
+//		int temp = i % 4;
+//		
+//		if(temp==0)
+//			hand1.
+//		else if(temp==1)
+//			
+//		else if(temp==2)
+//			
+//		else if(temp==3)
+		
+		
+		
+		
+		
+		
+//	}
 	
+	
+	
+
 	
 }
 

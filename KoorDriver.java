@@ -12,7 +12,7 @@ public class KoorDriver {
       
 	   Game game = new Game();
 	   game.Bidding();
-//	   game.PlayRound();
+	   game.PlayRound();
 	   game.makeDeck();
 }
 
