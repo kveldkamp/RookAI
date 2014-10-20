@@ -12,7 +12,7 @@ public class Game {
 	Player [] players = new Player[4];
 	int winner = 0;  
 	Card [] currentTrick = new Card[4];
-	Card.Suit trumpcolor; 
+	Card.Suit trumpcolor = null; 
 	protected ArrayList<Card> deck = new ArrayList<Card>();
 	
 	
@@ -43,8 +43,8 @@ public class Game {
 		     		  if(players[i].bidding == true){
 		     				  highBid = players[i].bid(highBid);
 		     				  winner = i; //Holds winner of bid
+		     				  System.out.println("Current High is " + highBid);
 		     				  //System.out.println("Bid Made");
-		     				  //System.out.println("highBid: " + highBid);
 		     			  
 		     		  }
 		     		  else{
@@ -64,9 +64,9 @@ public class Game {
 			     			  if(highBid == 0){
 			     				  highBid = 100;
 			     			  }
-			     			  System.out.println("last bidder won: player " + b);
-				       		  System.out.println("Are they bidding?: " + players[b].bidding);
-				       		  System.out.println("High bid is this at end: " + highBid);
+			     			  System.out.println("winning bidder is player " + b);
+				       		  //System.out.println("Are they bidding?: " + players[b].bidding);
+				       		  System.out.println("Highest bid: " + highBid);
 				       		  players[b].setHighBidder(highBid);
 				       		  players[b].winningBiddingTeam = true;
 				       		  //Set trump color
