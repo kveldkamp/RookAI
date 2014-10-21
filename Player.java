@@ -487,12 +487,24 @@ public class Player {
         return true;
     }
     
+    /**
+     * Calls lead on player that won the bid
+     * @return index of the card in their hand they want to play
+     */
    public int lead(){return 0;}
    
+    /**
+     * For playing a card once its been checked to be valid
+     * @param current card trick
+     * @return index of card in their hand to be played
+     */
    public int playFollowLeadCard(Card trick[]) {return 0;}
-   
-    public int getValidFollowMaxIndex(Card trick[]){return 0;}
     
+    /**
+     * For making sure the card the player wants to play is valid
+     * @param an array representing the current card trick(whats been played)
+     * @return an array of valid cards they can play
+     */
     public Card[] getValidFollowCards(Card trick[]){return new Card[15];}
     
     public void bidOrPass(boolean bid){}
@@ -507,13 +519,24 @@ public class Player {
     //add what was played to current trick array
     public Card[] Play(Card trick[], int IndexOfPlayer)
     {
+      // check that a hand is being dealt
+      System.out.println("Your hand is: ");
+      for(int i=0;i<hand.length;i++)
+         System.out.print(hand[i] + " ");
       int indexToPlay=playFollowLeadCard(trick);
       Card cardToPlay = hand[indexToPlay];
       trick[IndexOfPlayer]=cardToPlay;
       hand[indexToPlay]= null;
-      System.out.println("Check value being passed in to sort "+ getValidFollowMaxIndex(hand));//check value being passed in to sort Hand()
-      sortHand(getValidFollowMaxIndex(hand));
-      
+      System.out.println("Check value being passed in to sort>> "+ hand.length);//check value being passed in to sort Hand()
+      sortHand(hand.length);
+      //Check that hand is sorted
+      System.out.println("Sorted hand: ");
+      for(int i=0;i<hand.length;i++)
+         System.out.print(hand[i]+" ");
+      //Check that card is added to trick
+      System.out.println("Trick so far: ");
+      for(int i=0;i<4;i++)
+         System.out.print(trick[i]+" ");
       return trick;
     }
 

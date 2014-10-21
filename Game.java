@@ -91,18 +91,25 @@ public class Game {
 	}
 		
 	
-
+	/*
+	* PlayRound is the game play for a single round 
+	* play starts with the bid winner leading, and cycles through
+	*/
 	public void PlayRound(){
-	players[0].lead();
-	  
+     
 	  //Call lead on whoever won the bid
+     System.out.println("The player that leads is "+winner);
+     //players[winner].lead();
+ 
 	  
 	  //Cycle through players and have them Play
 	  int counter=0;
-	  //Start i at whoever won bid
-	  for(int i=0;counter<4;i=(i+1)%4)
+     
+	  //Start i at whoever won bid, cycle through rest of players
+	  for(int i=winner;counter<4;i=(i+1)%4)
 	  {
 	     currentTrick=players[i].Play(currentTrick,i);
+        //Add the card that was played to AI's intelligence
 	     players[0].cardPlayed(currentTrick[i]);
 	     players[1].cardPlayed(currentTrick[i]);
 	     players[2].cardPlayed(currentTrick[i]);

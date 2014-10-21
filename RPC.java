@@ -93,12 +93,14 @@ public class RPC extends Player {
       return trumpcolor;
    }
    
-   // Returns the index of the card to be led in the hand
-   // called only by winner of the bid(1st round)
-   // or of last trick (remaining rounds) by human player
+   /**
+     * Allows bidWinner or trick Winner to lead card of their choice
+     * @return The position in players hand of the card chosen.
+     */
    public int lead(){
       System.out.println("Please enter index of card to play");
       int index = scan.nextInt();
+      
       return index;
    }
    
@@ -111,14 +113,12 @@ public class RPC extends Player {
       public int playFollowLeadCard(Card trick[]) {
         // track acceptable responses and figure out play.
         Card[] validCards = new Card[15];
-        int maxIndex = -1;
 
         // compile a list of playable cards, have rules based on this list
         //getValidFollowCards doesnt need to be overridden, can be used as is
         validCards = getValidFollowCards(trick);
-        //Same for getValidFollowMaxIndex
-        maxIndex = getValidFollowMaxIndex(trick);
         
+        //Check to see if the card they want to play is in validCards array
         boolean isValid=false;
         int cardToPlay;
         do
