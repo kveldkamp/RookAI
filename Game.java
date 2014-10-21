@@ -155,34 +155,46 @@ public class Game {
 		  
 	  }	  
 	
-//public void dealCards(){
-//	Card[] hand1 = new Card[deck.get(0),deck.get(1),deck.get(2),deck.get(3),deck.get(4),deck.get(5),deck.get(6),deck.get(7),deck.get(8),deck.get(9)];
-//	Card[] hand2 = new Card[10];
-//	Card[] hand3 = new Card[10];
-//	Card[] hand4 = new Card[10];
-//	
-//	for(int i=0;i<40;i++){
-//		int temp = i % 4;
-//		
-//		if(temp==0)
-//			hand1.
-//		else if(temp==1)
-//			
-//		else if(temp==2)
-//			
-//		else if(temp==3)
+public void dealCards(){
+	Card[] hand1 = new Card[10];
+	Card[] hand2 = new Card[10];
+	Card[] hand3 = new Card[10];
+	Card[] hand4 = new Card[10];
+	
+	Card[] deckArray = new Card[deck.size()];
+	
+	deckArray = deck.toArray(deckArray);
+	
+	int h1 = 0;
+	int h2 = 0;
+	int h3 = 0;
+	int h4 = 0;
+	for(int i=0;i<39;){
 		
+		hand1[h1]=deckArray[i];
+		System.out.println(" ");
+		System.out.print(hand1[h1].getCardVal());
+		System.out.print(hand1[h1].getSuit());
+		i++;
+		h1++;
+		hand2[h2]=deckArray[i];
+		i++;
+		h2++;
+		hand3[h3] = deckArray[i];
+		i++;
+		h3++;
+		hand4[h4]= deckArray[i];
+		i++;	
+		h4++;
 		
-		
-		
-		
-		
-//	}
+	}
 	
 	
 	
 
 	
+}
+
 }
 
 

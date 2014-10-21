@@ -11,9 +11,10 @@ public class KoorDriver {
 //      players[3] = new RPC();
       
 	   Game game = new Game();
-	   game.Bidding();
-	   game.PlayRound();
+	   //game.Bidding();
+	   //game.PlayRound();
 	   game.makeDeck();
+	   game.dealCards();
 }
 
 }
