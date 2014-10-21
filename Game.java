@@ -176,12 +176,10 @@ public void dealCards(){
 	int h2 = 0;
 	int h3 = 0;
 	int h4 = 0;
+	
 	for(int i=0;i<39;){
 		
 		hand1[h1]=deckArray[i];
-		System.out.println(" ");
-		System.out.print(hand1[h1].getCardVal());
-		System.out.print(hand1[h1].getSuit());
 		i++;
 		h1++;
 		hand2[h2]=deckArray[i];
@@ -193,8 +191,9 @@ public void dealCards(){
 		hand4[h4]= deckArray[i];
 		i++;	
 		h4++;
-		
-	}
+		}
+	//deal kitty
+	
 	
 	
 	
