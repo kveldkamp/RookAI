@@ -45,8 +45,6 @@ public class Game {
 		     				  highBid = players[i].bid(highBid);
 		     				  winner = i; //Holds winner of bid
 		     				  System.out.println("Current High is " + highBid);
-		     				  //System.out.println("Bid Made");
-		     			  
 		     		  }
 		     		  else{
 		     			  //System.out.println("This player passed...");
@@ -55,36 +53,27 @@ public class Game {
 		 		  }
      			  
 		 		  if(highBid > 195 || bidders == 1){
-		     		//Only one bidder left; set winning bidder
-		       	  	//if(bidders == 1){
+		     			//Only one bidder left; set winning bidder
 		       		  bidwon = true;
 		       		  //Set the high bidder with the highBid; winner holds the index of winner
-		       		  for(int b = 0; b < players.length; b++){
-			     		  if(players[b].bidding == true){
 			     			  //If everyone passed but one, set highBid to default to 100
 			     			  if(highBid == 0){
 			     				  highBid = 100;
 			     			  }
-			     			  System.out.println("winning bidder is player " + b);
-				       		  //System.out.println("Are they bidding?: " + players[b].bidding);
+			     			  	  System.out.println("winning bidder is player " + winner);
 				       		  System.out.println("Highest bid: " + highBid);
-				       		  players[b].setHighBidder(highBid);
-				       		  players[b].winningBiddingTeam = true;
+				       		  players[winner].setHighBidder(highBid);
+				       		  players[winner].winningBiddingTeam = true;
 				       		  //Set trump color
-				       		  trumpcolor = players[b].chooseTrump();
+				       		  trumpcolor = players[winner].chooseTrump();
 				       		  System.out.println("Trump card: " + trumpcolor);
 				       		  //Set trump card for all players
 				       		  for(int a = 0; a < players.length; a++){
 				       			  players[a].setTrump(trumpcolor);
 				       			  //System.out.println("Player " + a + "knows that trump is " + players[a].getTrump());
-				       		  }
-				       		  
-				       		  
+				       		  }		       		  
 				       		  //Need to set their teammate as winning as well
-				       		  //winner = b; //This holds the index of the winning player
 				       		  break bidwonloop;
-			     		  }
-		       		  }
 		       	  }   
 		     }
 		  }
