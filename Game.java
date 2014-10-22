@@ -14,6 +14,7 @@ public class Game {
 	Card [] currentTrick = new Card[4];
 	Card.Suit trumpcolor = null; 
 	protected ArrayList<Card> deck = new ArrayList<Card>();
+	protected Card kitty[] = new Card[5];
 	
 	
 	public Game(){
@@ -162,11 +163,9 @@ public class Game {
 		  
 	  }	  
 	
+	
+	
 public void dealCards(){
-	Card[] hand1 = new Card[10];
-	Card[] hand2 = new Card[10];
-	Card[] hand3 = new Card[10];
-	Card[] hand4 = new Card[10];
 	
 	Card[] deckArray = new Card[deck.size()];
 	
@@ -177,29 +176,52 @@ public void dealCards(){
 	int h3 = 0;
 	int h4 = 0;
 	
-	for(int i=0;i<39;){
+	//deal out the 40 cards to the players
+	for(int i=0;i<40;){
 		
-		hand1[h1]=deckArray[i];
+		players[0].hand[h1]=deckArray[i];
 		i++;
 		h1++;
-		hand2[h2]=deckArray[i];
+		players[1].hand[h2]=deckArray[i];
 		i++;
 		h2++;
-		hand3[h3] = deckArray[i];
+		
+		players[2].hand[h3] = deckArray[i];
 		i++;
 		h3++;
-		hand4[h4]= deckArray[i];
+		
+		players[3].hand[h4]= deckArray[i];
 		i++;	
 		h4++;
 		}
-	//deal kitty
 	
+	//add the last 5 cards to the kitty
+	for(int i=40;i<45;i++){
+		int temp = i % 5;
+		kitty[temp] = deckArray[i];
 	
+		
 	
+		
+	}
 	
 
 	
 }
+
+
+public void sendKitty(){
+	
+	for(int i=0;i<4;i++){
+		
+		if(players[i].winningBiddingTeam){
+			players[i].addKittyToHand(kitty);
+			//System.out.println(players[i].chooseDiscards());
+		}
+	}
+	
+}
+
 
 }
 

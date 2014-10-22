@@ -1,6 +1,8 @@
 import java.util.*;
 
 public class RPC extends Player {
+	
+	boolean discarded[] = new boolean[15];
 
    Scanner scan = new Scanner(System.in);
    
@@ -91,6 +93,25 @@ public class RPC extends Player {
 	        }
       }
       return trumpcolor;
+   }
+   
+   
+   
+   public boolean[] chooseDiscards(){
+	   
+	  Scanner scanDiscard = new Scanner(System.in);
+	  
+	  Arrays.fill(discarded,false);
+	  
+	  for(int i=0;i<5;i++){
+	  int discard;
+	  discard = scanDiscard.nextInt();
+	  
+	  discarded[discard] = true;
+	  }
+	   
+	   return discarded;
+	   
    }
    
    /**

@@ -28,6 +28,7 @@ public class Player {
     protected int blackLength = 0;
     protected boolean isRookPresent = false;
     protected boolean enemiesOutOfTrump[] = new boolean [2];
+    boolean[] discarded = new boolean[15];
 
 
     /**
@@ -82,6 +83,7 @@ public class Player {
         for(int i = 0; i < 5; i++) {
             hand[i + 10] = newHand[i];
         }
+       
         sortHand(15);
     }
 
@@ -159,7 +161,8 @@ public class Player {
         for(int index = 0; index < handsize-1; index++) {
             min = index;
             for(int scan = index+1; scan < handsize; scan++) {
-                if(hand[scan].getValue() < hand[min].getValue()) {
+            	
+                if(hand[scan].getRank() < hand[min].getRank()) {
                     min = scan;
                 }
             }
@@ -169,6 +172,8 @@ public class Player {
             hand[min] = hand[index];
             hand[index] = temp;
         }
+        
+        
     }
 
     /**
@@ -192,6 +197,11 @@ public class Player {
         System.out.println("This is in generic player class");
         return Card.Suit.NOSUIT;
     }
+    
+    public boolean[] chooseDiscards(){
+    	return discarded;
+    	
+    };
 
     /**
      * Store the data from a card played, received from GamePlayController,

@@ -41,6 +41,7 @@ public class NPC extends Player {
      * Choose a suit to be the trump (called if we win the bidding).
      * @return The chosen suit.
      */
+    @Override
     public Card.Suit chooseTrump() {
         // just choose the suit of the first card in our hand
         //needs to be altered to choose best suit (highest value/deepest)
