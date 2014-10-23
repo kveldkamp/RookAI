@@ -83,7 +83,7 @@ public class Player {
         for(int i = 0; i < 5; i++) {
             hand[i + 10] = newHand[i];
         }
-       
+        
         sortHand(15);
     }
 
@@ -133,7 +133,17 @@ public class Player {
 				count++;
 			}
 		}
-        hand = tempHand;
+        
+        //copy all of the contents of tempHand (10) cards into the player's hand
+        for(int k=0;k<10;k++){
+        	hand[k] = tempHand[k];
+        }
+        //put 5 blank cards at the end of the player's hand so that it matches all the other hands
+        for(int k=10;k<15;k++){
+        	Card card = new Card();
+        	hand[k] = card;
+        }
+
     }
 
     /**
@@ -162,7 +172,7 @@ public class Player {
             min = index;
             for(int scan = index+1; scan < handsize; scan++) {
             	
-                if(hand[scan].getRank() < hand[min].getRank()) {
+                if(hand[scan].getValue() < hand[min].getValue()) {
                     min = scan;
                 }
             }
@@ -199,6 +209,8 @@ public class Player {
     }
     
     public boolean[] chooseDiscards(){
+    	
+    	
     	return discarded;
     	
     };
@@ -532,7 +544,7 @@ public class Player {
       // check that a hand is being dealt
       System.out.println("Your hand is: ");
       for(int i=0;i<hand.length;i++)
-         System.out.print(hand[i] + " ");
+         System.out.print(hand[i].getCardVal() + " " + hand[i].getSuit());
       int indexToPlay=playFollowLeadCard(trick);
       Card cardToPlay = hand[indexToPlay];
       trick[IndexOfPlayer]=cardToPlay;

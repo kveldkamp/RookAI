@@ -57,10 +57,10 @@ public class NPC extends Player {
      * @return An array the size of the hand with boolean values for whether or
      *         not each card is to be discarded.
      */
-     
+    @Override
     public boolean[] chooseDiscards() {
 	numberPossibleCards = 15;
-
+	
         determineSuitLengths();
         determineStrongestSuit();
         secondLongestSuit = determineSecondLongestSuit();
@@ -105,6 +105,10 @@ public class NPC extends Player {
             choosePossibleWinnersToKeep();
         }
 
+        
+       
+        
+        
         return discarded;
     }
 
@@ -1406,18 +1410,21 @@ public class NPC extends Player {
         int i = 14;
         while(numberPossibleCards > 5)
         {
-            if(i < 0){i=14;}
-            if(discarded[i] && numberPossibleCards > 5 &&
-               hand[i].getSuit() != secondLongestSuit &&
-               hand[i].getSuit() != strongestSuit &&
-               lastWinnerSuit != hand[i].getSuit() &&
-               lastWinnerRank <= hand[i].getRank())
-            {
-                discarded[i] = false;
-                numberPossibleCards--;
-                lastWinnerSuit = hand[i].getSuit();
-                lastWinnerRank = hand[i].getRank();
-            }
+            if(i < 0)
+            {i=14;}
+            
+	            if(discarded[i] && numberPossibleCards > 5 &&
+	               hand[i].getSuit() != secondLongestSuit &&
+	               hand[i].getSuit() != strongestSuit &&
+	               lastWinnerSuit != hand[i].getSuit() &&
+	               lastWinnerRank <= hand[i].getRank())
+	            {
+	                discarded[i] = false;
+	                numberPossibleCards--;
+	                lastWinnerSuit = hand[i].getSuit();
+	                lastWinnerRank = hand[i].getRank();
+	            }
+	            
             i--;
         }
     }

@@ -96,7 +96,7 @@ public class RPC extends Player {
    }
    
    
-   
+   @Override
    public boolean[] chooseDiscards(){
 	   
 	  Scanner scanDiscard = new Scanner(System.in);
@@ -104,6 +104,7 @@ public class RPC extends Player {
 	  Arrays.fill(discarded,false);
 	  
 	  for(int i=0;i<5;i++){
+	System.out.println("select the index of the card you want to get rid of");
 	  int discard;
 	  discard = scanDiscard.nextInt();
 	  

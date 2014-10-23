@@ -10,7 +10,7 @@ import java.util.Random;
  */
 public class Game {
 	Player [] players = new Player[4];
-	int winner = 0;  
+	int bidWinner = 0;  
 	Card [] currentTrick = new Card[4];
 	Card.Suit trumpcolor = null; 
 	protected ArrayList<Card> deck = new ArrayList<Card>();
@@ -43,7 +43,7 @@ public class Game {
 		 			  //sets high bid or decrements bidders based on their bidding value
 		     		  if(players[i].bidding == true){
 		     				  highBid = players[i].bid(highBid);
-		     				  winner = i; //Holds winner of bid
+		     				  bidWinner = i; //Holds winner of bid
 		     				  System.out.println("Current High is " + highBid);
 		     		  }
 		     		  else{
@@ -55,17 +55,17 @@ public class Game {
 		 		  if(highBid > 195 || bidders == 1){
 		     			//Only one bidder left; set winning bidder
 		       		  bidwon = true;
-		       		  //Set the high bidder with the highBid; winner holds the index of winner
+		       		  //Set the high bidder with the highBid; bidWinner holds the index of winner
 			     			  //If everyone passed but one, set highBid to default to 100
 			     			  if(highBid == 0){
 			     				  highBid = 100;
 			     			  }
-			     			  	  System.out.println("winning bidder is player " + winner);
+			     			  	  System.out.println("winning bidder is player " + bidWinner);
 				       		  System.out.println("Highest bid: " + highBid);
-				       		  players[winner].setHighBidder(highBid);
-				       		  players[winner].winningBiddingTeam = true;
+				       		  players[bidWinner].setHighBidder(highBid);
+				       		  players[bidWinner].winningBiddingTeam = true;
 				       		  //Set trump color
-				       		  trumpcolor = players[winner].chooseTrump();
+				       		  trumpcolor = players[bidWinner].chooseTrump();
 				       		  System.out.println("Trump card: " + trumpcolor);
 				       		  //Set trump card for all players
 				       		  for(int a = 0; a < players.length; a++){
@@ -83,12 +83,12 @@ public class Game {
 	
 	/*
 	* PlayRound is the game play for a single round 
-	* play starts with the bid winner leading, and cycles through
+	* play starts with the bid bidWinner leading, and cycles through
 	*/
 	public void PlayRound(){
      
 	  //Call lead on whoever won the bid
-     System.out.println("The player that leads is "+winner);
+     System.out.println("The player that leads is "+bidWinner);
      //players[winner].lead();
  
 	  
@@ -96,7 +96,7 @@ public class Game {
 	  int counter=0;
      
 	  //Start i at whoever won bid, cycle through rest of players
-	  for(int i=winner;counter<4;i=(i+1)%4)
+	  for(int i=bidWinner;counter<4;i=(i+1)%4)
 	  {
 	     currentTrick=players[i].Play(currentTrick,i);
         //Add the card that was played to AI's intelligence
@@ -156,42 +156,46 @@ public class Game {
 	
 public void dealCards(){
 	
-	Card[] deckArray = new Card[deck.size()];
+	int handIndex = 0;
 	
-	deckArray = deck.toArray(deckArray);
-	
-	int h1 = 0;
-	int h2 = 0;
-	int h3 = 0;
-	int h4 = 0;
 	
 	//deal out the 40 cards to the players
 	for(int i=0;i<40;){
 		
-		players[0].hand[h1]=deckArray[i];
+		players[0].hand[handIndex]=deck.get(i);
 		i++;
-		h1++;
-		players[1].hand[h2]=deckArray[i];
-		i++;
-		h2++;
 		
-		players[2].hand[h3] = deckArray[i];
+		players[1].hand[handIndex]=deck.get(i);
 		i++;
-		h3++;
-		
-		players[3].hand[h4]= deckArray[i];
+	
+		players[2].hand[handIndex] = deck.get(i);
+		i++;
+	
+		players[3].hand[handIndex]= deck.get(i);
 		i++;	
-		h4++;
+		handIndex++;
 		}
+	
+	//set blank card objects to the last 5 cards in hand
+	for(int i=0;i<5;i++){
+		
+		Card card1=new Card();
+		Card card2=new Card();
+		Card card3=new Card();
+		Card card4=new Card();
+		players[0].hand[handIndex]=card1;
+		players[1].hand[handIndex]=card2;
+		players[2].hand[handIndex]=card3;
+		players[3].hand[handIndex]=card4;
+		handIndex++;
+	}
 	
 	//add the last 5 cards to the kitty
 	for(int i=40;i<45;i++){
 		int temp = i % 5;
-		kitty[temp] = deckArray[i];
-	
+		kitty[temp] = deck.get(i);
 		
-	
-		
+
 	}
 	
 
@@ -200,18 +204,26 @@ public void dealCards(){
 
 
 public void sendKitty(){
-	
-	for(int i=0;i<4;i++){
+
+			players[bidWinner].addKittyToHand(kitty);
+			for(int k=0;k<15;k++){
+				   System.out.println(players[bidWinner].hand[k].getCardVal() + "  "+players[bidWinner].hand[k].getSuit());
+				   }
+			
+			
+			
+			players[bidWinner].chooseDiscards();
+			//players[bidWinner].reorganizeHand(players[bidWinner].discarded);
 		
-		if(players[i].winningBiddingTeam){
-			players[i].addKittyToHand(kitty);
-			//System.out.println(players[i].chooseDiscards());
-		}
-	}
 	
+	
+
+		System.out.println("new cards");
+for(int k=0;k<15;k++){
+		
+	   System.out.println(players[bidWinner].hand[k].getCardVal() + "  "+players[bidWinner].hand[k].getSuit());
+	   }
 }
-
-
 }
 
 
