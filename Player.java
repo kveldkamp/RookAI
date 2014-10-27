@@ -28,7 +28,7 @@ public class Player {
     protected int blackLength = 0;
     protected boolean isRookPresent = false;
     protected boolean enemiesOutOfTrump[] = new boolean [2];
-    boolean[] discarded = new boolean[15];
+   
 
 
     /**
@@ -141,6 +141,7 @@ public class Player {
         //put 5 blank cards at the end of the player's hand so that it matches all the other hands
         for(int k=10;k<15;k++){
         	Card card = new Card();
+        	card.setCard(Card.Suit.NOSUIT,0);
         	hand[k] = card;
         }
 
@@ -210,6 +211,10 @@ public class Player {
     
     public boolean[] chooseDiscards(){
     	
+    	System.out.println("Called the PlayerClass chooseDiscards");
+    	
+    	boolean discarded[] = new boolean[15];
+    	Arrays.fill(discarded,false);
     	
     	return discarded;
     	

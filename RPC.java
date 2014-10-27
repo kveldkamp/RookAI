@@ -103,6 +103,20 @@ public class RPC extends Player {
 	  
 	  Arrays.fill(discarded,false);
 	  
+	  System.out.println("Here are your cards: "); 
+	  determineSuitLengths();
+      determineStrongestSuit();
+      
+
+      System.out.println("strongestSuit = " + strongestSuit); //debug
+     
+	  
+	  for(int i=0;i<15;i++){
+		  System.out.println(i+".      "+ hand[i].getCardVal() + "  "+hand[i].getSuit());
+		  
+	  }
+	  
+	  
 	  for(int i=0;i<5;i++){
 	System.out.println("select the index of the card you want to get rid of");
 	  int discard;

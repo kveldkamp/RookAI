@@ -180,9 +180,14 @@ public void dealCards(){
 	for(int i=0;i<5;i++){
 		
 		Card card1=new Card();
+		card1.setCard(Card.Suit.NOSUIT,0);
 		Card card2=new Card();
+		card2.setCard(Card.Suit.NOSUIT,0);
 		Card card3=new Card();
+		card3.setCard(Card.Suit.NOSUIT,0);
 		Card card4=new Card();
+		card4.setCard(Card.Suit.NOSUIT,0);
+		
 		players[0].hand[handIndex]=card1;
 		players[1].hand[handIndex]=card2;
 		players[2].hand[handIndex]=card3;
@@ -202,6 +207,12 @@ public void dealCards(){
 	
 }
 
+/**
+ * addKittyToHand selects the winner within the player array and replaces their 5 null card values with the 5 cards from the 
+ * kitty. After that chooseDiscards() is called for the players hand, which returns a boolean array of cards to get rid of.
+ * That boolean array is used as the argument for reorganizeHand(), which is called for computer players to determine
+ * which cards are strongest/ and which to get rid of. For RPC, you can simply choose which cards to get rid of.
+ */
 
 public void sendKitty(){
 
@@ -212,8 +223,8 @@ public void sendKitty(){
 			
 			
 			
-			players[bidWinner].chooseDiscards();
-			//players[bidWinner].reorganizeHand(players[bidWinner].discarded);
+			
+			players[bidWinner].reorganizeHand((players[bidWinner].chooseDiscards()));
 		
 	
 	
