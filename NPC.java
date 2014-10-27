@@ -160,175 +160,177 @@ public class NPC extends Player {
      * Choose a card to lead with - most of the AI grunt work will happen here.
      * @return The position in our hand of the card chosen.
      */
-    public int lead() {
-        Card[] validCards = new Card[15];
-        int maxIndex = -1;
-        ArrayList<Card> prospWinners = new ArrayList<Card>();
+    public int lead()
+    {
+      Card[] validCards = new Card[15];
+      int maxIndex = -1;
+      ArrayList<Card> prospWinners = new ArrayList<Card>();
 		// Tally cards in hand that are not null, put in list
 		// calculate the winners left in the game and play one
-                // More rules will need to be called heavily here
-
-                
-            //if(bidWinner)
-             //{
-                   validCards = getValidLeadCards();
-                   maxIndex = getValidLeadMaxIndex();
-                //get valid cards (non-null)
-		
-		if (maxIndex == -1) {
+      // More rules will need to be called heavily here
+      //if(bidWinner)
+      //{
+      validCards = getValidLeadCards();
+      maxIndex = getValidLeadMaxIndex();
+      //get valid cards (non-null)
+	   if (maxIndex == -1)
+      {
 			System.err.println("Error: NPC hand empty in NPC.lead() - shouldn't happen");
 			System.exit(1);
 		}
-                
-                prospWinners = winningCards();
-
-                if(winningBiddingTeam)
-                    System.out.println("Bidding Team player leading");
-                else
-                    System.out.println("Setting Team player leading");
-                //gameplay if all trump is not accounted for
-                if(!checkOthersOutOfTrump() && winningBiddingTeam  && stillHasTrump()) //need to include check for if only partner has trump
-                {
-                    //play high trump card if you have it
-                    if(!(hasHighTrump(prospWinners) == notFound))
-                        return hasHighTrump(prospWinners);
-                    else if(!rookPlayed && !(hasRookCatchers() == notFound))
-                    {
-                        if(testCheck)
-                            System.out.println("PLAYING ROOK CATCHER");
-                        return hasRookCatchers();
-                    }
-                    else if(!(playerHasTrump() == notFound))
-                    {
-                        if(testCheck)
-                            System.out.println("LEADING OUT OF TRUMP");
-                        return playerHasTrump();
-                    }
-                }
-                //if others out of trump or on the not-winning team, go to else
-                else
-                {
-                    if(hasNonTrumpWinners(prospWinners) != notFound)
-                    {
-                        if(testCheck)
-                            System.out.println("PLAYING A NON-TRUMP PROSPECTIVE WINNER");
-                        return hasNonTrumpWinners(prospWinners);
-                    }
-                    else if(winningBiddingTeam && GetThrowAwayBidTeamLeadCard() != notFound)
-                    {
-                        if(testCheck)
-                            System.out.println("Playing a throw away card for bid winning team,"
+      prospWinners = winningCards();
+      if(winningBiddingTeam)
+         System.out.println("Bidding Team player leading");
+      else
+         System.out.println("Setting Team player leading");
+      //gameplay if all trump is not accounted for
+      if(!checkOthersOutOfTrump() && winningBiddingTeam  && stillHasTrump()) //need to include check for if only partner has trump
+      {
+         //play high trump card if you have it
+         if(!(hasHighTrump(prospWinners) == notFound))
+            return hasHighTrump(prospWinners);
+         else if(!rookPlayed && !(hasRookCatchers() == notFound))
+         {
+            if(testCheck)
+               System.out.println("PLAYING ROOK CATCHER");
+            return hasRookCatchers();
+         }
+         else if(!(playerHasTrump() == notFound))
+         {
+            if(testCheck)
+               System.out.println("LEADING OUT OF TRUMP");
+            return playerHasTrump();
+         }
+      }
+      //if others out of trump or on the not-winning team, go to else
+      else
+      {
+         if(hasNonTrumpWinners(prospWinners) != notFound)
+         {
+            if(testCheck)
+               System.out.println("PLAYING A NON-TRUMP PROSPECTIVE WINNER");
+            return hasNonTrumpWinners(prospWinners);
+         }
+         else if(winningBiddingTeam && GetThrowAwayBidTeamLeadCard() != notFound)
+         {
+            if(testCheck)
+               System.out.println("Playing a throw away card for bid winning team,"
                                     + " the " + hand[GetThrowAwayBidTeamLeadCard()].getSuit() + " "
                                     + hand[GetThrowAwayBidTeamLeadCard()].getRank());
-                        return GetThrowAwayBidTeamLeadCard();
-                    }
-                    else if(!winningBiddingTeam && getThrowAwaySetTeamLeadCard() != notFound)
-                    {
-                        if(testCheck)
-                            System.out.println("Playing a throw away card for setting team,"
-                                    + " the " + hand[getThrowAwaySetTeamLeadCard()].getSuit() + " "
-                                    + hand[getThrowAwaySetTeamLeadCard()].getRank());
-                        return getThrowAwaySetTeamLeadCard();
-                    }
-                    //need an else method to play a non-point, non trump if possible.  Defaulting to first valid card
-                    //is not good. a "GetThrowAway" method perhaps.  
-                }
-             // }
-                if(testCheck)
-                    System.out.println("Default, playing first valid card");
-                return getHandIndexOf(validCards[0]); // valid play if other rules don't fire. (first card, probable loser, whatever suit is first)
-        }
+            return GetThrowAwayBidTeamLeadCard();
+         }
+         else if(!winningBiddingTeam && getThrowAwaySetTeamLeadCard() != notFound)
+         {
+            if(testCheck)
+               System.out.println("Playing a throw away card for setting team,"
+                  + " the " + hand[getThrowAwaySetTeamLeadCard()].getSuit() + " "
+                  + hand[getThrowAwaySetTeamLeadCard()].getRank());
+            return getThrowAwaySetTeamLeadCard();
+         }
+         //need an else method to play a non-point, non trump if possible.  Defaulting to first valid card
+         //is not good. a "GetThrowAway" method perhaps.  
+      }
+         // }
+      if(testCheck)
+         System.out.println("Default, playing first valid card");
+      
+      // valid play if other rules don't fire
+      //(first card, probable loser, whatever suit is first)
+      return getHandIndexOf(validCards[0]);
+    }
 
     /**
      * Choose a card to play - most of the AI grunt work will happen here.
      * @param trick The cards that have been played already in the current trick.
      * @return The position in our hand of the card chosen.
      */
-    public int playFollowLeadCard(Card trick[]) {
-        // track acceptable responses and figure out play.
-        Card[] validCards = new Card[15];
-        int maxIndex = -1;
+    public int playFollowLeadCard(Card trick[])
+    {
+      // track acceptable responses and figure out play.
+      Card[] validCards = new Card[15];
+      int maxIndex = -1;
 
-        // compile a list of playable cards, have rules based on this list
-        validCards = getValidFollowCards(trick);
-        maxIndex = getValidFollowMaxIndex(trick);
-        Card currentHigh = getCurrentHighCard(trick);
-        boolean partnerIsHigh = partnerCurrentlyWinning(trick);
-        ArrayList<Card> prospWinners = new ArrayList<Card>();
-        prospWinners = winningCards();
-        boolean trumpLed;
-        if(trick[0].getSuit() == trumpSuit)
-            trumpLed = true;
-        else
-            trumpLed = false;
+      // compile a list of playable cards, have rules based on this list
+      validCards = getValidFollowCards(trick);
+      maxIndex = getValidFollowMaxIndex(trick);
+      Card currentHigh = getCurrentHighCard(trick);
+      boolean partnerIsHigh = partnerCurrentlyWinning(trick);
+      ArrayList<Card> prospWinners = new ArrayList<Card>();
+      prospWinners = winningCards();
+      boolean trumpLed;
+      if(trick[0].getSuit() == trumpSuit)
+         trumpLed = true;
+      else
+         trumpLed = false;
 
-        if(testCheck)
-            System.out.println("Current high card is " + currentHigh.getRank() + " of " + currentHigh.getSuit());
-        if(partnerIsHigh == true && testCheck)
-            System.out.println("PARTNER IS CURRENTLY WINNING");
-        else if(testCheck)
-            System.out.println("Partner is currently losing");
+      if(testCheck)
+         System.out.println("Current high card is " + 
+               currentHigh.getRank() + " of " + currentHigh.getSuit());
+      if(partnerIsHigh == true && testCheck)
+         System.out.println("PARTNER IS CURRENTLY WINNING");
+      else if(testCheck)
+         System.out.println("Partner is currently losing");
         
-        //need to replace code, currently plays the first card that is greater
-        //than the current card being led.
-        //if prospectivewinner and card > highestcard and suits are == then take
-        //possible exception: if you're last player and you don't have winner of your own?
-        //if(winningBiddingTeam)
-        //{
-            if(partnerIsHigh)
+      //need to replace code, currently plays the first card that is greater
+      //than the current card being led.
+      //if prospectivewinner and card > highestcard and suits are == then take
+      //possible exception: if you're last player and you don't have winner of your own?
+      //if(winningBiddingTeam)
+      //{
+      if(partnerIsHigh)
+      {
+        if(currentHighShouldWin(trick, currentHigh) || trick[2] != null)
+        {
+           if(testCheck)
+             System.out.println("Partner should win!");
+           if(trumpLed && hasRook() != -1)
+           {
+             System.out.println("Dumping rook to partner");
+             return hasRook();
+           }
+           if(getNonWinnerPointsCard(validCards, maxIndex, trumpLed) != notFound)
+           {
+             if(testCheck)
+               System.out.println("Partner will win, playing a non-high points card");
+             return getNonWinnerPointsCard(validCards, maxIndex, trumpLed);
+           }
+           if(getAnyPointsCard(validCards, maxIndex, trumpLed) != notFound)
+           {
+             if(testCheck)
+               System.out.println("Partner will win, playing first point card found");
+             return getAnyPointsCard(validCards, maxIndex, trumpLed);
+           }
+           //return low card/nonpoint/nontrump if possible
+           if(findThrowAwayCard(validCards, maxIndex, trumpLed)!= notFound)
+           {
+             System.out.println("Playing first throw away card found");
+             return findThrowAwayCard(validCards, maxIndex, trumpLed);
+           }
+         }
+         else if(partnerMayLose(trick, currentHigh))
+         {
+            if(testCheck)
+               System.out.println("Partner may lose");
+            if(getHandWinner(trick, currentHigh, validCards, maxIndex) != notFound)
             {
-                if(currentHighShouldWin(trick, currentHigh) || trick[2] != null)
-                {
-                    if(testCheck)
-                        System.out.println("Partner should win!");
-                    if(trumpLed && hasRook() != -1)
-                    {
-                        System.out.println("Dumping rook to partner");
-                        return hasRook();
-                    }
-                    if(getNonWinnerPointsCard(validCards, maxIndex, trumpLed) != notFound)
-                    {
-                        if(testCheck)
-                            System.out.println("Partner will win, playing a non-high points card");
-                        return getNonWinnerPointsCard(validCards, maxIndex, trumpLed);
-                    }
-                    if(getAnyPointsCard(validCards, maxIndex, trumpLed) != notFound)
-                    {
-                        if(testCheck)
-                            System.out.println("Partner will win, playing first point card found");
-                        return getAnyPointsCard(validCards, maxIndex, trumpLed);
-                    }
-                    //return low card/nonpoint/nontrump if possible
-                    if(findThrowAwayCard(validCards, maxIndex, trumpLed)!= notFound)
-                    {
-                        System.out.println("Playing first throw away card found");
-                        return findThrowAwayCard(validCards, maxIndex, trumpLed);
-                    }
-                }
-                else if(partnerMayLose(trick, currentHigh))
-                {
-                    if(testCheck)
-                        System.out.println("Partner may lose");
-                    if(getHandWinner(trick, currentHigh, validCards, maxIndex) != notFound)
-                    {
-                        if(testCheck)
-                            System.out.println("Playing winning card");
-                        return getHandWinner(trick, currentHigh, validCards, maxIndex);
-                    }
-                    //check for trump in
-                    if(canTrumpIn(validCards, maxIndex) != notFound && trickHasPoints(trick) && notLastTrump())
-                    {
-                        System.out.println("Trumping in, points at stake");
-                        return canTrumpIn(validCards, maxIndex);
-                    }
+               if(testCheck)
+                  System.out.println("Playing winning card");
+               return getHandWinner(trick, currentHigh, validCards, maxIndex);
+            }
+            //check for trump in
+            if(canTrumpIn(validCards, maxIndex) != notFound && trickHasPoints(trick) && notLastTrump())
+            {
+               System.out.println("Trumping in, points at stake");
+               return canTrumpIn(validCards, maxIndex);
+            }
 
-                    //find throw away
-                    if(findThrowAwayCard(validCards, maxIndex, trumpLed)!= notFound)
-                    {
-                        System.out.println("Playing first throw away card found");
-                        return findThrowAwayCard(validCards, maxIndex, trumpLed);
-                    }
-                }
+            //find throw away
+            if(findThrowAwayCard(validCards, maxIndex, trumpLed)!= notFound)
+            {
+               System.out.println("Playing first throw away card found");
+               return findThrowAwayCard(validCards, maxIndex, trumpLed);
+            }
+          }
             }
             else //!partnerIsHigh
             {
@@ -352,29 +354,29 @@ public class NPC extends Player {
                }
 
                //can't win options, toss points if partner hasn't played.
-               if(trick[1] == null && !winningBiddingTeam && !(currentHighShouldWin(trick, currentHigh)))
-               {
-                    if(getNonWinnerPointsCard(validCards, maxIndex, trumpLed) != notFound)
-                    {
-                        if(testCheck)
-                            System.out.println("Partner has yet to play, playing a non-high points card");
-                        return getNonWinnerPointsCard(validCards, maxIndex, trumpLed);
-                    }
-                    if(getAnyPointsCard(validCards, maxIndex, trumpLed) != notFound)
-                    {
-                        if(testCheck)
-                            System.out.println("Partner has yet to play, playing first point card found");
-                        return getAnyPointsCard(validCards, maxIndex, trumpLed);
-                    }
-               }
+        if(trick[1] == null && !winningBiddingTeam && !(currentHighShouldWin(trick, currentHigh)))
+        {
+          if(getNonWinnerPointsCard(validCards, maxIndex, trumpLed) != notFound)
+          {
+            if(testCheck)
+               System.out.println("Partner has yet to play, playing a non-high points card");
+            return getNonWinnerPointsCard(validCards, maxIndex, trumpLed);
+          }
+          if(getAnyPointsCard(validCards, maxIndex, trumpLed) != notFound)
+          {
+            if(testCheck)
+               System.out.println("Partner has yet to play, playing first point card found");
+            return getAnyPointsCard(validCards, maxIndex, trumpLed);
+          }
+        }
 
                //if need throw away card
-               if(findThrowAwayCard(validCards, maxIndex, trumpLed)!= notFound)
-               {
-                   System.out.println("Playing first throw away card found");
-                   return findThrowAwayCard(validCards, maxIndex, trumpLed);
-               }
-            }
+        if(findThrowAwayCard(validCards, maxIndex, trumpLed)!= notFound)
+        {
+          System.out.println("Playing first throw away card found");
+          return findThrowAwayCard(validCards, maxIndex, trumpLed);
+        }
+        }
         //}
         //else if(!winningBiddingTeam)
         //{
@@ -395,9 +397,9 @@ public class NPC extends Player {
 
 
         //play first valid card found as default
-        if(testCheck)
+       if(testCheck)
             System.out.println("Playing first valid card found as default");
-	return getHandIndexOf(validCards[0]);
+	    return getHandIndexOf(validCards[0]);
     }
     /* Method moved to Player.java
     /**
@@ -601,67 +603,85 @@ public class NPC extends Player {
     * @param trick
     * @return validFollowCards[] which is the valid card play options.
     */
-    public Card[] getValidFollowCards(Card trick[])
+    public Card[] getValidFollowCards(Card[] trick)
     {
         Card card = null;
         Card[] validFollowCards = new Card[15];
         int maxIndex = -1;
-        
-        //code to get valid cards while following suit
-                for(int i = 0; i < 15; i++) {
-                    if(hand[i] != null && hand[i].getSuit() == trick[0].getSuit())
-                    {
-			               card = hand[i];
-                        maxIndex++;
-                        validFollowCards[maxIndex] = hand[i];
-                    }
-		}
+        System.out.println("\nTESTINGVALIDFOLLOW:\n");
 
-                    if (card == null) {	// we don't have a card of the same suit
-			// compile list of cards in hand, have rules based on list
-			for (int i = 0; i<15; i++) {
-				if (hand[i] != null) {
+        if(trick[0]==null)
+         System.out.println("trick is null");
+        //code to get valid cards while following suit
+        for(int i = 0; i < 15; i++)
+        {
+          if(trick[0]!=null)
+          {
+            if(hand[i] != null && hand[i].getSuit() == trick[0].getSuit())
+            {
+			      card = hand[i];
+               maxIndex++;
+               validFollowCards[maxIndex] = hand[i];
+            }
+          }
+		  }
+
+        if (card == null)
+        {	// we don't have a card of the same suit
+			   // compile list of cards in hand, have rules based on list
+			for (int i = 0; i<15; i++)
+         {
+				if (hand[i] != null)
+            {
                  maxIndex++;
                  validFollowCards[maxIndex] = hand[i];
                  card = hand[i];
 				}
 			}
         }
+        
         if(maxIndex == -1)
             System.out.println("ERROR.  No Card to be played");
         return validFollowCards;
     }
 
     /**
-     *
+     * 
      * @param trick the cards in trick already played
      * @return the max index of the validFollowCards array.
      */
-    public int getValidFollowMaxIndex(Card trick[])
+    public int getValidFollowMaxIndex(Card[] trick)
     {
         Card card = null;
         Card[] validFollowCards = new Card[15];
         int maxIndex = -1;
 
         //code to get valid cards while following suit
-                for(int i = 0; i < 15; i++) {
-                    if(hand[i] != null && hand[i].getSuit() == trick[0].getSuit())
-                    {
-			card = hand[i];
-                        maxIndex++;
-                        validFollowCards[maxIndex] = hand[i];
-                    }
-		}
+        for(int i = 0; i < 15; i++)
+        {
+          if(trick[0] != null)
+          {
+            if(hand[i] != null && (hand[i].getSuit() == trick[0].getSuit()))
+            {
+			      card = hand[i];
+               maxIndex++;
+               validFollowCards[maxIndex] = hand[i];
+            }
+          }
+		  }
 
-                    if (card == null) {	// we don't have a card of the same suit
-			// compile list of cards in hand, have rules based on list
-			for (int i = 0; i<15; i++) {
-				if (hand[i] != null) {
-                                        maxIndex++;
-                                        validFollowCards[maxIndex] = hand[i];
-                                        card = hand[i];
+        if (card == null)
+        {	// we don't have a card of the same suit
+			   // compile list of cards in hand, have rules based on list
+			 for (int i = 0; i<15; i++)
+          {
+				if (hand[i] != null)
+            {
+              maxIndex++;
+              validFollowCards[maxIndex] = hand[i];
+              card = hand[i];
 				}
-			}
+			 }
         }
         if(maxIndex == -1)
             System.out.println("ERROR.  No Card to be played");
@@ -724,7 +744,7 @@ public class NPC extends Player {
      * @param trick
      * @return current which is the currentHighCard of the trick in play.
      */
-    public Card getCurrentHighCard(Card trick[])
+    public Card getCurrentHighCard(Card[] trick)
     {
         Card current = trick[0];
         Card.Suit suit = trick[0].getSuit();
@@ -776,7 +796,7 @@ public class NPC extends Player {
      * @param trick
      * @return true if the person with current high card in trick is your partner, false otherwise
      */
-    public Boolean partnerCurrentlyWinning(Card trick[])
+    public Boolean partnerCurrentlyWinning(Card[] trick)
     {
         Card currentHigh = getCurrentHighCard(trick);
         int foundHigh = 0;
@@ -972,7 +992,7 @@ public class NPC extends Player {
      * @param currentHighCard the current high card
      * @return true if partner is guaranteed to win, false otherwise
      */
-    public boolean currentHighShouldWin(Card trick[], Card currentHighCard)
+    public boolean currentHighShouldWin(Card[] trick, Card currentHighCard)
     {
         ArrayList<Card> prospWinners = new ArrayList<Card>();
         prospWinners = winningCards();

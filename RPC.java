@@ -6,12 +6,10 @@ public class RPC extends Player {
 
    Scanner scan = new Scanner(System.in);
    
-   
    /**
     * Choose a suit to be the trump (called if we win the bidding).
     * @return The chosen suit.
     */
-
    
    /**
     * Choose an amount to bid.
@@ -133,9 +131,16 @@ public class RPC extends Player {
      * Allows bidWinner or trick Winner to lead card of their choice
      * @return The position in players hand of the card chosen.
      */
-   public int lead(){
-      System.out.println("Please enter index of card to play");
-      int index = scan.nextInt();
+   public int lead()
+   {
+      int index;
+      //Allow the bid or Trick winner to lead any card
+      //That is in their hand(in one of the indexes 0-9)
+      do
+      {
+         System.out.println("Please enter index of card to play");
+         index = scan.nextInt();
+      }while(index<0||index>=10);
       
       return index;
    }
@@ -146,13 +151,30 @@ public class RPC extends Player {
      * @param trick The cards that have been played already in the current trick.
      * @return The position in our hand of the card chosen.
      */
-      public int playFollowLeadCard(Card trick[]) {
+      public int playFollowLeadCard(Card[] trick) {
         // track acceptable responses and figure out play.
         Card[] validCards = new Card[15];
 
         // compile a list of playable cards, have rules based on this list
-        //getValidFollowCards doesnt need to be overridden, can be used as is
+        // getValidFollowCards doesnt need to be overridden, can be used as is
         validCards = getValidFollowCards(trick);
+        
+        if(validCards != null)
+            System.out.println("ValidCards is not null");
+        else
+            System.out.println("ValidCards is null");
+        //See whats in the valid card array
+        System.out.println("Valid follow card array:\n");
+        System.out.println(validCards.length+"\n");
+
+        for(int i=0;i<15;i++)
+        {
+            if(validCards[i]==null)
+               System.out.print("null\n");
+            else
+               System.out.println(validCards[i].getCardVal() 
+                  + " " + validCards[i].getSuit()+"\n");
+        }
         
         //Check to see if the card they want to play is in validCards array
         boolean isValid=false;
@@ -161,9 +183,13 @@ public class RPC extends Player {
         {
          System.out.println("Please enter the index of the card you want to play");
          cardToPlay = scan.nextInt();
-         for(int i=0; i<15;i++){
-            if(validCards[i].getValue()==hand[cardToPlay].getValue())
-               isValid = true;
+         for(int i=0; i<15;i++)
+         {
+            if(validCards[i] != null)
+            {
+               if(validCards[i].getValue()==hand[cardToPlay].getValue())
+                  isValid = true;
+            }
          }
         }while(!isValid);
         

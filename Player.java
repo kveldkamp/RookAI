@@ -525,14 +525,14 @@ public class Player {
      * @param current card trick
      * @return index of card in their hand to be played
      */
-   public int playFollowLeadCard(Card trick[]) {return 0;}
+   public int playFollowLeadCard(Card[] trick) {return 0;}
     
     /**
      * For making sure the card the player wants to play is valid
      * @param an array representing the current card trick(whats been played)
      * @return an array of valid cards they can play
      */
-    public Card[] getValidFollowCards(Card trick[]){return new Card[15];}
+    public Card[] getValidFollowCards(Card[] trick){return new Card[15];}
     
     public void bidOrPass(boolean bid){}
     public int bid(int highBid){
@@ -541,15 +541,29 @@ public class Player {
 
     public void setHighBidder(int amount){}
    
-   //Play method to move play to the left, check validity of and play card
+    //Play method to move play to the left, check validity of and play card
     //remove card from players hand, reorganize hand
     //add what was played to current trick array
-    public Card[] Play(Card trick[], int IndexOfPlayer)
+    public Card[] Play(Card[] trick, int IndexOfPlayer)
     {
       // check that a hand is being dealt
       System.out.println("Your hand is: ");
       for(int i=0;i<hand.length;i++)
-         System.out.print(hand[i].getCardVal() + " " + hand[i].getSuit());
+      {
+         if(hand[i]==null)
+            System.out.print("null\n");
+         else
+            System.out.print(hand[i].getCardVal() + " " + hand[i].getSuit()+"\n");
+      }
+      //Whats in the trick?
+      System.out.println("The trick contains: ");
+      for(int i=0;i<4;i++)
+      { if(trick[i]!=null)
+         System.out.println(trick[i].getCardVal() + " " + trick[i].getSuit()+"\n");
+        else
+         System.out.println("Trick at "+i+" is null");
+      }
+
       int indexToPlay=playFollowLeadCard(trick);
       Card cardToPlay = hand[indexToPlay];
       trick[IndexOfPlayer]=cardToPlay;

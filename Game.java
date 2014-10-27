@@ -89,8 +89,12 @@ public class Game {
      
 	  //Call lead on whoever won the bid
      System.out.println("The player that leads is "+bidWinner);
-     //players[winner].lead();
- 
+     
+     //Play the card that the leader of the trick wants to play, at index 0
+     int indexToPlay = players[bidWinner].lead();
+     Card cardToPlay = players[bidWinner].hand[indexToPlay];
+     currentTrick[0]=cardToPlay;
+     players[bidWinner].hand[indexToPlay]= null;
 	  
 	  //Cycle through players and have them Play
 	  int counter=0;

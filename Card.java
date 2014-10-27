@@ -22,7 +22,6 @@ public class Card {
     private int value;
     private int cardVal;
     
-
     /** Creates a new instance of Card */
     public Card() {
 		value = -1;	//initialize this because isRook() might be called on a new Card object
