@@ -47,9 +47,8 @@ public class NPC extends Player {
         //needs to be altered to choose best suit (highest value/deepest)
 
         //these two commands need to be paired in this order so trump data is stored
-    	//STRONGEST SUIT IS ALWAYS RED
-        setTrump(this.strongestSuit);
-        return this.strongestSuit;
+        setTrump(strongestSuit);
+        return strongestSuit;
     }
     
     /**

@@ -65,7 +65,10 @@ public class Game {
 				       		  players[bidWinner].setHighBidder(highBid);
 				       		  players[bidWinner].winningBiddingTeam = true;
 				       		  //Set trump color
+				       		  players[bidWinner].determineSuitLengths();
+				       		  players[bidWinner].determineStrongestSuit();
 				       		  trumpcolor = players[bidWinner].chooseTrump();
+				       		  
 				       		  System.out.println("Trump card: " + trumpcolor);
 				       		  //Set trump card for all players
 				       		  for(int a = 0; a < players.length; a++){
@@ -219,20 +222,18 @@ public void dealCards(){
  */
 
 public void sendKitty(){
-
+	for(int k=0;k<15;k++){
+		
+		   System.out.println(players[bidWinner].hand[k].getCardVal() + "  "+players[bidWinner].hand[k].getSuit());
+	}
+	
+	
 			players[bidWinner].addKittyToHand(kitty);
-			for(int k=0;k<15;k++){
-				   System.out.println(players[bidWinner].hand[k].getCardVal() + "  "+players[bidWinner].hand[k].getSuit());
-				   }
-			
-			
-			
-			
 			players[bidWinner].reorganizeHand((players[bidWinner].chooseDiscards()));
 		
 	
 	
-
+//used for debugging to make sure actually got rid of cards
 		System.out.println("new cards");
 for(int k=0;k<15;k++){
 		
