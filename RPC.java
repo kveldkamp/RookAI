@@ -144,6 +144,54 @@ public class RPC extends Player {
       return index;
    }
    
+   /**
+    * Code to gather cards that follow suit in an array
+    * @param trick
+    * @return validFollowCards[] which is the valid card play options.
+    */
+    public Card[] getValidFollowCards(Card[] trick)
+    {
+        Card card = null;
+        Card[] validFollowCards = new Card[15];
+        int maxIndex = -1;
+        System.out.println("\nTESTINGVALIDFOLLOW:\n");
+
+        if(trick[0]==null)
+         System.out.println("trick is null");
+        //code to get valid cards while following suit
+        for(int i = 0; i < 15; i++)
+        {
+          if(trick[0]!=null)
+          {
+            if(hand[i] != null && hand[i].getSuit() == trick[0].getSuit())
+            {
+			      card = hand[i];
+               maxIndex++;
+               validFollowCards[maxIndex] = hand[i];
+            }
+          }
+		  }
+
+        if (card == null)
+        {	// we don't have a card of the same suit
+			   // compile list of cards in hand, have rules based on list
+			for (int i = 0; i<15; i++)
+         {
+				if (hand[i] != null)
+            {
+                 maxIndex++;
+                 validFollowCards[maxIndex] = hand[i];
+                 card = hand[i];
+				}
+			}
+        }
+        
+        if(maxIndex == -1)
+            System.out.println("ERROR.  No Card to be played");
+        return validFollowCards;
+    }
+
+   
    
    /**
      * Allow player to choose a card to play, only if valid
@@ -172,7 +220,7 @@ public class RPC extends Player {
                System.out.print("null\n");
             else
                System.out.println(validCards[i].getCardVal() 
-                  + " " + validCards[i].getSuit()+"\n");
+                  + " " + validCards[i].getSuit());
         }
         
         //Check to see if the card they want to play is in validCards array
