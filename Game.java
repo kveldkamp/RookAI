@@ -26,15 +26,15 @@ public class Game {
 	
 	/*
 	* This is the bidding process. 
-	* bidwon is set to true if only one bidder is left
+	* bidWon is set to true if only one bidder is left
 	* 
 	*/
 
 	public void Bidding(){
 		   int highBid = 0;
-		   boolean bidwon = false;
-		   bidwonloop:
-		   while(bidwon == false){
+		   boolean bidWon = false;
+		   bidLoop:
+		   while(bidWon == false){
 		 	  int bidders = 4;
 		 	  for(int i = 0; i < players.length; i++){
 		 		  if(highBid <= 195 && bidders > 1){
@@ -50,7 +50,7 @@ public class Game {
 		 		  }
      			  
 		 		  if(highBid > 195 || bidders == 1){
-		       		  bidwon = true;
+		       		  bidWon = true;
 			     			  if(highBid == 0){ //All NPCs Passed
 			     				  highBid = players[3].bid(highBid);
 			     				  bidWinner = 3;
@@ -60,7 +60,7 @@ public class Game {
 				       		  players[bidWinner].setHighBidder(highBid);
 				       		  players[bidWinner].winningBiddingTeam = true;
 				       		  //Need to set their teammate as winning as well		  
-				       		  break bidwonloop;
+				       		  break bidLoop;
 		       	  }   
 		     }
 		  }
@@ -211,21 +211,15 @@ public void sendKitty(){
 		   System.out.println(players[bidWinner].hand[k].getCardVal() + "  "+players[bidWinner].hand[k].getSuit());
 	}
 	
-	
 			players[bidWinner].addKittyToHand(kitty);
-			
      		players[bidWinner].determineSuitLengths();
      		players[bidWinner].determineStrongestSuit();
      		trumpColor = players[bidWinner].chooseTrump();
-     		  
      		System.out.println("Trump card: " + trumpColor);
      		for(int a = 0; a < players.length; a++){
      			  players[a].setTrump(trumpColor);
      		}		
-			
 			players[bidWinner].reorganizeHand((players[bidWinner].chooseDiscards()));
-		
-	
 	
 //used for debugging to make sure actually got rid of cards
 		System.out.println("new cards");
