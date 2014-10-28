@@ -162,7 +162,8 @@ public class Player {
 
     /**
      * Sorts the cards in a player's hand by suit and numerical order.
-     * @param HandSize The number of cards in Player's hand[].  This can vary depending on if the Player is holding the kitty or not.
+     * @param HandSize The number of cards in Player's hand[].
+       This can vary depending on if the Player is holding the kitty or not.
      */
     public void sortHand(int HandSize) {
         int handsize = HandSize;
@@ -173,7 +174,7 @@ public class Player {
             min = index;
             for(int scan = index+1; scan < handsize; scan++) {
             	
-                if(hand[scan].getValue() < hand[min].getValue()) {
+                if(hand[scan].getValue() > hand[min].getValue()) {
                     min = scan;
                 }
             }
@@ -542,9 +543,10 @@ public class Player {
     public void setHighBidder(int amount){}
    
     //Play method to move play to the left, check validity of and play card
-    //remove card from players hand, reorganize hand
+    //remove card from players hand,
     //add what was played to current trick array
-    public Card[] Play(Card[] trick, int IndexOfPlayer)
+    //reorganize hand
+    public Card[] Play(Card[] trick, int indexOfPlaceInTrick)
     {
       // check that a hand is being dealt
       System.out.println("Your hand is: ");
@@ -558,26 +560,33 @@ public class Player {
       //Whats in the trick?
       System.out.println("The trick contains: ");
       for(int i=0;i<4;i++)
-      { if(trick[i]!=null)
-         System.out.println(trick[i].getCardVal() + " " + trick[i].getSuit()+"\n");
-        else
-         System.out.println("Trick at "+i+" is null");
+      { 
+         if(trick[i]!=null)
+            System.out.println(trick[i].getCardVal() + " " + trick[i].getSuit()+"\n");
+         else
+            System.out.println("Trick at "+i+" is null");
       }
 
       int indexToPlay=playFollowLeadCard(trick);
       Card cardToPlay = hand[indexToPlay];
-      trick[IndexOfPlayer]=cardToPlay;
-      hand[indexToPlay]= null;
+      trick[indexOfPlaceInTrick]=cardToPlay;
+      hand[indexToPlay].setCard(Card.Suit.NOSUIT, 0);
+      
       System.out.println("Check value being passed in to sort>> "+ hand.length);//check value being passed in to sort Hand()
       sortHand(hand.length);
       //Check that hand is sorted
-      System.out.println("Sorted hand: ");
+      System.out.println("Sorted hand of player "+indexOfPlaceInTrick+": ");
       for(int i=0;i<hand.length;i++)
-         System.out.print(hand[i]+" ");
+         System.out.println(hand[i].getCardVal() + " " + hand[i].getSuit());
       //Check that card is added to trick
       System.out.println("Trick so far: ");
       for(int i=0;i<4;i++)
-         System.out.print(trick[i]+" ");
+      {
+         if(trick[i]!=null)
+            System.out.println(trick[i].getCardVal() + " " + trick[i].getSuit()+"\n");
+         else
+            System.out.println("Trick at "+i+" is null");
+      }
       return trick;
     }
 

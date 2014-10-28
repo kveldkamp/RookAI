@@ -68,9 +68,12 @@ public class Game {
 	}
 		
 	
-	/*
+   
+   
+   
+   /*
 	* PlayRound is the game play for a single round 
-	* play starts with the bid bidWinner leading, and cycles through
+	* play starts with the bidWinner leading, and cycles through
 	*/
 	public void PlayRound(){
      
@@ -79,23 +82,37 @@ public class Game {
      
      //Play the card that the leader of the trick wants to play, at index 0
      int indexToPlay = players[bidWinner].lead();
-     Card cardToPlay = players[bidWinner].hand[indexToPlay];
-     currentTrick[0]=cardToPlay;
-     players[bidWinner].hand[indexToPlay]= null;
-	  
+     
+     Card.Suit setSuit = players[bidWinner].hand[indexToPlay].getSuit();
+     int setVal = players[bidWinner].hand[indexToPlay].getCardVal();
+     int setHiddenValue = players[bidWinner].hand[indexToPlay].getValue();
+     
+     //Set current trick at 0 to the chosen card
+     currentTrick[0] = new Card();
+     currentTrick[0].setCard(setSuit,setHiddenValue);
+     currentTrick[0].setCardValue(setVal);
+     
+     players[bidWinner].hand[indexToPlay].setCard(Card.Suit.NOSUIT, 0);
+
 	  //Cycle through players and have them Play
-	  int counter=0;
+	  int counter=1;
+     int placeInTrick=1;
      
 	  //Start i at whoever won bid, cycle through rest of players
-	  for(int i=bidWinner;counter<4;i=(i+1)%4)
+	  for(int i=(bidWinner+1)%4;counter<4;i=(i+1)%4)
 	  {
-	     currentTrick=players[i].Play(currentTrick,i);
+        System.out.println("Place in trick: "+placeInTrick);
+        currentTrick=players[i].Play(currentTrick,placeInTrick);
         //Add the card that was played to AI's intelligence
 	     players[0].cardPlayed(currentTrick[i]);
 	     players[1].cardPlayed(currentTrick[i]);
 	     players[2].cardPlayed(currentTrick[i]);
 	     counter++;
+        placeInTrick++;
 	  }
+     
+     
+     
 	}
 	
 /** 
@@ -228,6 +245,12 @@ for(int k=0;k<15;k++){
 	   System.out.println(players[bidWinner].hand[k].getCardVal() + "  "+players[bidWinner].hand[k].getSuit());
 	   }
 }
-}
+
+
+
+
+
+
+}//end of class
 
 

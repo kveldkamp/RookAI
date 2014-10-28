@@ -34,6 +34,16 @@ public class Card {
     public void setSuit (Suit newSuit) {
         suit = newSuit;
     }
+    
+    
+    /**
+     * Sets the suit variable of the card to a new value.
+     * @param newSuit The new variable that suit will be set to.
+     */
+    public void setCardValue (int newValue) {
+        cardVal = newValue;
+    }
+    
 
     /**
      * Sets both member variables of the card to new values.
@@ -44,6 +54,7 @@ public class Card {
         suit = newSuit;
         value = newValue;
     }
+    
 
     /**
      * Retrieves the integer member variable value.
