@@ -22,6 +22,10 @@ public class Game {
 	      players[1] = new NPC();
 	      players[2] = new NPC();
 	      players[3] = new RPC();
+	      players[0].myPartner = players[2];
+	      players[1].myPartner = players[3];
+	      players[2].myPartner = players[0];
+	      players[3].myPartner = players[1];
 	}
 	
 	/*
@@ -59,6 +63,7 @@ public class Game {
 				       		  System.out.println("Highest bid: " + highBid);
 				       		  players[bidWinner].setHighBidder(highBid);
 				       		  players[bidWinner].winningBiddingTeam = true;
+				       		  players[bidWinner].myPartner.winningBiddingTeam = true;
 				       		  //Need to set their teammate as winning as well		  
 				       		  break bidLoop;
 		       	  }   

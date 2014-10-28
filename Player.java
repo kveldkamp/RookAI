@@ -28,7 +28,7 @@ public class Player {
     protected int blackLength = 0;
     protected boolean isRookPresent = false;
     protected boolean enemiesOutOfTrump[] = new boolean [2];
-   
+    protected Player myPartner = null;
 
 
     /**
