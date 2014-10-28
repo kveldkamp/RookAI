@@ -66,7 +66,6 @@ public class RPC extends Player {
    public void setHighBidder(int amount) {
        //setBidWinner();
        bidAmount = amount;
-       System.out.println("bidamount is" + bidAmount);
    }
    
    

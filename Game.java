@@ -12,7 +12,7 @@ public class Game {
 	Player [] players = new Player[4];
 	int bidWinner = 0;  
 	Card [] currentTrick = new Card[4];
-	Card.Suit trumpcolor = null; 
+	Card.Suit trumpColor = null; 
 	protected ArrayList<Card> deck = new ArrayList<Card>();
 	protected Card kitty[] = new Card[5];
 	
@@ -27,55 +27,39 @@ public class Game {
 	/*
 	* This is the bidding process. 
 	* bidwon is set to true if only one bidder is left
+	* 
 	*/
 
 	public void Bidding(){
-		   //Issue 1: You have to bid again if every other player passes
 		   int highBid = 0;
 		   boolean bidwon = false;
 		   bidwonloop:
 		   while(bidwon == false){
 		 	  int bidders = 4;
 		 	  for(int i = 0; i < players.length; i++){
-		 		  	  //This is called even if all the others passed: a bit should be set by default
 		 		  if(highBid <= 195 && bidders > 1){
 		 			  players[i].bidOrPass(players[i].bidding);
-		 			  //sets high bid or decrements bidders based on their bidding value
 		     		  if(players[i].bidding == true){
 		     				  highBid = players[i].bid(highBid);
-		     				  bidWinner = i; //Holds winner of bid
+		     				  bidWinner = i;
 		     				  System.out.println("Current High is " + highBid);
 		     		  }
 		     		  else{
-		     			  //System.out.println("This player passed...");
 		     			  bidders--;
 		     		  }
 		 		  }
      			  
 		 		  if(highBid > 195 || bidders == 1){
-		     			//Only one bidder left; set winning bidder
 		       		  bidwon = true;
-		       		  //Set the high bidder with the highBid; bidWinner holds the index of winner
-			     			  //If everyone passed but one, set highBid to default to 100
-			     			  if(highBid == 0){
-			     				  highBid = 100;
+			     			  if(highBid == 0){ //All NPCs Passed
+			     				  highBid = players[3].bid(highBid);
+			     				  bidWinner = 3;
 			     			  }
-			     			  	  System.out.println("winning bidder is player " + bidWinner);
+			     			  System.out.println("winning bidder is player " + bidWinner);
 				       		  System.out.println("Highest bid: " + highBid);
 				       		  players[bidWinner].setHighBidder(highBid);
 				       		  players[bidWinner].winningBiddingTeam = true;
-				       		  //Set trump color
-				       		  players[bidWinner].determineSuitLengths();
-				       		  players[bidWinner].determineStrongestSuit();
-				       		  trumpcolor = players[bidWinner].chooseTrump();
-				       		  
-				       		  System.out.println("Trump card: " + trumpcolor);
-				       		  //Set trump card for all players
-				       		  for(int a = 0; a < players.length; a++){
-				       			  players[a].setTrump(trumpcolor);
-				       			  //System.out.println("Player " + a + "knows that trump is " + players[a].getTrump());
-				       		  }		       		  
-				       		  //Need to set their teammate as winning as well
+				       		  //Need to set their teammate as winning as well		  
 				       		  break bidwonloop;
 		       	  }   
 		     }
@@ -229,6 +213,16 @@ public void sendKitty(){
 	
 	
 			players[bidWinner].addKittyToHand(kitty);
+			
+     		players[bidWinner].determineSuitLengths();
+     		players[bidWinner].determineStrongestSuit();
+     		trumpColor = players[bidWinner].chooseTrump();
+     		  
+     		System.out.println("Trump card: " + trumpColor);
+     		for(int a = 0; a < players.length; a++){
+     			  players[a].setTrump(trumpColor);
+     		}		
+			
 			players[bidWinner].reorganizeHand((players[bidWinner].chooseDiscards()));
 		
 	

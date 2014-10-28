@@ -127,7 +127,6 @@ public class NPC extends Player {
         else{
         	bidding = bid;
         }
-        
     }
 
     /**
