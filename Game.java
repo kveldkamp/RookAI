@@ -104,9 +104,9 @@ public class Game {
         System.out.println("Place in trick: "+placeInTrick);
         currentTrick=players[i].Play(currentTrick,placeInTrick);
         //Add the card that was played to AI's intelligence
-	     players[0].cardPlayed(currentTrick[i]);
-	     players[1].cardPlayed(currentTrick[i]);
-	     players[2].cardPlayed(currentTrick[i]);
+	     players[0].cardPlayed(currentTrick[placeInTrick]);
+	     players[1].cardPlayed(currentTrick[placeInTrick]);
+	     players[2].cardPlayed(currentTrick[placeInTrick]);
 	     counter++;
         placeInTrick++;
 	  }
