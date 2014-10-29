@@ -36,6 +36,15 @@ public class Game {
 	public void Bidding(){
 		   int highBid = 0;
 		   boolean bidWon = false;
+		   //Print the player's hand
+		   for(int k=0;k<15;k++){
+				if(players[3].hand[k].getCardVal()!=0){
+				
+			   System.out.println(k+".      "+ players[bidWinner].hand[k].getCardVal() + "  "+players[bidWinner].hand[k].getSuit());
+				}
+			   }
+		
+		   
 		   bidLoop:
 		   while(bidWon == false){
 		 	  int bidders = 4;
