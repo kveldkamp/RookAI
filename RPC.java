@@ -17,7 +17,7 @@ public class RPC extends Player {
     * @return The amount to bid.
     */
    public int bid(int highBid) {
-	   System.out.println("Enter your bid, your bid needs to be between 100-200 and higher than the current high in multiples of 5: " + highBid);
+	   System.out.println("Enter your bid, your bid needs to be between "+(highBid+5)+ "-200 and multiples of 5: " );
 	   int bid = 0;
 	   
 	   boolean validinput = false;
