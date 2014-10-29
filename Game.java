@@ -96,7 +96,12 @@ public class Game {
      //Discard the card from the players hand(replace with empty card)
      players[bidWinner].hand[indexToPlay].setCard(Card.Suit.NOSUIT, 0);
 
-	  //Cycle through players and have them Play
+	  //Print out trick once the lead player has played
+     System.out.println("Trick so far: ");
+     System.out.println(currentTrick[0].getCardVal() 
+                        + " " + currentTrick[0].getSuit()+"\n");
+     
+     //Cycle through players and have them Play
 	  int counter=1;
      int placeInTrick=1;
      
