@@ -581,8 +581,8 @@ public class Player {
       sortHand(hand.length);
       
       //Check that hand is sorted
-      System.out.println("Sorted hand of player "+indexOfPlaceInTrick+": "+
-                              " after they discard.");
+      System.out.println("Sorted hand of player "+indexOfPlaceInTrick+
+                              " places after the bidWinner(after they discard)");
       for(int i=0;i<hand.length;i++)
       {
          if(hand[i].getCardVal()!=0)
