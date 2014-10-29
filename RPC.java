@@ -19,10 +19,10 @@ public class RPC extends Player {
    public int bid(int highBid) {
 	   
 	   if(highBid > 0){
-		   System.out.println("Enter your bid, your bid needs to be between "+(highBid+5)+ "-200 and multiples of 5: " );
+		   System.out.println("Enter your bid, your bid needs to be between "+(highBid+5)+ "-200 and a multiple of 5: " );
 	   }
 	   else{
-		   System.out.println("Enter your bid, your bid needs to be between 100-200 and multiples of 5: " );
+		   System.out.println("Enter your bid, your bid needs to be between 100-200 and a multiple of 5: " );
 	   }
 	   int bid = 0;
 	   
