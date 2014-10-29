@@ -75,14 +75,22 @@ public class RPC extends Player {
     * @return the Trump Card Suit
     */
    public Card.Suit chooseTrump() {
-      System.out.println("Please pick the trump color: RED, BLUE, GREEN, BLACK");
+      
       boolean trumpvalid = false;
       Card.Suit trumpcolor = null;
       while(!trumpvalid){
+    	  System.out.println("Please pick the trump color: RED, BLUE, GREEN, BLACK");
 	        try {
 	        	Scanner scantrump = new Scanner(System.in);
+	        	
 	        	trumpcolor = Card.Suit.valueOf(scantrump.nextLine());
-	        	trumpvalid = true;
+	        	if(trumpcolor == Card.Suit.NOSUIT){
+	        		System.out.println("You cannot enter NOSUIT, try again");
+	        		trumpvalid = false;
+	        	}
+	        	else{
+	        		trumpvalid = true;
+	        	}
       
 	        }
 	        catch(IllegalArgumentException I) {
