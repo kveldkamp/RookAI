@@ -37,10 +37,11 @@ public class Game {
 		   int highBid = 0;
 		   boolean bidWon = false;
 		   //Print the player's hand
+		   System.out.println("This is your hand");
 		   for(int k=0;k<15;k++){
 				if(players[3].hand[k].getCardVal()!=0){
 				
-			   System.out.println(k+".      "+ players[bidWinner].hand[k].getCardVal() + "  "+players[bidWinner].hand[k].getSuit());
+			   System.out.println(k+".      "+ players[3].hand[k].getCardVal() + "  "+players[3].hand[k].getSuit());
 				}
 			   }
 		
@@ -242,6 +243,7 @@ public void sendKitty(){
 
 	
 			players[bidWinner].addKittyToHand(kitty);
+			System.out.println("This is your hand with the Kitty");
 			//Print their cards if the real player won
 			if(bidWinner == 3){
 			for(int k=0;k<15;k++){
