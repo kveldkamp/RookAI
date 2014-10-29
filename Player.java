@@ -531,9 +531,13 @@ public class Player {
      * @param an array representing the current card trick(whats been played)
      * @return an array of valid cards they can play
      */
-    public Card[] getValidFollowCards(Card[] trick){return new Card[15];}
+    public Card[] getValidFollowCards(Card[] trick){
+    	return new Card[15];
+    	}
     
-    public void bidOrPass(boolean bid){}
+    public void bidOrPass(boolean bid){
+    	
+    }
     public int bid(int highBid){
     	return 0;
     }

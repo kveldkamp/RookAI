@@ -230,10 +230,7 @@ public void dealCards(){
  */
 
 public void sendKitty(){
-	for(int k=0;k<15;k++){
-		
-		   System.out.println(players[bidWinner].hand[k].getCardVal() + "  "+players[bidWinner].hand[k].getSuit());
-	}
+
 	
 			players[bidWinner].addKittyToHand(kitty);
      		players[bidWinner].determineSuitLengths();
@@ -246,10 +243,13 @@ public void sendKitty(){
 			players[bidWinner].reorganizeHand((players[bidWinner].chooseDiscards()));
 	
 //used for debugging to make sure actually got rid of cards
-		System.out.println("new cards");
-for(int k=0;k<15;k++){
+		System.out.println("player"+" "+bidWinner+"'s cards after reorganizing: ");
 		
-	   System.out.println(players[bidWinner].hand[k].getCardVal() + "  "+players[bidWinner].hand[k].getSuit());
+for(int k=0;k<15;k++){
+		if(players[bidWinner].hand[k].getCardVal()!=0){
+		
+	   System.out.println(k+".      "+ players[bidWinner].hand[k].getCardVal() + "  "+players[bidWinner].hand[k].getSuit());
+		}
 	   }
 }
 
