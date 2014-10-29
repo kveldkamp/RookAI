@@ -557,7 +557,8 @@ public class Player {
          if(hand[i]==null)
             System.out.print("null\n");
          else
-            System.out.print(hand[i].getCardVal() + " " + hand[i].getSuit()+"\n");
+            System.out.print(i + ". " +hand[i].getCardVal() 
+                        + " " + hand[i].getSuit()+"\n");
       }
 
       //Index in Players hand of the card to play
@@ -581,7 +582,9 @@ public class Player {
       System.out.println("Sorted hand of player "+indexOfPlaceInTrick+": "+
                               " after they discard.");
       for(int i=0;i<hand.length;i++)
-         System.out.println(hand[i].getCardVal() + " " + hand[i].getSuit());
+      {
+         System.out.println(i +". "+ hand[i].getCardVal() + " " + hand[i].getSuit());
+      }
          
       //Check that card is added to trick
       System.out.println("Trick so far: ");
