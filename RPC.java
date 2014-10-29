@@ -154,10 +154,7 @@ public class RPC extends Player {
         Card card = null;
         Card[] validFollowCards = new Card[15];
         int maxIndex = -1;
-        System.out.println("\nTESTINGVALIDFOLLOW:\n");
 
-        if(trick[0]==null)
-         System.out.println("trick is null");
         //code to get valid cards while following suit
         for(int i = 0; i < 15; i++)
         {
@@ -205,23 +202,6 @@ public class RPC extends Player {
         // compile a list of playable cards, have rules based on this list
         // getValidFollowCards doesnt need to be overridden, can be used as is
         validCards = getValidFollowCards(trick);
-        
-        if(validCards != null)
-            System.out.println("ValidCards is not null");
-        else
-            System.out.println("ValidCards is null");
-        //See whats in the valid card array
-        System.out.println("Valid follow card array:\n");
-        System.out.println(validCards.length+"\n");
-
-        for(int i=0;i<15;i++)
-        {
-            if(validCards[i]==null)
-               System.out.print("null\n");
-            else
-               System.out.println(validCards[i].getCardVal() 
-                  + " " + validCards[i].getSuit());
-        }
         
         //Check to see if the card they want to play is in validCards array
         boolean isValid=false;

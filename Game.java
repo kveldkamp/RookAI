@@ -16,7 +16,6 @@ public class Game {
 	protected ArrayList<Card> deck = new ArrayList<Card>();
 	protected Card kitty[] = new Card[5];
 	
-	
 	public Game(){
 	      players[0] = new NPC();
 	      players[1] = new NPC();
@@ -73,9 +72,6 @@ public class Game {
 	}
 		
 	
-   
-   
-   
    /*
 	* PlayRound is the game play for a single round 
 	* play starts with the bidWinner leading, and cycles through
@@ -92,11 +88,12 @@ public class Game {
      int setVal = players[bidWinner].hand[indexToPlay].getCardVal();
      int setHiddenValue = players[bidWinner].hand[indexToPlay].getValue();
      
-     //Set current trick at 0 to the chosen card
+     //Set the first spot in the trick to the card that was led
      currentTrick[0] = new Card();
      currentTrick[0].setCard(setSuit,setHiddenValue);
      currentTrick[0].setCardValue(setVal);
      
+     //Discard the card from the players hand(replace with empty card)
      players[bidWinner].hand[indexToPlay].setCard(Card.Suit.NOSUIT, 0);
 
 	  //Cycle through players and have them Play
