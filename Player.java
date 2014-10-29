@@ -556,9 +556,11 @@ public class Player {
       {
          if(hand[i]==null)
             System.out.print("null\n");
-         else
+         if(hand[i].getCardVal()!=0)
+         {
             System.out.print(i + ". " +hand[i].getCardVal() 
                         + " " + hand[i].getSuit()+"\n");
+         }
       }
 
       //Index in Players hand of the card to play
@@ -583,7 +585,11 @@ public class Player {
                               " after they discard.");
       for(int i=0;i<hand.length;i++)
       {
-         System.out.println(i +". "+ hand[i].getCardVal() + " " + hand[i].getSuit());
+         if(hand[i].getCardVal()!=0)
+         {
+            System.out.println(i +". "+ hand[i].getCardVal() 
+                        + " " + hand[i].getSuit());
+         }
       }
          
       //Check that card is added to trick
