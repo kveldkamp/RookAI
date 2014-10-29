@@ -242,6 +242,16 @@ public void sendKitty(){
 
 	
 			players[bidWinner].addKittyToHand(kitty);
+			//Print their cards if the real player won
+			if(bidWinner == 3){
+			for(int k=0;k<15;k++){
+				if(players[bidWinner].hand[k].getCardVal()!=0){
+				
+			   System.out.println(k+".      "+ players[bidWinner].hand[k].getCardVal() + "  "+players[bidWinner].hand[k].getSuit());
+				}
+			   }
+			}
+			
      		players[bidWinner].determineSuitLengths();
      		players[bidWinner].determineStrongestSuit();
      		trumpColor = players[bidWinner].chooseTrump();
