@@ -203,19 +203,20 @@ public void dealCards(){
 	//set blank card objects to the last 5 cards in hand
 	for(int i=0;i<5;i++){
 		
-		Card card1=new Card();
-		card1.setCard(Card.Suit.NOSUIT,0);
-		Card card2=new Card();
+		Card nullCardPlaceholder=new Card();
+		nullCardPlaceholder.setCard(Card.Suit.NOSUIT,0);
+		
+      /*Card card2=new Card();
 		card2.setCard(Card.Suit.NOSUIT,0);
 		Card card3=new Card();
 		card3.setCard(Card.Suit.NOSUIT,0);
 		Card card4=new Card();
-		card4.setCard(Card.Suit.NOSUIT,0);
+		card4.setCard(Card.Suit.NOSUIT,0);*/
 		
-		players[0].hand[handIndex]=card1;
-		players[1].hand[handIndex]=card2;
-		players[2].hand[handIndex]=card3;
-		players[3].hand[handIndex]=card4;
+		players[0].hand[handIndex]=nullCardPlaceholder;
+		players[1].hand[handIndex]=nullCardPlaceholder;
+		players[2].hand[handIndex]=nullCardPlaceholder;
+		players[3].hand[handIndex]=nullCardPlaceholder;
 		handIndex++;
 	}
 	
