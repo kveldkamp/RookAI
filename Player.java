@@ -174,7 +174,7 @@ public class Player {
             min = index;
             for(int scan = index+1; scan < handsize; scan++) {
             	
-                if(hand[scan].getValue() > hand[min].getValue()) {
+                if(hand[scan].getValue() < hand[min].getValue()) {
                     min = scan;
                 }
             }
@@ -575,8 +575,8 @@ public class Player {
       trick[indexOfPlaceInTrick]=cardToPlay;
       
       //"Discard" card at indexToPlay in hand
-      hand[indexToPlay].setCard(Card.Suit.NOSUIT, 0);
-      hand[indexToPlay].setCardValue(0);
+      hand[indexToPlay].setCard(Card.Suit.NOSUIT, 100); //After the card is played, setting the hidden value to 100 so it is sorted to the bottom. 
+      hand[indexToPlay].setCardValue(0); //Showing the value is 0 so it isn't displayed.
       
       sortHand(hand.length);
       
@@ -585,7 +585,7 @@ public class Player {
                               " places after the bidWinner(after they discard)");
       for(int i=0;i<hand.length;i++)
       {
-         if(hand[i].getCardVal()!=0)
+         if(hand[i].getCardVal()!=0) //Stops the card from being displayed if the cardValue is equal to zero.
          {
             System.out.println(i +". "+ hand[i].getCardVal() 
                         + " " + hand[i].getSuit());

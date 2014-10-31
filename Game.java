@@ -104,7 +104,7 @@ public class Game {
      currentTrick[0].setCardValue(setVal);
      
      //Discard the card from the players hand(replace with empty card)
-     players[bidWinner].hand[indexToPlay].setCard(Card.Suit.NOSUIT, 0);
+     players[bidWinner].hand[indexToPlay].setCard(Card.Suit.NOSUIT, 100);
 
 	  //Print out trick once the lead player has played
      System.out.println("Trick so far: ");
@@ -144,19 +144,19 @@ public class Game {
 			
 			int temp = i % 4;
 			
-			if(temp==0){
+			if(i <= 10){
 				card.setCard(Card.Suit.RED,i);
 			}
 					
-			else if(temp==1){
+			else if(i <= 21){
 			card.setCard(Card.Suit.BLUE,i);
 			}
 					
-			else if(temp==2){
+			else if(i <= 32){
 				card.setCard(Card.Suit.GREEN,i);
 			}
 					
-			else if(temp==3){
+			else if(i <= 43){
 				card.setCard(Card.Suit.BLACK,i);
 				}
 			
@@ -204,7 +204,7 @@ public void dealCards(){
 	for(int i=0;i<5;i++){
 		
 		Card nullCardPlaceholder=new Card();
-		nullCardPlaceholder.setCard(Card.Suit.NOSUIT,0);
+		nullCardPlaceholder.setCard(Card.Suit.NOSUIT,100); //Using 100 as the value so it is sorted to the bottom of the hand later.
 		
       /*Card card2=new Card();
 		card2.setCard(Card.Suit.NOSUIT,0);
@@ -228,7 +228,9 @@ public void dealCards(){
 
 	}
 	
-
+   for(int i = 0; i < 4; i++){
+      players[i].sortHand(10);
+   }
 	
 }
 

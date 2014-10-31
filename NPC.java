@@ -94,6 +94,8 @@ public class NPC extends Player {
                     discarded[j] = true;
                     numberPossibleCards++;
                 }
+                
+                
             }
         }
         
