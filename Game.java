@@ -183,7 +183,6 @@ public void dealCards(){
 	
 	int handIndex = 0;
 	
-	
 	//deal out the 40 cards to the players
 	for(int i=0;i<40;){
 		
@@ -253,7 +252,10 @@ public void sendKitty(){
 				}
 			   }
 			}
-			
+		
+		//Player.chooseTrump depends on determineStrongestSuit being called beforehand. 
+		//This resolves the issue of the player not being able to see the kitty before making the trump decision.
+		
      		players[bidWinner].determineSuitLengths();
      		players[bidWinner].determineStrongestSuit();
      		trumpColor = players[bidWinner].chooseTrump();
