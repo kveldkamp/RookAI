@@ -59,9 +59,15 @@ public class Game {
 		   bidLoop:
 		   while(bidWon == false){
 		 	  int bidders = 4;
-		 	  for(int i = 0; i < players.length; i++){
+		 	  	for(int i = 0; i < players.length; i++){
+		 	  		
+		 	  		
+		 	  		
 		 		  if(highBid <= 195 && bidders > 1){
-		 			  players[i].bidOrPass(players[i].bidding);
+		 			 players[i].bidOrPass(players[i].bidding);
+		 			  
+		 			
+		 			  
 		     		  if(players[i].bidding == true){
 		     				  highBid = players[i].bid(highBid);
 		     				  bidWinner = i;
@@ -71,15 +77,18 @@ public class Game {
 					  	  //Removing player from bidding.
 						  playerActive[i] = false;
 		     			  bidders--;
+		     			  
 		     		  }
 		 		  }
      			  
+		 		 
 		 		  if(highBid > 195 || bidders == 1){
 		       		  bidWon = true;
 			     			  if(highBid == 0){ //All NPCs Passed
 			     				  highBid = players[3].bid(highBid);
 			     				  bidWinner = 3;
 			     			  }
+			     			  
 			     			  System.out.println("winning bidder is player " + bidWinner);
 				       		  System.out.println("Highest bid: " + highBid);
 				       		  players[bidWinner].setHighBidder(highBid);
@@ -154,7 +163,7 @@ public class Game {
 					
 			Card card = new Card();
 			
-			int temp = i % 4;
+			
 			
 			if(i <= 10){
 				card.setCard(Card.Suit.RED,i);
@@ -216,7 +225,7 @@ public void dealCards(){
 	for(int i=0;i<5;i++){
 		
 		Card nullCardPlaceholder=new Card();
-		nullCardPlaceholder.setCard(Card.Suit.NOSUIT,100); //Using 100 as the value so it is sorted to the bottom of the hand later.
+		nullCardPlaceholder.setCard(Card.Suit.BLANK,100); //Using 100 as the value so it is sorted to the bottom of the hand later.
 		
       /*Card card2=new Card();
 		card2.setCard(Card.Suit.NOSUIT,0);
@@ -257,16 +266,17 @@ public void sendKitty(){
 
 	
 			players[bidWinner].addKittyToHand(kitty);
-			System.out.println("This is your hand with the Kitty");
+			
 			//Print their cards if the real player won
-			if(bidWinner == 3){
+			
+			System.out.println("This is your hand with the Kitty");
 			for(int k=0;k<15;k++){
 				if(players[bidWinner].hand[k].getCardVal()!=0){
 				
 			   System.out.println(k+".      "+ players[bidWinner].hand[k].getCardVal() + "  "+players[bidWinner].hand[k].getSuit());
 				}
 			   }
-			}
+			
 		
 		//Player.chooseTrump depends on determineStrongestSuit being called beforehand. 
 		//This resolves the issue of the player not being able to see the kitty before making the trump decision.
@@ -278,8 +288,19 @@ public void sendKitty(){
      		for(int a = 0; a < players.length; a++){
      			  players[a].setTrump(trumpColor);
      		}		
+     		
+     		//debug//
+     		System.out.println("red length"+players[bidWinner].redLength);
+     		System.out.println("green length"+players[bidWinner].greenLength);
+     		System.out.println("blue length"+players[bidWinner].blueLength);
+     		System.out.println("black length"+players[bidWinner].blackLength);
+     		//
+     		
+     		
 			players[bidWinner].reorganizeHand((players[bidWinner].chooseDiscards()));
-	
+			
+	//ERROR OCCURS HERE
+			
 //used for debugging to make sure actually got rid of cards
 		System.out.println("player"+" "+bidWinner+"'s cards after reorganizing: ");
 		

@@ -14,7 +14,6 @@ public class KoorDriver {
       
 	   game.makeDeck();
 	   game.dealCards();
-      
 	   game.Bidding();
 	   game.sendKitty();
 

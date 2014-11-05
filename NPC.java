@@ -22,6 +22,7 @@ public class NPC extends Player {
     int maxBid = 200;
     boolean[] discarded = new boolean[15];
     int numberPossibleCards = 15;
+    protected ArrayList<Integer> junkCards = new ArrayList<Integer>();
     
     private boolean testCheck = true;
 
@@ -69,10 +70,15 @@ public class NPC extends Player {
 
         resetDiscardedValues();
 
+        	
+        
         setStrongestSuitToFalse();
 
+        	
+        
         setRankOneCardsToFalse();
-
+        
+        	
         if(numberPossibleCards < 5)
         {
             for(int k = 0; k < 15; k++)
@@ -85,6 +91,9 @@ public class NPC extends Player {
                     numberPossibleCards--;
                 }
             }
+            
+            
+            
             for(int j = 0; j < 15; j++)
             {
                 if(!discarded[j] &&
@@ -97,19 +106,32 @@ public class NPC extends Player {
                 
                 
             }
+            
+           
         }
         
         attemptToShortSuit();
+        
+      
 
         if(numberPossibleCards > 5)
         {
+        	
+        	System.out.println(numberPossibleCards);
+        	 for(int k=0;k<15;k++){
+          	   System.out.println(discarded[k]);
+             }
+        	 
             choosePossibleWinnersToKeep();
         }
+        
+
 
         
        
-        
-        
+        for(int j=0;j<15;j++){
+        System.out.println(discarded[j]);
+        }
         return discarded;
     }
 
@@ -1288,7 +1310,7 @@ public class NPC extends Player {
     private Card.Suit determineSecondLongestSuit()
     {
         int second = 0;
-        Card.Suit secondLongest = Card.Suit.NOSUIT;
+        Card.Suit secondLongest = Card.Suit.BLANK;
         boolean suitsOfEqualLength = determineSuitsOfEqualLengthPresent();
             if(strongestSuit == Card.Suit.RED)
             {
@@ -1425,13 +1447,15 @@ public class NPC extends Player {
      */
     private void choosePossibleWinnersToKeep()
     {
+    	
+    	
         Card.Suit lastWinnerSuit = strongestSuit;
         int lastWinnerRank = 0;
-        int i = 14;
-        while(numberPossibleCards > 5)
+        
+     
+        for(int i=0;i<15;i++)
         {
-            if(i < 0)
-            {i=14;}
+            
             
 	            if(discarded[i] && numberPossibleCards > 5 &&
 	               hand[i].getSuit() != secondLongestSuit &&
@@ -1445,7 +1469,54 @@ public class NPC extends Player {
 	                lastWinnerRank = hand[i].getRank();
 	            }
 	            
-            i--;
+            
+            
         }
-    }
+        
+        //what Kevin added
+//        if(numberPossibleCards>5){
+//        	System.out.println("here");
+//        	
+//        	int gottenRidOf =0;
+//        	int getRidOf = numberPossibleCards-5;
+//        	
+//        	
+//        		for(int i=0;i<15;){
+//        			if(discarded[i]==true){
+//        				i++;
+//        			}
+//        			else{
+//        				junkCards.add(i);
+//        				i++;
+//        			}
+//        		}
+//        		
+//        		int lowCard = junkCards.get(0);
+//        		int j=0;
+//        		
+//        		for(int k =0;k<15;k++){
+//        			for(Integer i : junkCards){
+//        				if(hand[i].getRank() < hand[lowCard].getRank()){
+//        					lowCard = i;
+//        					j++;
+//        						}
+//        				else if(hand[i].getRank()==hand[lowCard].getRank()){
+//        					lowCard = i;
+//        					j++;
+//        				}
+//        				
+//        						
+//        			}
+//        			junkCards.remove(lowCard);
+//        			gottenRidOf++;
+//       
+//        		if(gottenRidOf==getRidOf)
+//        			break;
+//        	}
+//        		
+//        for(Integer i : junkCards){
+//        	discarded[i]=false;
+//        }
+//    	}
+  }
 }

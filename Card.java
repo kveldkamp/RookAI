@@ -15,7 +15,7 @@ public class Card {
 	/**
 	 * An enumerated type for the four suits or colors in the game of Rook: red, blue, green, and black.
 	 */
-    public enum Suit { RED, BLUE, GREEN, BLACK, NOSUIT };
+    public enum Suit { RED, BLUE, GREEN, BLACK, NOSUIT, BLANK };
 
     private Suit suit;
     private String image;

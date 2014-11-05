@@ -133,7 +133,14 @@ public class RPC extends Player {
 	  int discard;
 	  discard = scanDiscard.nextInt();
 	  
-	  discarded[discard] = true;
+	  //checks that the card hasn't already been discarded
+	  if(discarded[discard]==true){
+		  System.out.println("Sorry you've already chosen that card, please choose another");
+		  i--;
+	  }
+	  else{
+		  discarded[discard] = true;
+	  }
 	  }
 	   
 	   return discarded;
