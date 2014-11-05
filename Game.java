@@ -15,6 +15,9 @@ public class Game {
 	Card.Suit trumpColor = null; 
 	protected ArrayList<Card> deck = new ArrayList<Card>();
 	protected Card kitty[] = new Card[5];
+	protected int highBid = 0;
+	protected boolean [] playerActive = new boolean[4];
+	protected int[] currentTeamScores = new int[2];
 	
 	public Game(){
 	      players[0] = new NPC();
@@ -34,7 +37,14 @@ public class Game {
 	*/
 
 	public void Bidding(){
-		   int highBid = 0;
+			//Resetting value of highest bid.
+		   highBid = 0;
+			
+			//Resetting all values in playerActive to false.
+			for(int i=0; i<4;i++){
+				playerActive[i] = true;
+			}
+			
 		   boolean bidWon = false;
 		   //Print the player's hand
 		   System.out.println("This is your hand");
@@ -58,6 +68,8 @@ public class Game {
 		     				  System.out.println("Current High is " + highBid);
 		     		  }
 		     		  else{
+					  	  //Removing player from bidding.
+						  playerActive[i] = false;
 		     			  bidders--;
 		     		  }
 		 		  }
@@ -276,13 +288,61 @@ for(int k=0;k<15;k++){
 		
 	   System.out.println(k+".      "+ players[bidWinner].hand[k].getCardVal() + "  "+players[bidWinner].hand[k].getSuit());
 		}
-	   }
+	}
 }
 
+//***
+//ACCESSORS AND MUTATORS NECESSARY FOR GUI FUNCTIONALITY.
+//***
 
+//Precondition: Bidding has begun and highBid has been given a value.
+//Postcondition: Returns the value of highBid when called.
+public int getHighestBidValue()
+{
+	return highBid;
+}
+	
+//Precondition: Gets the current state of bidding. Bidding must have occurred.
+//Postcondition: Returns an array of players still active in bidding.
+public boolean[] getCurrentBidState()
+{ 
+	return playerActive;
+}
 
+//Precondition: Player's hand has been instantiated.
+//Postcondition: Returns the cards that are within the playerHand array.
+public Card[] getPlayerHand()
+{
+	return players[3].hand;
+}
 
+//Precondition: currentTeamScores has been instantiated.
+//Postcondition: currentTeamScores is returned as an array of two values.
+public int[] getCurrentTeamScores()
+{
+	return currentTeamScores;
+}
 
+//Precondition: getCurrentTrick has been instantiated.
+//Postcondition: currentTrick is returned as an array of cards. This will include any cards that have been played so far.
+public Card[] getCurrentTrick()
+{
+	return currentTrick;
+}
+
+//Precondition: kitty has been instantiated.
+//Postcondition: kitty is returned as an array of cards.
+public Card[] getKitty()
+{
+	return kitty;
+}
+
+//Precondition: newKitty is a card array of five cards.
+//Postcondition: kitty will be set to point to the values located in newKitty.
+public void setKitty(Card[] newKitty)
+{
+	kitty = newKitty;
+}
 
 }//end of class
 
