@@ -588,7 +588,7 @@ public class Player {
       
       //Check that hand is sorted
       System.out.println("Sorted hand of player "+indexOfPlaceInTrick+
-                              " places after the bidWinner(after they discard)");
+                              " places after the trickWinner(after they discard)");
       for(int i=0;i<hand.length;i++)
       {
          if(hand[i].getCardVal()!=0) //Stops the card from being displayed if the cardValue is equal to zero.

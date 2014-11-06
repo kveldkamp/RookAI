@@ -100,7 +100,8 @@ public class Game {
 		       	  }   
 		     }
 		  }
-		  System.out.println("Done with bidding"); 
+		  System.out.println("Done with bidding");
+        trickWinner=bidWinner; 
 	}
 		
    /*
@@ -109,10 +110,13 @@ public class Game {
 	*/
 	public void playGame(){
    
-      for(int i=0;i<3;i++)
+      for(int i=1;i<3;i++)
       {
-         System.out.println("\nPLAYING ROUND: "+(i+1));
-         System.out.println("bidWinner or Trick Winner, is: " + bidWinner);
+         System.out.println("\nPLAYING ROUND: "+i);
+         if(i==1)
+            System.out.println("Bid Winner is: " + bidWinner);
+         else
+            System.out.println("Trick Winner is: " + trickWinner);
          
 //		 System.out.println("These are the discards");
 //		   for(int k=0;k<5;k++){
@@ -177,22 +181,22 @@ public class Game {
 	public void playRound(){
      
 	  //Call lead on whoever won the bid
-     System.out.println("The player that leads is "+bidWinner);
+     System.out.println("The player that leads is "+trickWinner);
      
      for(int i=0;i<15;i++)
      {
-      if(players[bidWinner].hand[i].getCardVal()!=0)
-         System.out.println(players[bidWinner].hand[i].getSuit() + " "
-               + players[bidWinner].hand[i].getCardVal());
+      if(players[trickWinner].hand[i].getCardVal()!=0)
+         System.out.println(players[trickWinner].hand[i].getSuit() + " "
+               + players[trickWinner].hand[i].getCardVal());
      }
      
      //Play the card that the leader of the trick wants to play, at index 0
-     int indexToPlay = players[bidWinner].lead();
+     int indexToPlay = players[trickWinner].lead();
      
      //Get the different values of the card that is to be played
-     Card.Suit setSuit = players[bidWinner].hand[indexToPlay].getSuit();
-     int setVal = players[bidWinner].hand[indexToPlay].getCardVal();
-     int setHiddenValue = players[bidWinner].hand[indexToPlay].getValue();
+     Card.Suit setSuit = players[trickWinner].hand[indexToPlay].getSuit();
+     int setVal = players[trickWinner].hand[indexToPlay].getCardVal();
+     int setHiddenValue = players[trickWinner].hand[indexToPlay].getValue();
      
      //Set the first spot in the trick to the card that was led
      currentTrick[0] = new Card();
@@ -200,11 +204,11 @@ public class Game {
      currentTrick[0].setCardValue(setVal);
      
      //Discard the card from the players hand(replace with empty card)
-     players[bidWinner].hand[indexToPlay].setCard(Card.Suit.NOSUIT, 100);
-     players[bidWinner].hand[indexToPlay].setCardValue(0);
+     players[trickWinner].hand[indexToPlay].setCard(Card.Suit.NOSUIT, 100);
+     players[trickWinner].hand[indexToPlay].setCardValue(0);
      
      //Sort whoever won's hand
-     players[bidWinner].sortHand(players[bidWinner].hand.length);
+     players[trickWinner].sortHand(players[trickWinner].hand.length);
 
 	  //Print out trick once the lead player has played
      System.out.println("Trick so far: ");
@@ -216,7 +220,7 @@ public class Game {
      int placeInTrick=1;
      
 	  //Start i at whoever won bid, cycle through rest of players
-	  for(int i=(bidWinner+1)%4;counter<4;i=(i+1)%4)
+	  for(int i=(trickWinner+1)%4;counter<4;i=(i+1)%4)
 	  {
         System.out.println("Place in trick: "+placeInTrick);
         currentTrick=players[i].Play(currentTrick,placeInTrick);
