@@ -10,7 +10,8 @@ import java.util.Random;
  */
 public class Game {
 	Player [] players = new Player[4];
-	int bidWinner = 0;  
+	int bidWinner = 0; 
+	int trickWinner = 0;
 	Card [] currentTrick = new Card[4];
 	Card.Suit trumpColor = null; 
 	protected ArrayList<Card> deck = new ArrayList<Card>();
@@ -112,6 +113,15 @@ public class Game {
       {
          System.out.println("\nPLAYING ROUND: "+(i+1));
          System.out.println("bidWinner or Trick Winner, is: " + bidWinner);
+         
+//		 System.out.println("These are the discards");
+//		   for(int k=0;k<5;k++){
+//				if(players[bidWinner].discards[k].getCardVal()!=0){
+//				
+//			   System.out.println(k+".      "+ players[bidWinner].discards[k].getCardVal() + "  "+players[bidWinner].discards[k].getSuit());
+//				}
+//			}
+         
          playRound();
          
          // Find index of card that won the trick, represented by MAX
@@ -153,6 +163,9 @@ public class Game {
          System.out.println("WINNER WAS PLAYER IN TRICK AT: "+MAX);
          
       } //for loop end
+      
+      addDiscardToScore();
+      displayScore();
       
    } //playGame end
    
@@ -373,6 +386,49 @@ for(int k=0;k<15;k++){
 		
 	   System.out.println(k+".      "+ players[bidWinner].hand[k].getCardVal() + "  "+players[bidWinner].hand[k].getSuit());
 		}
+	}
+}
+
+/** 
+ * addDiscardToScore() adds the values of the originally discarded cards to the score 
+ * of the team that won the last trick
+ */
+public void addDiscardToScore(){
+	/*How are current team scores decided? This assumes that players 0 and 2 are currentTeamScores[1]
+	 * and players 1 and 3 are currentTeamScores[2]
+	 */
+	if(trickWinner == 0 || trickWinner == 2){
+		currentTeamScores[1] += discardScore();
+	}
+	if(trickWinner == 1 || trickWinner == 3){
+		currentTeamScores[2] += discardScore();
+	}
+}
+/** 
+ * discardScore() grabs the discards array from the original bidWinner and adds the scores
+ * of the cards up and returns the total score value of the discards
+ */
+public int discardScore(){
+	int discardScore = 0;
+	//Need to get card values from discarded array in the Player
+	//Winner of last trick is not necessarily the one who discarded
+	for(int i = 0; i < players[bidWinner].discards.length; i++){
+		discardScore += players[bidWinner].discards[i].getScore();
+	}
+	return discardScore;
+}
+
+/** 
+ * displayScore() shows the final scores and the resultant winner
+ */
+public void displayScore(){
+	if(currentTeamScores[1] > currentTeamScores[2]){
+		System.out.println("The winning team is team one, Players 0 and 2, with a total of : " + currentTeamScores[1]);
+		System.out.println("Second place goes to team two, Players 1 and 3 (you), with a total of : " + currentTeamScores[2]);
+	}
+	if(currentTeamScores[1] < currentTeamScores[2]){
+		System.out.println("The winning team is team two, Players 1 and 3 (you), with a total of : " + currentTeamScores[2]);
+		System.out.println("Second place goes to team one, Players 0 and 2, with a total of : " + currentTeamScores[1]);
 	}
 }
 

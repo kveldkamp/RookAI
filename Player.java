@@ -35,6 +35,7 @@ public class Player {
      * Array of Card objects used as the internal representation of a players hand
      */
     protected Card[] hand = new Card[15];
+    protected Card[] discards = new Card[5];
     /**
      * States true if the player is still bidding and false if the player has passed
      */
@@ -125,12 +126,17 @@ public class Player {
      * @param discarded An array the same size as the player's hand with boolean values for whether each card is to be discarded (true) or not (false).
      */
     public void reorganizeHand (boolean[] discarded) {
-        int i, count = 0;
+        int i, count = 0, discardCount = 0;
         Card[] tempHand = new Card[15];
         for (i=0; i<15; i++) {
 			if (!discarded[i]) {
 				tempHand[count] = hand[i];
 				count++;
+			}
+			//Populate another card array to hold discards
+			else{
+				discards[discardCount] = hand[i];
+				discardCount++;
 			}
 		}
         
