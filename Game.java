@@ -394,14 +394,14 @@ for(int k=0;k<15;k++){
  * of the team that won the last trick
  */
 public void addDiscardToScore(){
-	/*How are current team scores decided? This assumes that players 0 and 2 are currentTeamScores[1]
-	 * and players 1 and 3 are currentTeamScores[2]
+	/*How are current team scores decided? This assumes that players 0 and 2 are currentTeamScores[0]
+	 * and players 1 and 3 are currentTeamScores[1]
 	 */
 	if(trickWinner == 0 || trickWinner == 2){
-		currentTeamScores[1] += discardScore();
+		currentTeamScores[0] += discardScore();
 	}
 	if(trickWinner == 1 || trickWinner == 3){
-		currentTeamScores[2] += discardScore();
+		currentTeamScores[1] += discardScore();
 	}
 }
 /** 
@@ -422,13 +422,13 @@ public int discardScore(){
  * displayScore() shows the final scores and the resultant winner
  */
 public void displayScore(){
-	if(currentTeamScores[1] > currentTeamScores[2]){
-		System.out.println("The winning team is team one, Players 0 and 2, with a total of : " + currentTeamScores[1]);
-		System.out.println("Second place goes to team two, Players 1 and 3 (you), with a total of : " + currentTeamScores[2]);
+	if(currentTeamScores[0] > currentTeamScores[1]){
+		System.out.println("The winning team is team one, Players 0 and 2, with a total of : " + currentTeamScores[0]);
+		System.out.println("Second place goes to team two, Players 1 and 3 (you), with a total of : " + currentTeamScores[1]);
 	}
-	if(currentTeamScores[1] < currentTeamScores[2]){
-		System.out.println("The winning team is team two, Players 1 and 3 (you), with a total of : " + currentTeamScores[2]);
-		System.out.println("Second place goes to team one, Players 0 and 2, with a total of : " + currentTeamScores[1]);
+	if(currentTeamScores[0] < currentTeamScores[1]){
+		System.out.println("The winning team is team two, Players 1 and 3 (you), with a total of : " + currentTeamScores[1]);
+		System.out.println("Second place goes to team one, Players 0 and 2, with a total of : " + currentTeamScores[0]);
 	}
 }
 
