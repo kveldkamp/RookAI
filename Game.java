@@ -110,7 +110,8 @@ public class Game {
 	*/
 	public void playGame(){
    
-      for(int i=1;i<3;i++)
+      //Allow 10 rounds of the game to be played
+      for(int i=1;i<11;i++)
       {
          System.out.println("\nPLAYING ROUND: "+i);
          if(i==1)
@@ -162,9 +163,10 @@ public class Game {
             }
          }
          
-         // The bidWinner index is set to the "Trick Winner"
-         // Find Trick Winner..relative to bidWinner
+         // The trickWinner is set to the player that won the bid
          System.out.println("WINNER WAS PLAYER IN TRICK AT: "+MAX);
+         trickWinner = (trickWinner+MAX)%4;
+         System.out.println("trickWinner was player: "+ trickWinner);
          
       } //for loop end
       
@@ -186,8 +188,8 @@ public class Game {
      for(int i=0;i<15;i++)
      {
       if(players[trickWinner].hand[i].getCardVal()!=0)
-         System.out.println(players[trickWinner].hand[i].getSuit() + " "
-               + players[trickWinner].hand[i].getCardVal());
+         System.out.println(i+". "+players[trickWinner].hand[i].getCardVal() + " "
+               + players[trickWinner].hand[i].getSuit());
      }
      
      //Play the card that the leader of the trick wants to play, at index 0
@@ -222,7 +224,7 @@ public class Game {
 	  //Start i at whoever won bid, cycle through rest of players
 	  for(int i=(trickWinner+1)%4;counter<4;i=(i+1)%4)
 	  {
-        System.out.println("Place in trick: "+placeInTrick);
+        System.out.println("Place in trick: "+(placeInTrick+1));
         currentTrick=players[i].Play(currentTrick,placeInTrick);
         //Add the card that was played to AI's intelligence
 	     players[0].cardPlayed(currentTrick[placeInTrick]);

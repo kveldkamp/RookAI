@@ -600,7 +600,7 @@ public class Player {
          
       //Check that card is added to trick
       System.out.println("Trick so far: ");
-      for(int i=0;i<4;i++)
+      for(int i=0;i<=indexOfPlaceInTrick;i++)
       {
          if(trick[i]!=null)
             System.out.println(trick[i].getCardVal() 
