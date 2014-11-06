@@ -53,7 +53,7 @@ public class Game {
 				
 			   System.out.println(k+".      "+ players[3].hand[k].getCardVal() + "  "+players[3].hand[k].getSuit());
 				}
-			   }
+			}
 		
 		   
 		   bidLoop:
@@ -102,19 +102,81 @@ public class Game {
 		  System.out.println("Done with bidding"); 
 	}
 		
-	
    /*
-	* PlayRound is the game play for a single round 
+	* playGame is the game play for 10 tricks 
 	* play starts with the bidWinner leading, and cycles through
 	*/
-	public void PlayRound(){
+	public void playGame(){
+   
+      for(int i=0;i<3;i++)
+      {
+         System.out.println("\nPLAYING ROUND: "+(i+1));
+         System.out.println("bidWinner or Trick Winner, is: " + bidWinner);
+         playRound();
+         
+         // Find index of card that won the trick, represented by MAX
+         // Should either be highest trump if there is a trump on the table
+         // Or the highest card of the suit that was led
+         
+         int MAX =0;
+         boolean trumpFound = false;
+         
+         // Find highest outright card value that follows suit
+         for(int j=1;j<4;j++)
+         {
+            if(currentTrick[j].getCardVal()>currentTrick[MAX].getCardVal()
+                     && currentTrick[0].getSuit()== currentTrick[j].getSuit())
+            MAX=j;
+         }
+         
+         // If trump wasn't led, check to see if anyone trumped in
+         // and won the suit
+         if(currentTrick[0].getSuit() != trumpColor)
+         {
+            for(int k=0;k<4;k++)
+            {
+               if(currentTrick[k].getSuit() == trumpColor && !trumpFound)
+               {
+                  MAX=k;
+                  trumpFound = true;
+               }
+               else if(currentTrick[k].getSuit() == trumpColor &&
+                   currentTrick[k].getCardVal()>currentTrick[MAX].getCardVal())
+               {
+                  MAX=k;
+               }
+            }
+         }
+         
+         // The bidWinner index is set to the "Trick Winner"
+         // Find Trick Winner..relative to bidWinner
+         System.out.println("WINNER WAS PLAYER IN TRICK AT: "+MAX);
+         
+      } //for loop end
+      
+   } //playGame end
+   
+   
+   /*
+	* playRound is the game play for a single round 
+	* play starts with the bidWinner leading, and cycles through
+	*/
+	public void playRound(){
      
 	  //Call lead on whoever won the bid
      System.out.println("The player that leads is "+bidWinner);
      
+     for(int i=0;i<15;i++)
+     {
+      if(players[bidWinner].hand[i].getCardVal()!=0)
+         System.out.println(players[bidWinner].hand[i].getSuit() + " "
+               + players[bidWinner].hand[i].getCardVal());
+     }
+     
      //Play the card that the leader of the trick wants to play, at index 0
      int indexToPlay = players[bidWinner].lead();
      
+     //Get the different values of the card that is to be played
      Card.Suit setSuit = players[bidWinner].hand[indexToPlay].getSuit();
      int setVal = players[bidWinner].hand[indexToPlay].getCardVal();
      int setHiddenValue = players[bidWinner].hand[indexToPlay].getValue();
@@ -126,6 +188,10 @@ public class Game {
      
      //Discard the card from the players hand(replace with empty card)
      players[bidWinner].hand[indexToPlay].setCard(Card.Suit.NOSUIT, 100);
+     players[bidWinner].hand[indexToPlay].setCardValue(0);
+     
+     //Sort whoever won's hand
+     players[bidWinner].sortHand(players[bidWinner].hand.length);
 
 	  //Print out trick once the lead player has played
      System.out.println("Trick so far: ");
@@ -148,9 +214,7 @@ public class Game {
 	     counter++;
         placeInTrick++;
 	  }
-     
-     
-     
+  
 	}
 	
 /** 

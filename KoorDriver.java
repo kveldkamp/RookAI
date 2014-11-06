@@ -17,7 +17,7 @@ public class KoorDriver {
 	   game.Bidding();
 	   game.sendKitty();
 
-	   game.PlayRound();
+	   game.playGame();
    
 	   
 
