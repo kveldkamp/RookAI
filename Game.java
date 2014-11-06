@@ -139,9 +139,11 @@ public class Game {
          // Find highest outright card value that follows suit
          for(int j=1;j<4;j++)
          {
-            if(currentTrick[j].getCardVal()>currentTrick[MAX].getCardVal()
+            if(currentTrick[MAX].getCardVal() != 1)
+               if((currentTrick[j].getCardVal()==1|| 
+                     currentTrick[j].getCardVal()>currentTrick[MAX].getCardVal())
                      && currentTrick[0].getSuit()== currentTrick[j].getSuit())
-            MAX=j;
+               MAX=j;
          }
          
          // If trump wasn't led, check to see if anyone trumped in
