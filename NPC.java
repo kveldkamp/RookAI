@@ -22,7 +22,7 @@ public class NPC extends Player {
     int maxBid = 200;
     boolean[] discarded = new boolean[15];
     int numberPossibleCards = 15;
-    protected ArrayList<Integer> junkCards = new ArrayList<Integer>();
+    //protected ArrayList<Integer> junkCards = new ArrayList<Integer>();
     
     private boolean testCheck = true;
 
@@ -117,10 +117,7 @@ public class NPC extends Player {
         if(numberPossibleCards > 5)
         {
         	
-        	System.out.println(numberPossibleCards);
-        	 for(int k=0;k<15;k++){
-          	   System.out.println(discarded[k]);
-             }
+        	
         	 
             choosePossibleWinnersToKeep();
         }
@@ -129,9 +126,7 @@ public class NPC extends Player {
 
         
        
-        for(int j=0;j<15;j++){
-        System.out.println(discarded[j]);
-        }
+       
         return discarded;
     }
 
@@ -287,7 +282,7 @@ public class NPC extends Player {
 
       if(testCheck)
          System.out.println("Current high card is " + 
-               currentHigh.getRank() + " of " + currentHigh.getSuit());
+               currentHigh.getCardVal() + " of " + currentHigh.getSuit());
       if(partnerIsHigh == true && testCheck)
          System.out.println("PARTNER IS CURRENTLY WINNING");
       else if(testCheck)
@@ -1321,12 +1316,27 @@ public class NPC extends Player {
                 }
                 else
                 {
-                    if(blueLength == greenLength)
+                	//the case where strongest suit (trump) is also tied for the longest
+                	 if(redLength == blackLength)
+                         second = computeSuitStrength(Card.Suit.BLACK);
+                     else if(redLength == blueLength)
+                     	second = computeSuitStrength(Card.Suit.BLUE);
+                     else if(redLength == greenLength)
+                         second = computeSuitStrength(Card.Suit.GREEN);
+                	 
+                	 
+                	//checking for a 3 way tie for longest suit
+                     else if(blueLength == greenLength)
                         second = Math.max(computeSuitStrength(Card.Suit.BLUE), computeSuitStrength(Card.Suit.GREEN));
                     else if(blueLength == blackLength)
                         second = Math.max(computeSuitStrength(Card.Suit.BLUE), computeSuitStrength(Card.Suit.BLACK));
                     else if(greenLength == blackLength)
                         second = Math.max(computeSuitStrength(Card.Suit.GREEN), computeSuitStrength(Card.Suit.BLACK));
+                    
+                    
+                   
+                   //add in more comparisons here
+                    //else if()
                 }
 
             }
@@ -1339,7 +1349,17 @@ public class NPC extends Player {
                 }
                 else
                 {
-                    if(redLength == blueLength)
+                	
+                	//the case where strongest suit (trump) is also tied for the longest
+               	 if(greenLength == blackLength)
+                     second = computeSuitStrength(Card.Suit.BLACK);
+                 else if(greenLength == blueLength)
+                 	second = computeSuitStrength(Card.Suit.BLUE);
+                 else if(greenLength == redLength)
+                     second = computeSuitStrength(Card.Suit.RED);
+                	
+               //checking for a 3 way tie for longest suit
+                 else if(redLength == blueLength)
                         second = Math.max(computeSuitStrength(Card.Suit.BLUE), computeSuitStrength(Card.Suit.RED));
                     else if(redLength == blackLength)
                         second = Math.max(computeSuitStrength(Card.Suit.RED), computeSuitStrength(Card.Suit.BLACK));
@@ -1356,7 +1376,16 @@ public class NPC extends Player {
                 }
                 else
                 {
-                    if(redLength == greenLength)
+                	//the case where strongest suit (trump) is also tied for the longest
+                	 if(blueLength == blackLength)
+                         second = computeSuitStrength(Card.Suit.BLACK);
+                     else if(blueLength == greenLength)
+                     	second = computeSuitStrength(Card.Suit.GREEN);
+                     else if(blueLength == redLength)
+                         second = computeSuitStrength(Card.Suit.RED);
+                	
+                	//checking for a 3 way tie for longest suit
+                    else if(redLength == greenLength)
                         second = Math.max(computeSuitStrength(Card.Suit.GREEN), computeSuitStrength(Card.Suit.RED));
                     else if(redLength == blackLength)
                         second = Math.max(computeSuitStrength(Card.Suit.RED), computeSuitStrength(Card.Suit.BLACK));
@@ -1373,7 +1402,16 @@ public class NPC extends Player {
                 }
                 else
                 {
-                    if(redLength == greenLength)
+                	//the case where strongest suit (trump) is also tied for the longest
+                	 if(blackLength == greenLength)
+                         second = computeSuitStrength(Card.Suit.GREEN);
+                     else if(blackLength == blueLength)
+                     	second = computeSuitStrength(Card.Suit.BLUE);
+                     else if(blackLength == redLength)
+                         second = computeSuitStrength(Card.Suit.RED);
+                	
+                	//checking for a 3 way tie for longest suit
+                     else if(redLength == greenLength)
                         second = Math.max(computeSuitStrength(Card.Suit.GREEN), computeSuitStrength(Card.Suit.RED));
                     else if(redLength == blueLength)
                         second = Math.max(computeSuitStrength(Card.Suit.RED), computeSuitStrength(Card.Suit.BLUE));

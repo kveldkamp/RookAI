@@ -66,7 +66,7 @@ public class Game {
 		 	  		
 		 		  if(highBid <= 195 && bidders > 1){
 		 			 players[i].bidOrPass(players[i].bidding);
-		 			  
+		 			
 		 			
 		 			  
 		     		  if(players[i].bidding == true){
@@ -312,12 +312,7 @@ public void dealCards(){
 		Card nullCardPlaceholder=new Card();
 		nullCardPlaceholder.setCard(Card.Suit.BLANK,100); //Using 100 as the value so it is sorted to the bottom of the hand later.
 		
-      /*Card card2=new Card();
-		card2.setCard(Card.Suit.NOSUIT,0);
-		Card card3=new Card();
-		card3.setCard(Card.Suit.NOSUIT,0);
-		Card card4=new Card();
-		card4.setCard(Card.Suit.NOSUIT,0);*/
+     
 		
 		players[0].hand[handIndex]=nullCardPlaceholder;
 		players[1].hand[handIndex]=nullCardPlaceholder;
@@ -354,13 +349,16 @@ public void sendKitty(){
 			
 			//Print their cards if the real player won
 			
+			if(bidWinner==3){
 			System.out.println("This is your hand with the Kitty");
 			for(int k=0;k<15;k++){
+				
 				if(players[bidWinner].hand[k].getCardVal()!=0){
 				
 			   System.out.println(k+".      "+ players[bidWinner].hand[k].getCardVal() + "  "+players[bidWinner].hand[k].getSuit());
 				}
 			   }
+			}
 			
 		
 		//Player.chooseTrump depends on determineStrongestSuit being called beforehand. 
