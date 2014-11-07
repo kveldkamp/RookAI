@@ -70,15 +70,10 @@ public class NPC extends Player {
 
         resetDiscardedValues();
 
-        	
-        
         setStrongestSuitToFalse();
 
-        	
-        
         setRankOneCardsToFalse();
         
-        	
         if(numberPossibleCards < 5)
         {
             for(int k = 0; k < 15; k++)
@@ -92,8 +87,6 @@ public class NPC extends Player {
                 }
             }
             
-            
-            
             for(int j = 0; j < 15; j++)
             {
                 if(!discarded[j] &&
@@ -102,31 +95,17 @@ public class NPC extends Player {
                 {
                     discarded[j] = true;
                     numberPossibleCards++;
-                }
-                
-                
+                } 
             }
-            
-           
         }
         
         attemptToShortSuit();
         
-      
-
         if(numberPossibleCards > 5)
         {
-        	
-        	
-        	 
             choosePossibleWinnersToKeep();
         }
         
-
-
-        
-       
-       
         return discarded;
     }
 
@@ -481,7 +460,8 @@ public class NPC extends Player {
             deck[GreenSeen.get(i).getValue()] = null;
         }
 
-        int highestBlack = noSuitLeft, highestBlue = noSuitLeft, highestGreen = noSuitLeft, highestRed = noSuitLeft;
+        int highestBlack = noSuitLeft, highestBlue = noSuitLeft,
+            highestGreen = noSuitLeft, highestRed = noSuitLeft;
         for(int i = 0; i <= 44; i++) {
             if(i <= 10 && deck[i] != null) {
                 highestRed = i;
@@ -564,14 +544,16 @@ public class NPC extends Player {
         Card[] validLeadCards = new Card[15];
         int maxIndex = -1;
         //code to get valid cards
-                for(int i = 0; i < 15; i++) {
-                    if(hand[i] != null)
-                    {
-                        maxIndex++;
-                        validLeadCards[maxIndex] = hand[i];
-                    }
-		}
-                    return validLeadCards;
+        for(int i = 0; i < 15; i++)
+        {
+          if(hand[i] != null 
+                && !(hand[i].getSuit().equals(Card.Suit.BLANK)))
+          {
+            maxIndex++;
+            validLeadCards[maxIndex] = hand[i];
+          }
+		   }
+       return validLeadCards;
     }
 
     /**
@@ -634,7 +616,8 @@ public class NPC extends Player {
         {
           if(trick[0]!=null)
           {
-            if(hand[i] != null && hand[i].getSuit() == trick[0].getSuit())
+            if(hand[i] != null && hand[i].getSuit() == trick[0].getSuit()
+                  && !(hand[i].getSuit().equals(Card.Suit.BLANK)))
             {
 			      card = hand[i];
                maxIndex++;
@@ -1062,6 +1045,7 @@ public class NPC extends Player {
                 for(int checkPotentialWinner = 0; checkPotentialWinner < prospWinners.size(); checkPotentialWinner++)
                 {
                     if(prospWinners.get(checkPotentialWinner) != null)
+                      if(!prospWinners.get(checkPotentialWinner).getSuit().equals(Card.Suit.BLANK))
                         if(prospWinners.get(checkPotentialWinner).getSuit() == validCards[i].getSuit())
                             if(prospWinners.get(checkPotentialWinner).getValue() != validCards[i].getValue())
                                 return getHandIndexOf(validCards[i]);

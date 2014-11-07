@@ -208,7 +208,7 @@ public class Game {
      currentTrick[0].setCardValue(setVal);
      
      //Discard the card from the players hand(replace with empty card)
-     players[trickWinner].hand[indexToPlay].setCard(Card.Suit.NOSUIT, 100);
+     players[trickWinner].hand[indexToPlay].setCard(Card.Suit.BLANK, 100);
      players[trickWinner].hand[indexToPlay].setCardValue(0);
      
      //Sort whoever won's hand

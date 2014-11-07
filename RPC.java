@@ -158,13 +158,17 @@ public class RPC extends Player {
    public int lead()
    {
       int index;
+      boolean isValid = false;
       //Allow the bid or Trick winner to lead any card
       //That is in their hand(in one of the indexes 0-9)
       do
       {
          System.out.println("Please enter index of card to play");
          index = scan.nextInt();
-      }while(index<0||index>=10);
+         if(index>=0 && index<10 
+            && !(hand[index].getSuit().equals(Card.Suit.BLANK)))
+            isValid=true;
+      }while(!isValid);
       
       return index;
    }
@@ -237,7 +241,8 @@ public class RPC extends Player {
          cardToPlay = scan.nextInt();
          for(int i=0; i<15;i++)
          {
-            if(validCards[i] != null)
+            if(validCards[i] != null && 
+                  !(validCards[i].getSuit().equals(Card.Suit.BLANK)))
             {
                if(validCards[i].getValue()==hand[cardToPlay].getValue())
                   isValid = true;

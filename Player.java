@@ -211,7 +211,7 @@ public class Player {
     //Empty method: RPC and NPC override
     public Card.Suit chooseTrump() {
         System.out.println("This is in generic player class");
-        return Card.Suit.NOSUIT;
+        return Card.Suit.BLANK;
     }
     
     public boolean[] chooseDiscards(){
@@ -581,10 +581,9 @@ public class Player {
       trick[indexOfPlaceInTrick]=cardToPlay;
       
       //"Discard" card at indexToPlay in hand
-//      hand[indexToPlay].setCard(Card.Suit.BLANK, 100); //After the card is played, setting the hidden value to 100 so it is sorted to the bottom. 
-      hand[indexToPlay].setCard(Card.Suit.NOSUIT, 100);
+      hand[indexToPlay].setCard(Card.Suit.BLANK, 100);
+      //After the card is played, setting the hidden value to 100 so it is sorted to the bottom. 
       hand[indexToPlay].setCardValue(0); //Showing the value is 0 so it isn't displayed.
-//      hand[indexToPlay].setCardVal();
       
       sortHand(hand.length);
       
