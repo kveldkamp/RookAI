@@ -236,6 +236,7 @@ public class Game {
         placeInTrick++;
 	  }
   
+	  addTrickScore(trickWinner);
 	}
 	
 /** 
@@ -393,6 +394,15 @@ for(int k=0;k<15;k++){
 	   System.out.println(k+".      "+ players[bidWinner].hand[k].getCardVal() + "  "+players[bidWinner].hand[k].getSuit());
 		}
 	}
+}
+
+public void addTrickScore(int trickWinner){
+	
+	//calc value of trick
+//	if (trickWinner%2==0){
+//		currentTeamScores[0] += trick
+//	}
+	
 }
 
 /** 
