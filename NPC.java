@@ -22,7 +22,7 @@ public class NPC extends Player {
     int maxBid = 200;
     boolean[] discarded = new boolean[15];
     int numberPossibleCards = 15;
-   
+    //protected ArrayList<Integer> junkCards = new ArrayList<Integer>();
     
     private boolean testCheck = true;
 
@@ -1511,6 +1511,50 @@ public class NPC extends Player {
             
         }
         
-   
+        //what Kevin added
+//        if(numberPossibleCards>5){
+//        	System.out.println("here");
+//        	
+//        	int gottenRidOf =0;
+//        	int getRidOf = numberPossibleCards-5;
+//        	
+//        	
+//        		for(int i=0;i<15;){
+//        			if(discarded[i]==true){
+//        				i++;
+//        			}
+//        			else{
+//        				junkCards.add(i);
+//        				i++;
+//        			}
+//        		}
+//        		
+//        		int lowCard = junkCards.get(0);
+//        		int j=0;
+//        		
+//        		for(int k =0;k<15;k++){
+//        			for(Integer i : junkCards){
+//        				if(hand[i].getRank() < hand[lowCard].getRank()){
+//        					lowCard = i;
+//        					j++;
+//        						}
+//        				else if(hand[i].getRank()==hand[lowCard].getRank()){
+//        					lowCard = i;
+//        					j++;
+//        				}
+//        				
+//        						
+//        			}
+//        			junkCards.remove(lowCard);
+//        			gottenRidOf++;
+//       
+//        		if(gottenRidOf==getRidOf)
+//        			break;
+//        	}
+//        		
+//        for(Integer i : junkCards){
+//        	discarded[i]=false;
+//        }
+//    	}
   }
 }
