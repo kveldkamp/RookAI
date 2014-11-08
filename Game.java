@@ -109,6 +109,14 @@ public class Game {
 	* play starts with the bidWinner leading, and cycles through
 	*/
 	public void playGame(){
+		
+	  System.out.println("These are the discards");
+		   for(int k=0;k<5;k++){
+				if(players[bidWinner].discards[k].getCardVal()!=0){
+				
+			   System.out.println(k+".      "+ players[bidWinner].discards[k].getCardVal() + "  "+players[bidWinner].discards[k].getSuit());
+				}
+		}
    
       //Allow 10 rounds of the game to be played
       for(int i=1;i<11;i++)
@@ -119,13 +127,7 @@ public class Game {
          else
             System.out.println("Trick Winner is: " + trickWinner);
          
-//		 System.out.println("These are the discards");
-//		   for(int k=0;k<5;k++){
-//				if(players[bidWinner].discards[k].getCardVal()!=0){
-//				
-//			   System.out.println(k+".      "+ players[bidWinner].discards[k].getCardVal() + "  "+players[bidWinner].discards[k].getSuit());
-//				}
-//			}
+
          
          playRound();
          
@@ -169,12 +171,11 @@ public class Game {
          System.out.println("WINNER WAS PLAYER IN TRICK AT: "+MAX);
          trickWinner = (trickWinner+MAX)%4;
          System.out.println("trickWinner was player: "+ trickWinner);
+         addTrickScore(trickWinner,currentTrick);
          
       } //for loop end
-      
       addDiscardToScore();
       displayScore();
-      
    } //playGame end
    
    
@@ -236,7 +237,7 @@ public class Game {
         placeInTrick++;
 	  }
   
-	  addTrickScore(trickWinner,currentTrick);
+	  //addTrickScore(trickWinner,currentTrick);
 	}
 	
 /** 
@@ -403,13 +404,17 @@ public void addTrickScore(int trickWinner, Card[] currentTrick){
 	}
 	
 	if (trickWinner%2==0){
+		System.out.println("team0 and trickWinner is " + trickWinner);
 		currentTeamScores[0] += score;
 	}
 	else{ 
 		currentTeamScores[1] += score;
+		System.out.println("team1 and trickWinner is " + trickWinner);
 	}
 	
 	System.out.println("Value of trick: "+score);
+	System.out.println("Team one's, Players 0 and 2, score: " + currentTeamScores[0]);
+	System.out.println("Team two's, Players 1 and 3 (you), score: " + currentTeamScores[1]);
 		
 	
 }
@@ -440,13 +445,23 @@ public int discardScore(){
 	for(int i = 0; i < players[bidWinner].discards.length; i++){
 		discardScore += players[bidWinner].discards[i].getScore();
 	}
+	System.out.println("Discard score: "+ discardScore);
 	return discardScore;
 }
 
 /** 
- * displayScore() shows the final scores and the resultant winner
+ * displayScore() shows the current totals
  */
 public void displayScore(){
+		System.out.println("Team one's, Players 0 and 2, score: " + currentTeamScores[0]);
+		System.out.println("Team two's, Players 1 and 3 (you), score: " + currentTeamScores[1]);
+}
+
+
+/** 
+ * displayFinalScore() shows the final scores and the resultant winner
+ */
+public void displayFinalScore(){
 	if(currentTeamScores[0] > currentTeamScores[1]){
 		System.out.println("The winning team is team one, Players 0 and 2, with a total of : " + currentTeamScores[0]);
 		System.out.println("Second place goes to team two, Players 1 and 3 (you), with a total of : " + currentTeamScores[1]);

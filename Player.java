@@ -128,6 +128,7 @@ public class Player {
     public void reorganizeHand (boolean[] discarded) {
         int i, count = 0, discardCount = 0;
         Card[] tempHand = new Card[15];
+        discards = new Card[5];
         for (i=0; i<15; i++) {
 			if (!discarded[i]) {
 				tempHand[count] = hand[i];
