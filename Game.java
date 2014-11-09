@@ -44,6 +44,7 @@ public class Game {
 			//Resetting all values in playerActive to false.
 			for(int i=0; i<4;i++){
 				playerActive[i] = true;
+				players[i].bidding = true;
 			}
 			
 		   boolean bidWon = false;
