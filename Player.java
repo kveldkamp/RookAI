@@ -129,7 +129,8 @@ public class Player {
         int i, count = 0, discardCount = 0;
         Card[] tempHand = new Card[15];
         discards = new Card[5];
-        for (i=0; i<15; i++) {
+        for (i=0; i<15; i++)
+        {
 			if (!discarded[i]) {
 				tempHand[count] = hand[i];
 				count++;
@@ -139,7 +140,7 @@ public class Player {
 				discards[discardCount] = hand[i];
 				discardCount++;
 			}
-		}
+		  }
         
         //copy all of the contents of tempHand (10) cards into the player's hand
         for(int k=0;k<10;k++){
@@ -158,11 +159,14 @@ public class Player {
      * This function Retrieves the index within a player objects hand array which indicates the location of the rook card.
      * @return an integer which is either the index of the rook card in the hand array or a -1 if not found.
      */
-    public int findRook () {
-        for(int i = 0; i < 15; i++) {
-            if(hand[i] != null && hand[i].isRook()) {
-				return i;
-			}
+    public int findRook ()
+    {
+        for(int i = 0; i < 15; i++)
+        {
+            if(hand[i] != null && hand[i].isRook())
+            {
+				   return i;
+			   }
         }
         return -1;
     }

@@ -189,7 +189,14 @@ public class RPC extends Player {
         {
           if(trick[0]!=null)
           {
-            if(hand[i] != null && hand[i].getSuit() == trick[0].getSuit())
+            if(trick[0].getSuit().equals(trumpSuit) &&
+                                    hand[i].getCardVal() ==44)
+            {
+               card = hand[i];
+               maxIndex++;
+               validFollowCards[maxIndex] = hand[i];
+            }
+            else if(hand[i] != null && hand[i].getSuit() == trick[0].getSuit())
             {
 			      card = hand[i];
                maxIndex++;

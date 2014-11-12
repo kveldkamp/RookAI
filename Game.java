@@ -122,13 +122,14 @@ public class Game {
 		   for(int k=0;k<5;k++){
 				if(players[bidWinner].discards[k].getCardVal()!=0){
 				
-			   System.out.println(k+".      "+ players[bidWinner].discards[k].getCardVal() + "  "+players[bidWinner].discards[k].getSuit());
+			   System.out.println(k+".      "+ 
+               players[bidWinner].discards[k].getCardVal() + 
+               "  "+players[bidWinner].discards[k].getSuit());
 				}
 		}
    
       //Allow 10 rounds of the game to be played
 		   
-	//debug//
       for(int i=1;i<11;i++)
       {
          System.out.println("\nPLAYING ROUND: "+i);
@@ -136,8 +137,6 @@ public class Game {
             System.out.println("Bid Winner is: " + bidWinner);
          else
             System.out.println("Trick Winner is: " + trickWinner);
-         
-
          
          playRound();
          
@@ -147,6 +146,8 @@ public class Game {
          
          int MAX =0;
          boolean trumpFound = false;
+         boolean rookFound = false;
+         int rookAt = 0;
          
          // Find highest outright card value that follows suit
          for(int j=1;j<4;j++)
@@ -157,7 +158,8 @@ public class Game {
                      && currentTrick[0].getSuit()== currentTrick[j].getSuit())
                MAX=j;
          }
-         
+
+        
          // If trump wasn't led, check to see if anyone trumped in
          // and won the suit
          if(currentTrick[0].getSuit() != trumpColor)
@@ -170,12 +172,40 @@ public class Game {
                   trumpFound = true;
                }
                else if(currentTrick[k].getSuit() == trumpColor &&
-                   currentTrick[k].getCardVal()>currentTrick[MAX].getCardVal())
+                   (currentTrick[k].getCardVal()>currentTrick[MAX].getCardVal() ||
+                     currentTrick[k].getCardVal()==1))
                {
                   MAX=k;
                }
             }
          }
+         
+         //Check to see if Rook is found, if so it wins unless
+         //a 11,12,13,14 or 1 of trump is played
+         for(int j=0;j<4;j++)
+         {
+            if(currentTrick[j].getCardVal()==44)
+            {
+               rookFound = true;
+               rookAt = j;
+            }
+         }
+         
+         if(rookFound)
+         {
+            if(!(currentTrick[MAX].getSuit()== trumpColor))
+               MAX=rookAt;
+            else if(!(currentTrick[MAX].getCardVal()==1 ||
+                      currentTrick[MAX].getCardVal()==11||
+                      currentTrick[MAX].getCardVal()==12||
+                      currentTrick[MAX].getCardVal()==13||
+                      currentTrick[MAX].getCardVal()==14 ))
+            {
+                      MAX=rookAt;
+            }
+         }                   
+         
+         
          
          // The trickWinner is set to the player that won the bid
          System.out.println("WINNER WAS PLAYER IN TRICK AT: "+MAX);

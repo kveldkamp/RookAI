@@ -523,16 +523,19 @@ public class NPC extends Player {
         //short-circuit for if both opponents out of trump.
         if(getEnemiesOutOfTrump())
             return true;
-     int totalTrump = 12 - numTrump;
-     for(int i = 0; i < 15; i++) {
-            if(hand[i] != null && hand[i].getSuit() == trumpSuit) {
-				totalTrump--;
-			}
+        int totalTrump = 12 - numTrump;
+        for(int i = 0; i < 15; i++)
+        {
+            if(hand[i] != null && hand[i].getSuit() == trumpSuit)
+            {
+				   totalTrump--;
+			   }
         }
-     //error check
-     if(totalTrump == 0 && testCheck)
-                System.out.println("OTHER PLAYERS OUT OF TRUMP");
-     return (totalTrump == 0);
+        //error check
+        if(totalTrump == 0 && testCheck)
+            System.out.println("OTHER PLAYERS OUT OF TRUMP");
+        
+        return (totalTrump == 0);
     }
 
     /**
@@ -565,14 +568,15 @@ public class NPC extends Player {
         Card[] validLeadCards = new Card[15];
         int maxIndex = -1;
         //code to get valid cards
-                for(int i = 0; i < 15; i++) {
-                    if(hand[i] != null)
-                    {
-                        maxIndex++;
-                        validLeadCards[maxIndex] = hand[i];
-                    }
-		}
-                    return maxIndex;
+        for(int i = 0; i < 15; i++)
+        {
+          if(hand[i] != null)
+          {
+            maxIndex++;
+            validLeadCards[maxIndex] = hand[i];
+          }
+		  }
+        return maxIndex;
     }
 
 
@@ -582,20 +586,22 @@ public class NPC extends Player {
      * @return -1 if not found, if found, then return the trumpIgnoredWinner (== handIndex)
      */
    public int hasNonTrumpWinners(ArrayList<Card> potentialWinners)
-    {
+   {
        for(int i = 0; i < potentialWinners.size(); i++)
-                {
-                    for(int handIndex = 0; handIndex < 15; handIndex++)
-                    {
-                        if(hand[handIndex] != null && potentialWinners.get(i) != null && hand[handIndex].getValue() == potentialWinners.get(i).getValue() && hand[handIndex].getSuit() != trumpSuit)
-                        {
-                            //System.out.println("Playing Winner from hand index " + handIndex + " value of " + hand[handIndex].getValue());
-                            return handIndex;
-                        }
-                    }
-                }
+       {
+         for(int handIndex = 0; handIndex < 15; handIndex++)
+         {
+           if(hand[handIndex] != null && potentialWinners.get(i) != null 
+               && hand[handIndex].getValue() == potentialWinners.get(i).getValue()
+               && hand[handIndex].getSuit() != trumpSuit
+               && !(hand[handIndex].getSuit().equals(Card.Suit.BLANK)))
+           {
+            return handIndex;
+           }
+         }
+       }
        return -1;
-    }
+   }
 
    /**
     * Code to gather cards that follow suit in an array
@@ -610,13 +616,21 @@ public class NPC extends Player {
         System.out.println("\nTESTINGVALIDFOLLOW:\n");
 
         if(trick[0]==null)
-         System.out.println("trick is null");
+            System.out.println("trick is null");
         //code to get valid cards while following suit
         for(int i = 0; i < 15; i++)
         {
           if(trick[0]!=null)
           {
-            if(hand[i] != null && hand[i].getSuit() == trick[0].getSuit()
+            if(trick[0].getSuit().equals(trumpSuit) &&
+                                    hand[i].getCardVal() ==44)
+            {
+               card = hand[i];
+               maxIndex++;
+               validFollowCards[maxIndex] = hand[i];
+            }
+            else if(hand[i] != null
+               &&hand[i].getSuit() == trick[0].getSuit()
                   && !(hand[i].getSuit().equals(Card.Suit.BLANK)))
             {
 			      card = hand[i];
@@ -661,7 +675,14 @@ public class NPC extends Player {
         {
           if(trick[0] != null)
           {
-            if(hand[i] != null && (hand[i].getSuit() == trick[0].getSuit()))
+            if(trick[0].getSuit().equals(trumpSuit) &&
+                                    hand[i].getCardVal() ==44)
+            {
+               card = hand[i];
+               maxIndex++;
+               validFollowCards[maxIndex] = hand[i];
+            }
+            else if(hand[i] != null && (hand[i].getSuit() == trick[0].getSuit()))
             {
 			      card = hand[i];
                maxIndex++;
@@ -1160,8 +1181,10 @@ public class NPC extends Player {
         for(int i = 0; i <= maxIndex; i++)
         {
             //check to see if the valid card is a prospective winner
-            if((prospWinners.size() < 1 ||validCards[i].getValue() != prospWinners.get(0).getValue())  && (prospWinners.size() < 2 ||validCards[i].getValue() != prospWinners.get(1).getValue())
-                    && (prospWinners.size() < 3 ||validCards[i].getValue() != prospWinners.get(2).getValue()) && (prospWinners.size() < 4 ||validCards[i].getValue() != prospWinners.get(3).getValue())  )
+            if((prospWinners.size() < 1 ||validCards[i].getValue() != prospWinners.get(0).getValue())  
+                  && (prospWinners.size() < 2 ||validCards[i].getValue() != prospWinners.get(1).getValue())
+                    && (prospWinners.size() < 3 ||validCards[i].getValue() != prospWinners.get(2).getValue()) 
+                     && (prospWinners.size() < 4 ||validCards[i].getValue() != prospWinners.get(3).getValue())  )
                 {
                     //check to see if the valid card is trump or worth points.
                     if(validCards[i].getScore() == 0 && (trumpLed ||validCards[i].getSuit() != trumpSuit))
