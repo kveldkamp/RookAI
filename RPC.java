@@ -22,7 +22,7 @@ public class RPC extends Player {
 		   System.out.println("Enter your bid, your bid needs to be between "+(highBid+5)+ "-200 and a multiple of 5: " );
 	   }
 	   else{
-		   System.out.println("Enter your bid, your bid needs to be between 100-200 and a multiple of 5: " );
+		   System.out.println("Enter your bid, your bid needs to be between 50-200 and a multiple of 5: " );
 	   }
 	   int bid = 0;
 	   
@@ -32,7 +32,7 @@ public class RPC extends Player {
 	        try {
 	        	Scanner scanbid = new Scanner(System.in);
 	            bid = scanbid.nextInt();
-	            if (bid < 100 || bid > 200 || bid%5 != 0 || bid <= highBid) {
+	            if (bid < 50 || bid > 200 || bid%5 != 0 || bid <= highBid) {
 	                System.out.println("Not in range/multiple of 5/higher than highbid, try again:");
 	            }
 	            else {

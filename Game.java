@@ -468,6 +468,10 @@ public int discardScore(){
 public void addRoundScoreToGameScore(){
 	//computer team won the bid
 	if (bidWinner%2==0){
+		
+		//updating human score even tho computers won the bid
+		currentTeamScores[1] += roundScore[1];
+		
 		if(roundScore[0]<players[bidWinner].bidAmount){
 			currentTeamScores[0] -= (players[bidWinner].bidAmount-roundScore[0]);
 		}
@@ -478,6 +482,10 @@ public void addRoundScoreToGameScore(){
 	}
 	//else the human team won the bid
 	else{
+		
+		//updating computer score even though human team won
+		currentTeamScores[0] += roundScore[0];
+		
 		if(roundScore[1]<players[bidWinner].bidAmount){
 			currentTeamScores[1] -= (players[bidWinner].bidAmount-roundScore[1]);
 		}
