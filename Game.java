@@ -557,6 +557,11 @@ public void displayFinalScore(){
 		System.out.println("The winning team is team two, Players 1 and 3 (you), with a total of : " + currentTeamScores[1]);
 		System.out.println("Second place goes to team one, Players 0 and 2, with a total of : " + currentTeamScores[0]);
 	}
+	else{
+		System.out.println("You tied!");
+		System.out.println("The winning team is team two, Players 1 and 3 (you), with a total of : " + currentTeamScores[1]);
+		System.out.println("Ther other winning team is team one, Players 0 and 2, with a total of : " + currentTeamScores[0]);
+	}
 }
 
 //***
