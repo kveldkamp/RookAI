@@ -52,7 +52,7 @@ public class Player {
 
     /**
      * Sets the name variable of Player to a new name.
-     * @param newName A new nama value for the specific player.
+     * @param newName A new name value for the specific player.
      */
     public void setName (String newName) {
         name = newName;

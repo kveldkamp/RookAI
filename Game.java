@@ -19,6 +19,7 @@ public class Game {
 	protected int highBid = 0;
 	protected boolean [] playerActive = new boolean[4];
 	protected int[] currentTeamScores = new int[2];
+	int count = 1;
 	
 	public Game(){
 	      players[0] = new NPC();
@@ -120,7 +121,9 @@ public class Game {
 		}
    
       //Allow 10 rounds of the game to be played
-      for(int i=1;i<11;i++)
+		   
+	//debug//
+      for(int i=1;i<3;i++)
       {
          System.out.println("\nPLAYING ROUND: "+i);
          if(i==1)
@@ -175,6 +178,8 @@ public class Game {
          addTrickScore(trickWinner,currentTrick);
          
       } //for loop end
+      
+      
       addDiscardToScore();
       displayScore();
    } //playGame end
@@ -242,13 +247,15 @@ public class Game {
 	}
 	
 /** 
- * makeDeck method iterates through all suits (skipping NOSUIT) and creates 1-14 in each suit
+ * makeDeck method iterates through all suits (skipping NOSUIT and BLANK) and creates 1-14 in each suit
  * deck is filled and shuffled after completion of this method
  */
 	public void makeDeck(){
 				
+		deck.clear();
+		
 		for(int i=0;i<44;i++){
-					
+			
 			Card card = new Card();
 			
 			
@@ -283,7 +290,7 @@ public class Game {
 		long seed = System.nanoTime();
 		Collections.shuffle(deck, new Random(seed));
 		  
-		  
+		  count++;
 	  }	  
 	
 	
