@@ -123,7 +123,7 @@ public class Game {
       //Allow 10 rounds of the game to be played
 		   
 	//debug//
-      for(int i=1;i<3;i++)
+      for(int i=1;i<11;i++)
       {
          System.out.println("\nPLAYING ROUND: "+i);
          if(i==1)
