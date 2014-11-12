@@ -19,6 +19,8 @@ public class Game {
 	protected int highBid = 0;
 	protected boolean [] playerActive = new boolean[4];
 	protected int[] currentTeamScores = new int[2];
+	protected int[] roundScore = new int[2];
+	int tricksWon=0;
 	int count = 1;
 	
 	public Game(){
@@ -41,6 +43,7 @@ public class Game {
 	public void Bidding(){
 			//Resetting value of highest bid.
 		   highBid = 0;
+		   bidWinner = 4;
 			
 			//Resetting all values in playerActive to false.
 			for(int i=0; i<4;i++){
@@ -111,6 +114,9 @@ public class Game {
 	* play starts with the bidWinner leading, and cycles through
 	*/
 	public void playGame(){
+		//resets the scores for the round to zero
+		roundScore[0]=0;
+		roundScore[1]=0;
 		
 	  System.out.println("These are the discards");
 		   for(int k=0;k<5;k++){
@@ -179,7 +185,7 @@ public class Game {
          
       } //for loop end
       
-      
+      addRoundScoreToGameScore();
       addDiscardToScore();
       displayScore();
    } //playGame end
@@ -406,23 +412,24 @@ for(int k=0;k<15;k++){
 }
 
 public void addTrickScore(int trickWinner, Card[] currentTrick){
-	int score=0;
+	int trickScore=0;
 	for(int i =0;i<4;i++){
-		score += currentTrick[i].getScore();
+		trickScore += currentTrick[i].getScore();
 	}
 	
 	if (trickWinner%2==0){
 		System.out.println("team0 and trickWinner is " + trickWinner);
-		currentTeamScores[0] += score;
+		roundScore[0] += trickScore;
+		tricksWon++;
 	}
 	else{ 
-		currentTeamScores[1] += score;
+		roundScore[1] += trickScore;
 		System.out.println("team1 and trickWinner is " + trickWinner);
 	}
 	
-	System.out.println("Value of trick: "+score);
-	System.out.println("Team one's, Players 0 and 2, score: " + currentTeamScores[0]);
-	System.out.println("Team two's, Players 1 and 3 (you), score: " + currentTeamScores[1]);
+	System.out.println("Value of trick: "+trickScore);
+	System.out.println("Team one's, Players 0 and 2, score: " + roundScore[0]);
+	System.out.println("Team two's, Players 1 and 3 (you), score: " + roundScore[1]);
 		
 	
 }
@@ -455,6 +462,40 @@ public int discardScore(){
 	}
 	System.out.println("Discard score: "+ discardScore);
 	return discardScore;
+}
+
+
+public void addRoundScoreToGameScore(){
+	//computer team won the bid
+	if (bidWinner%2==0){
+		if(roundScore[0]<players[bidWinner].bidAmount){
+			currentTeamScores[0] -= (players[bidWinner].bidAmount-roundScore[0]);
+		}
+	
+		else{
+		currentTeamScores[0] += roundScore[0];
+		}
+	}
+	//else the human team won the bid
+	else{
+		if(roundScore[1]<players[bidWinner].bidAmount){
+			currentTeamScores[1] -= (players[bidWinner].bidAmount-roundScore[1]);
+		}
+	
+		else{
+		currentTeamScores[1] += roundScore[1];
+		}
+	}
+	
+	//tricksWon refers to number of tricks won by computer team, adds 20 pts if its greater than 5
+	if(tricksWon!=5){
+		if(tricksWon>5){
+			currentTeamScores[0] += 20;
+		}
+		else{
+			currentTeamScores[1] +=20;
+		}
+	}
 }
 
 /** 
