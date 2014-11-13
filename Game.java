@@ -208,9 +208,9 @@ public class Game {
          
          
          // The trickWinner is set to the player that won the bid
-         System.out.println("WINNER WAS PLAYER IN TRICK AT: "+MAX);
+         //System.out.println("WINNER WAS PLAYER IN TRICK AT: "+MAX);
          trickWinner = (trickWinner+MAX)%4;
-         System.out.println("trickWinner was player: "+ trickWinner);
+         System.out.println("Player "+ trickWinner +" won the trick.");
          addTrickScore(trickWinner,currentTrick);
          
       } //for loop end
@@ -228,13 +228,16 @@ public class Game {
 	public void playRound(){
      
 	  //Call lead on whoever won the bid
-     System.out.println("The player that leads is "+trickWinner);
+     System.out.println("Player "+trickWinner+" is now leading");
      
-     for(int i=0;i<15;i++)
+     if(trickWinner==3)
      {
-      if(players[trickWinner].hand[i].getCardVal()!=0)
-         System.out.println(i+". "+players[trickWinner].hand[i].getCardVal() + " "
+      for(int i=0;i<15;i++)
+      {
+         if(players[trickWinner].hand[i].getCardVal()!=0)
+            System.out.println(i+". "+players[trickWinner].hand[i].getCardVal() + " "
                + players[trickWinner].hand[i].getSuit());
+      }
      }
      
      //Play the card that the leader of the trick wants to play, at index 0
@@ -269,7 +272,22 @@ public class Game {
 	  //Start i at whoever won bid, cycle through rest of players
 	  for(int i=(trickWinner+1)%4;counter<4;i=(i+1)%4)
 	  {
-        System.out.println("Place in trick: "+(placeInTrick+1));
+         //Only display the real players hand
+         if(trickWinner + placeInTrick ==3)
+         {
+            System.out.println("Here is your current hand: ");
+            for(int h=0;h<players[i].hand.length;h++)
+            {
+               if(players[i].hand[h]==null)
+                  System.out.print("null\n");
+               if(players[i].hand[h].getCardVal()!=0)
+               {
+                  System.out.print(h + ". " +players[i].hand[h].getCardVal() 
+                        + " " + players[i].hand[h].getSuit()+"\n");
+               }
+            } 
+         }
+        
         currentTrick=players[i].Play(currentTrick,placeInTrick);
         //Add the card that was played to AI's intelligence
 	     players[0].cardPlayed(currentTrick[placeInTrick]);

@@ -120,10 +120,10 @@ public class RPC extends Player {
 	  
 	  System.out.println("Here are your cards: "); 
 	  determineSuitLengths();
-      determineStrongestSuit();
+     determineStrongestSuit();
       
 
-      System.out.println("strongestSuit = " + strongestSuit); //debug
+     System.out.println("strongestSuit = " + strongestSuit); //debug
      
 	  
 	  for(int i=0;i<15;i++){
@@ -246,15 +246,18 @@ public class RPC extends Player {
         {
          System.out.println("Please enter the index of the card you want to play");
          cardToPlay = scan.nextInt();
-         for(int i=0; i<15;i++)
+         if(cardToPlay>=0 && cardToPlay<15)
          {
-            if(validCards[i] != null && 
-                  !(validCards[i].getSuit().equals(Card.Suit.BLANK)))
+            for(int i=0; i<15;i++)
             {
-               if(validCards[i].getValue()==hand[cardToPlay].getValue())
-                  isValid = true;
+               if(validCards[i] != null && 
+                  !(validCards[i].getSuit().equals(Card.Suit.BLANK)))
+               {
+                  if(validCards[i].getValue()==hand[cardToPlay].getValue())
+                     isValid = true;
+               }
             }
-         }
+          }
         }while(!isValid);
         
         return cardToPlay;

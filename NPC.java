@@ -187,14 +187,14 @@ public class NPC extends Player {
             return hasHighTrump(prospWinners);
          else if(!rookPlayed && !(hasRookCatchers() == notFound))
          {
-            if(testCheck)
-               System.out.println("PLAYING ROOK CATCHER");
+            //if(testCheck)
+               //System.out.println("PLAYING ROOK CATCHER");
             return hasRookCatchers();
          }
          else if(!(playerHasTrump() == notFound))
          {
-            if(testCheck)
-               System.out.println("LEADING OUT OF TRUMP");
+            //if(testCheck)
+               //System.out.println("LEADING OUT OF TRUMP");
             return playerHasTrump();
          }
       }
@@ -203,32 +203,33 @@ public class NPC extends Player {
       {
          if(hasNonTrumpWinners(prospWinners) != notFound)
          {
-            if(testCheck)
-               System.out.println("PLAYING A NON-TRUMP PROSPECTIVE WINNER");
+            //if(testCheck)
+               //System.out.println("PLAYING A NON-TRUMP PROSPECTIVE WINNER");
             return hasNonTrumpWinners(prospWinners);
          }
          else if(winningBiddingTeam && GetThrowAwayBidTeamLeadCard() != notFound)
          {
-            if(testCheck)
-               System.out.println("Playing a throw away card for bid winning team,"
-                                    + " the " + hand[GetThrowAwayBidTeamLeadCard()].getSuit() + " "
-                                    + hand[GetThrowAwayBidTeamLeadCard()].getRank());
+            //if(testCheck)
+               //System.out.println("Playing a throw away card for bid winning team,"
+                                    //+ " the " + hand[GetThrowAwayBidTeamLeadCard()].getSuit() + " "
+                                    //+ hand[GetThrowAwayBidTeamLeadCard()].getRank());
             return GetThrowAwayBidTeamLeadCard();
          }
          else if(!winningBiddingTeam && getThrowAwaySetTeamLeadCard() != notFound)
          {
-            if(testCheck)
-               System.out.println("Playing a throw away card for setting team,"
-                  + " the " + hand[getThrowAwaySetTeamLeadCard()].getSuit() + " "
-                  + hand[getThrowAwaySetTeamLeadCard()].getRank());
+            //if(testCheck)
+               //System.out.println("Playing a throw away card for setting team,"
+                  //+ " the " + hand[getThrowAwaySetTeamLeadCard()].getSuit() + " "
+                  //+ hand[getThrowAwaySetTeamLeadCard()].getRank());
             return getThrowAwaySetTeamLeadCard();
          }
          //need an else method to play a non-point, non trump if possible.  Defaulting to first valid card
          //is not good. a "GetThrowAway" method perhaps.  
       }
          // }
-      if(testCheck)
-         System.out.println("Default, playing first valid card");
+         
+      //if(testCheck)
+         //System.out.println("Default, playing first valid card");
       
       // valid play if other rules don't fire
       //(first card, probable loser, whatever suit is first)
@@ -259,13 +260,13 @@ public class NPC extends Player {
       else
          trumpLed = false;
 
-      if(testCheck)
+      /*if(testCheck)
          System.out.println("Current high card is " + 
                currentHigh.getCardVal() + " of " + currentHigh.getSuit());
       if(partnerIsHigh == true && testCheck)
          System.out.println("PARTNER IS CURRENTLY WINNING");
       else if(testCheck)
-         System.out.println("Partner is currently losing");
+         System.out.println("Partner is currently losing");*/
         
       //need to replace code, currently plays the first card that is greater
       //than the current card being led.
@@ -277,53 +278,53 @@ public class NPC extends Player {
       {
         if(currentHighShouldWin(trick, currentHigh) || trick[2] != null)
         {
-           if(testCheck)
-             System.out.println("Partner should win!");
+           //if(testCheck)
+             //System.out.println("Partner should win!");
            if(trumpLed && hasRook() != -1)
            {
-             System.out.println("Dumping rook to partner");
+             //System.out.println("Dumping rook to partner");
              return hasRook();
            }
            if(getNonWinnerPointsCard(validCards, maxIndex, trumpLed) != notFound)
            {
-             if(testCheck)
-               System.out.println("Partner will win, playing a non-high points card");
+             //if(testCheck)
+               //System.out.println("Partner will win, playing a non-high points card");
              return getNonWinnerPointsCard(validCards, maxIndex, trumpLed);
            }
            if(getAnyPointsCard(validCards, maxIndex, trumpLed) != notFound)
            {
-             if(testCheck)
-               System.out.println("Partner will win, playing first point card found");
+             //if(testCheck)
+               //System.out.println("Partner will win, playing first point card found");
              return getAnyPointsCard(validCards, maxIndex, trumpLed);
            }
            //return low card/nonpoint/nontrump if possible
            if(findThrowAwayCard(validCards, maxIndex, trumpLed)!= notFound)
            {
-             System.out.println("Playing first throw away card found");
+             //System.out.println("Playing first throw away card found");
              return findThrowAwayCard(validCards, maxIndex, trumpLed);
            }
          }
          else if(partnerMayLose(trick, currentHigh))
          {
-            if(testCheck)
-               System.out.println("Partner may lose");
+            //if(testCheck)
+               //System.out.println("Partner may lose");
             if(getHandWinner(trick, currentHigh, validCards, maxIndex) != notFound)
             {
-               if(testCheck)
-                  System.out.println("Playing winning card");
+               //if(testCheck)
+                  //System.out.println("Playing winning card");
                return getHandWinner(trick, currentHigh, validCards, maxIndex);
             }
             //check for trump in
             if(canTrumpIn(validCards, maxIndex) != notFound && trickHasPoints(trick) && notLastTrump())
             {
-               System.out.println("Trumping in, points at stake");
+               //System.out.println("Trumping in, points at stake");
                return canTrumpIn(validCards, maxIndex);
             }
 
             //find throw away
             if(findThrowAwayCard(validCards, maxIndex, trumpLed)!= notFound)
             {
-               System.out.println("Playing first throw away card found");
+               //System.out.println("Playing first throw away card found");
                return findThrowAwayCard(validCards, maxIndex, trumpLed);
             }
           }
@@ -333,19 +334,20 @@ public class NPC extends Player {
                 //same suit winner check
                if(getHandWinner(trick, currentHigh, validCards, maxIndex) != notFound)
                {
-                   if(testCheck)
-                       System.out.println("Playing winning card");
+                   //if(testCheck)
+                       //System.out.println("Playing winning card");
                    return getHandWinner(trick, currentHigh, validCards, maxIndex);
                }
                //trump in check
                if(canTrumpIn(validCards, maxIndex) != notFound && !trumpLed && (trickHasPoints(trick) || trick[1] == null) && notLastTrump())
                {
-                   if(winningBiddingTeam)
+                   /*if(winningBiddingTeam)
                    {
-                        System.out.println("Trumping in, points at stake or a enemy yet to play");
+                     System.out.println("Trumping in, points at stake or a enemy yet to play");
                    }
                    else
-                       System.out.println("Trumping in, points at stake or a partner yet to play");
+                     System.out.println("Trumping in, points at stake or a partner yet to play");
+                   */
                    return canTrumpIn(validCards, maxIndex);
                }
 
@@ -354,14 +356,14 @@ public class NPC extends Player {
         {
           if(getNonWinnerPointsCard(validCards, maxIndex, trumpLed) != notFound)
           {
-            if(testCheck)
-               System.out.println("Partner has yet to play, playing a non-high points card");
+            //if(testCheck)
+               //System.out.println("Partner has yet to play, playing a non-high points card");
             return getNonWinnerPointsCard(validCards, maxIndex, trumpLed);
           }
           if(getAnyPointsCard(validCards, maxIndex, trumpLed) != notFound)
           {
-            if(testCheck)
-               System.out.println("Partner has yet to play, playing first point card found");
+            //if(testCheck)
+               //System.out.println("Partner has yet to play, playing first point card found");
             return getAnyPointsCard(validCards, maxIndex, trumpLed);
           }
         }
@@ -369,7 +371,7 @@ public class NPC extends Player {
                //if need throw away card
         if(findThrowAwayCard(validCards, maxIndex, trumpLed)!= notFound)
         {
-          System.out.println("Playing first throw away card found");
+          //System.out.println("Playing first throw away card found");
           return findThrowAwayCard(validCards, maxIndex, trumpLed);
         }
         }
@@ -377,6 +379,7 @@ public class NPC extends Player {
         //else if(!winningBiddingTeam)
         //{
         //}
+        
         /*
         for(int i =0; i < maxIndex; i++)
         {
@@ -387,14 +390,11 @@ public class NPC extends Player {
                             + validCards[i].getRank() + " of " + validCards[i].getSuit());
                 return getHandIndexOf(validCards[i]);
             }
-        }
-         *
-         */
-
-
+        }*/
+         
         //play first valid card found as default
-       if(testCheck)
-            System.out.println("Playing first valid card found as default");
+       //if(testCheck)
+         //System.out.println("Playing first valid card found as default");
 	    return getHandIndexOf(validCards[0]);
     }
     /* Method moved to Player.java
@@ -532,8 +532,8 @@ public class NPC extends Player {
 			   }
         }
         //error check
-        if(totalTrump == 0 && testCheck)
-            System.out.println("OTHER PLAYERS OUT OF TRUMP");
+        //if(totalTrump == 0 && testCheck)
+            //System.out.println("OTHER PLAYERS OUT OF TRUMP");
         
         return (totalTrump == 0);
     }
@@ -613,10 +613,8 @@ public class NPC extends Player {
         Card card = null;
         Card[] validFollowCards = new Card[15];
         int maxIndex = -1;
-        System.out.println("\nTESTINGVALIDFOLLOW:\n");
+        //System.out.println("\nTESTINGVALIDFOLLOW:\n");
 
-        if(trick[0]==null)
-            System.out.println("trick is null");
         //code to get valid cards while following suit
         for(int i = 0; i < 15; i++)
         {
@@ -733,29 +731,30 @@ public class NPC extends Player {
      */
     public int hasHighTrump(ArrayList<Card> potentialWinners)
     {
-        for(int i = 0; i < potentialWinners.size(); i++)
-                {
-                    for(int handIndex = 0; handIndex < 15; handIndex++)
-                    {
-                        if(hand[handIndex] != null && potentialWinners.get(i) != null && hand[handIndex].getValue() == potentialWinners.get(i).getValue()
-                                && hand[handIndex].getSuit() == getTrump())
-                        {
-                            if(testCheck)
-                                System.out.println("Playing High Trump from hand index " + handIndex + " value of " + hand[handIndex].getValue());
-                            cardPlayed(hand[handIndex]);
-                            ArrayList<Card> prospWinners = new ArrayList<Card>();
-                            prospWinners = winningCards();
-                            int returner = hasHighTrump(prospWinners);
-                            cardUnPlayed(hand[handIndex]);
-                            if(returner != notFound)
-                                return returner;
-                            else
-
-                                return handIndex;
-                        }
-                    }
-                }
-        return -1;
+      for(int i = 0; i < potentialWinners.size(); i++)
+      {
+          for(int handIndex = 0; handIndex < 15; handIndex++)
+          {
+            if(hand[handIndex] != null && potentialWinners.get(i) != null 
+                  && hand[handIndex].getValue() == potentialWinners.get(i).getValue()
+                      && hand[handIndex].getSuit() == getTrump()
+                           &&!hand[handIndex].getSuit().equals(Card.Suit.BLANK))
+            {
+              //if(testCheck)
+                  //System.out.println("Playing High Trump from hand index " + handIndex + " value of " + hand[handIndex].getValue());
+              cardPlayed(hand[handIndex]);
+              ArrayList<Card> prospWinners = new ArrayList<Card>();
+              prospWinners = winningCards();
+              int returner = hasHighTrump(prospWinners);
+              cardUnPlayed(hand[handIndex]);
+              if(returner != notFound)
+                  return returner;
+              else
+                  return handIndex;
+            }
+          }
+       }
+      return -1;
     }
 
 
@@ -786,7 +785,7 @@ public class NPC extends Player {
         {
             for(int i = 1; i < 3; i++)
             {
-                if(trick[i]!= null)
+                if(trick[i]!= null&&!trick[i].getSuit().equals(Card.Suit.BLANK))
                 {
                     if(trick[i].getSuit() == trumpSuit && current.getSuit() != trumpSuit)
                     {
@@ -805,9 +804,8 @@ public class NPC extends Player {
                         current = trick[i];
                     }
                 }
-
             }
-    }
+        }
         
         return current;
     }
@@ -824,19 +822,20 @@ public class NPC extends Player {
         int foundEnd = 1;
         boolean finder = false;
         for(int i = 0; i < 3; i++)
+        {
+          if(trick[i]!= null)
+          {
+            if(trick[i]== currentHigh)
             {
-                if(trick[i]!= null)
-                {
-                    if(trick[i]== currentHigh)
-                    {
-                        foundHigh = i;
-                    }
-                }
-                else if (!finder){
-                    foundEnd = i;
-                    finder = true;
-                }
+              foundHigh = i;
             }
+          }
+          else if (!finder)
+          {
+           foundEnd = i;
+           finder = true;
+          }
+        }
         return (((foundEnd - foundHigh) % 2) == 0);
     }
 
@@ -901,7 +900,8 @@ public class NPC extends Player {
 
         for(int i = 0; i < 15; i++)
         {
-            if(hand[i] != null)
+            if(hand[i] != null
+                  && !hand[i].getSuit().equals(Card.Suit.BLANK))
             {
                 if(hand[i].getSuit() != trumpSuit)
                 {
@@ -939,7 +939,7 @@ public class NPC extends Player {
         
         for(int i = 0; i < 15; i++)
         {
-            if(hand[i] != null)
+            if(hand[i] != null && !hand[i].getSuit().equals(Card.Suit.BLANK))
             {
                 if(hand[i].getSuit() != trumpSuit)
                 {
@@ -969,7 +969,7 @@ public class NPC extends Player {
 
         for(int i = 0; i < 15; i++)
         {
-            if(hand[i] != null)
+            if(hand[i] != null && !hand[i].getSuit().equals(Card.Suit.BLANK))
             {
                 if(hand[i].getSuit() != trumpSuit)
                 {
@@ -1021,7 +1021,9 @@ public class NPC extends Player {
         if(prospWinners.size() > 0)
         for(int i = 0; i < prospWinners.size(); i++)
         {
-            if(prospWinners.get(i) != null && prospWinners.get(i).getSuit() == currentHighCard.getSuit())
+            if(prospWinners.get(i) != null 
+                  && prospWinners.get(i).getSuit() == currentHighCard.getSuit()
+                     && !prospWinners.get(i).getSuit().equals(Card.Suit.BLANK))
             {
                 if(prospWinners.get(i).getRank() <= currentHighCard.getRank())
                 {
@@ -1055,13 +1057,14 @@ public class NPC extends Player {
      */
     public int getNonWinnerPointsCard(Card validCards[], int maxIndex, boolean trumpLed)
     {
-
         ArrayList<Card> prospWinners = new ArrayList<Card>();
         prospWinners = winningCards();
         //return first a points card that is not a winner
         for(int i = 0; i <= maxIndex; i++)
         {
-            if(validCards[i].getScore() != 0 && ((validCards[i].getSuit() != trumpSuit) || trumpLed))
+            if(validCards[i].getScore() != 0 
+                  && ((validCards[i].getSuit() != trumpSuit) || trumpLed)
+                     && !validCards[i].getSuit().equals(Card.Suit.BLANK))
             {
                 for(int checkPotentialWinner = 0; checkPotentialWinner < prospWinners.size(); checkPotentialWinner++)
                 {
@@ -1087,7 +1090,9 @@ public class NPC extends Player {
     {
         for(int i = 0; i <= maxIndex; i++)
         {
-            if(validCards[i].getScore() != 0 && (validCards[i].getSuit() != trumpSuit || trumpLed))
+            if(validCards[i].getScore() != 0 
+                  && (validCards[i].getSuit() != trumpSuit || trumpLed)
+                     &&!validCards[i].getSuit().equals(Card.Suit.BLANK))
             {
                 return getHandIndexOf(validCards[i]);
             }
@@ -1124,13 +1129,13 @@ public class NPC extends Player {
         if(prospWinners.size() > 0)
         for(int i = 0; i < prospWinners.size(); i++)
         {
-            if(prospWinners.get(i) != null && prospWinners.get(i).getSuit() == currentHighCard.getSuit())
+          if(prospWinners.get(i) != null && prospWinners.get(i).getSuit() == currentHighCard.getSuit())
+          {
+            if(prospWinners.get(i).getRank() > currentHighCard.getRank())
             {
-                if(prospWinners.get(i).getRank() > currentHighCard.getRank())
-                {
-                    return true;
-                }
+               return true;
             }
+          }
         }
         return false;
     }
@@ -1150,7 +1155,8 @@ public class NPC extends Player {
         {
             for(int i = 0; i < prospWinners.size(); i++)
             {
-                if(prospWinners.get(i).getSuit() == currentHighCard.getSuit())
+                if(prospWinners.get(i).getSuit() == currentHighCard.getSuit()
+                     && !prospWinners.get(i).getSuit().equals(Card.Suit.BLANK))
                 {
                     for(int handIndex = 0; handIndex <= maxIndex; handIndex++)
                     {
@@ -1187,7 +1193,9 @@ public class NPC extends Player {
                      && (prospWinners.size() < 4 ||validCards[i].getValue() != prospWinners.get(3).getValue())  )
                 {
                     //check to see if the valid card is trump or worth points.
-                    if(validCards[i].getScore() == 0 && (trumpLed ||validCards[i].getSuit() != trumpSuit))
+                    if(validCards[i].getScore() == 0 
+                        && (trumpLed ||validCards[i].getSuit() != trumpSuit)
+                           && !validCards[i].getSuit().equals(Card.Suit.BLANK))
                         return getHandIndexOf(validCards[i]);
                 }
         }
@@ -1204,7 +1212,8 @@ public class NPC extends Player {
     {
         for(int i = 0; i <= maxIndex; i++)
         {
-            if(validCards[i].getSuit() == trumpSuit)
+            if(validCards[i].getSuit() == trumpSuit
+                  && !validCards[i].getSuit().equals(Card.Suit.BLANK))
                 return getHandIndexOf(validCards[i]);
         }
         return -1;
@@ -1314,92 +1323,85 @@ public class NPC extends Player {
         int second = 0;
         Card.Suit secondLongest = Card.Suit.BLANK;
         boolean suitsOfEqualLength = determineSuitsOfEqualLengthPresent();
-            if(strongestSuit == Card.Suit.RED)
+        if(strongestSuit == Card.Suit.RED)
+        {
+            if(!suitsOfEqualLength)
             {
-                if(!suitsOfEqualLength)
-                {
-                    second = Math.max(blueLength, greenLength);
-                    second = Math.max(blackLength, second);
-                }
-                else
-                {
-                	//the case where strongest suit (trump) is also tied for the longest
-                	 if(redLength == blackLength)
-                         second = computeSuitStrength(Card.Suit.BLACK);
-                     else if(redLength == blueLength)
-                     	second = computeSuitStrength(Card.Suit.BLUE);
-                     else if(redLength == greenLength)
-                         second = computeSuitStrength(Card.Suit.GREEN);
-                	 
-                	 
-                	//checking for a 3 way tie for longest suit
-                     else if(blueLength == greenLength)
-                        second = Math.max(computeSuitStrength(Card.Suit.BLUE), computeSuitStrength(Card.Suit.GREEN));
-                    else if(blueLength == blackLength)
-                        second = Math.max(computeSuitStrength(Card.Suit.BLUE), computeSuitStrength(Card.Suit.BLACK));
-                    else if(greenLength == blackLength)
-                        second = Math.max(computeSuitStrength(Card.Suit.GREEN), computeSuitStrength(Card.Suit.BLACK));
-                    
-                    
-                   
-                   //add in more comparisons here
-                    //else if()
-                }
-
+               second = Math.max(blueLength, greenLength);
+               second = Math.max(blackLength, second);
             }
-            else if(strongestSuit == Card.Suit.GREEN)
+            else
             {
-                if(!suitsOfEqualLength)
-                {
-                    second = Math.max(redLength, blueLength);
-                    second = Math.max(blackLength, second);
-                }
-                else
-                {
-                	
-                	//the case where strongest suit (trump) is also tied for the longest
-               	 if(greenLength == blackLength)
-                     second = computeSuitStrength(Card.Suit.BLACK);
-                 else if(greenLength == blueLength)
+               //the case where strongest suit (trump) is also tied for the longest
+               if(redLength == blackLength)
+                  second = computeSuitStrength(Card.Suit.BLACK);
+               else if(redLength == blueLength)
+                  second = computeSuitStrength(Card.Suit.BLUE);
+               else if(redLength == greenLength)
+                  second = computeSuitStrength(Card.Suit.GREEN); 
+               //checking for a 3 way tie for longest suit
+               else if(blueLength == greenLength)
+                  second = Math.max(computeSuitStrength(Card.Suit.BLUE), computeSuitStrength(Card.Suit.GREEN));
+               else if(blueLength == blackLength)
+                  second = Math.max(computeSuitStrength(Card.Suit.BLUE), computeSuitStrength(Card.Suit.BLACK));
+               else if(greenLength == blackLength)
+                  second = Math.max(computeSuitStrength(Card.Suit.GREEN), computeSuitStrength(Card.Suit.BLACK));
+
+               //add in more comparisons here
+             }
+         }
+         else if(strongestSuit == Card.Suit.GREEN)
+         {
+            if(!suitsOfEqualLength)
+            {
+               second = Math.max(redLength, blueLength);
+               second = Math.max(blackLength, second);
+            }
+            else
+            {
+               //the case where strongest suit (trump) is also tied for the longest
+               if(greenLength == blackLength)
+                  second = computeSuitStrength(Card.Suit.BLACK);
+               else if(greenLength == blueLength)
                  	second = computeSuitStrength(Card.Suit.BLUE);
-                 else if(greenLength == redLength)
-                     second = computeSuitStrength(Card.Suit.RED);
+               else if(greenLength == redLength)
+                  second = computeSuitStrength(Card.Suit.RED);
                 	
                //checking for a 3 way tie for longest suit
-                 else if(redLength == blueLength)
-                        second = Math.max(computeSuitStrength(Card.Suit.BLUE), computeSuitStrength(Card.Suit.RED));
-                    else if(redLength == blackLength)
-                        second = Math.max(computeSuitStrength(Card.Suit.RED), computeSuitStrength(Card.Suit.BLACK));
-                    else if(blueLength == blackLength)
-                        second = Math.max(computeSuitStrength(Card.Suit.BLUE), computeSuitStrength(Card.Suit.BLACK));
-                }
+               else if(redLength == blueLength)
+                  second = Math.max(computeSuitStrength(Card.Suit.BLUE), computeSuitStrength(Card.Suit.RED));
+               else if(redLength == blackLength)
+                  second = Math.max(computeSuitStrength(Card.Suit.RED), computeSuitStrength(Card.Suit.BLACK));
+               else if(blueLength == blackLength)
+                  second = Math.max(computeSuitStrength(Card.Suit.BLUE), computeSuitStrength(Card.Suit.BLACK));
             }
-            else if(strongestSuit == Card.Suit.BLUE)
-            {
-                if(!suitsOfEqualLength)
+          }
+          else if(strongestSuit == Card.Suit.BLUE)
+          {
+            if(!suitsOfEqualLength)
                 {
                     second = Math.max(redLength, greenLength);
                     second = Math.max(blackLength, second);
                 }
-                else
-                {
-                	//the case where strongest suit (trump) is also tied for the longest
-                	 if(blueLength == blackLength)
-                         second = computeSuitStrength(Card.Suit.BLACK);
-                     else if(blueLength == greenLength)
-                     	second = computeSuitStrength(Card.Suit.GREEN);
-                     else if(blueLength == redLength)
-                         second = computeSuitStrength(Card.Suit.RED);
+            else
+            {
+               //the case where strongest suit (trump) is also tied for the longest
+               if(blueLength == blackLength)
+                  second = computeSuitStrength(Card.Suit.BLACK);
+               else if(blueLength == greenLength)
+                  second = computeSuitStrength(Card.Suit.GREEN);
+               else if(blueLength == redLength)
+                  second = computeSuitStrength(Card.Suit.RED);
                 	
-                	//checking for a 3 way tie for longest suit
-                    else if(redLength == greenLength)
-                        second = Math.max(computeSuitStrength(Card.Suit.GREEN), computeSuitStrength(Card.Suit.RED));
-                    else if(redLength == blackLength)
-                        second = Math.max(computeSuitStrength(Card.Suit.RED), computeSuitStrength(Card.Suit.BLACK));
-                    else if(greenLength == blackLength)
-                        second = Math.max(computeSuitStrength(Card.Suit.GREEN), computeSuitStrength(Card.Suit.BLACK));
-                }
-            }
+               //checking for a 3 way tie for longest suit
+               else if(redLength == greenLength)
+                  second = Math.max(computeSuitStrength(Card.Suit.GREEN), computeSuitStrength(Card.Suit.RED));
+               else if(redLength == blackLength)
+                  second = Math.max(computeSuitStrength(Card.Suit.RED), computeSuitStrength(Card.Suit.BLACK));
+               else if(greenLength == blackLength)
+                  second = Math.max(computeSuitStrength(Card.Suit.GREEN), computeSuitStrength(Card.Suit.BLACK));
+             }
+           }
             else if(strongestSuit == Card.Suit.BLACK)
             {
                 if(!suitsOfEqualLength)
@@ -1475,15 +1477,15 @@ public class NPC extends Player {
      */
     private void attemptToShortSuit()
     {
-        for(int i = 14; i >= 0; i--)
-        {
-            if(discarded[i] && numberPossibleCards > 5 &&
+      for(int i = 14; i >= 0; i--)
+      {
+        if(discarded[i] && numberPossibleCards > 5 &&
                hand[i].getSuit() == secondLongestSuit)
-            {
-                discarded[i] = false;
-                numberPossibleCards--;
-            }
+        {
+            discarded[i] = false;
+            numberPossibleCards--;
         }
+      }
     }
 
     /**
@@ -1492,30 +1494,22 @@ public class NPC extends Player {
      */
     private void choosePossibleWinnersToKeep()
     {
-    	
-    	
         Card.Suit lastWinnerSuit = strongestSuit;
         int lastWinnerRank = 0;
         
-     
         for(int i=0;i<15;i++)
         {
-            
-            
-	            if(discarded[i] && numberPossibleCards > 5 &&
+	         if(discarded[i] && numberPossibleCards > 5 &&
 	               hand[i].getSuit() != secondLongestSuit &&
 	               hand[i].getSuit() != strongestSuit &&
 	               lastWinnerSuit != hand[i].getSuit() &&
 	               lastWinnerRank <= hand[i].getRank())
-	            {
-	                discarded[i] = false;
-	                numberPossibleCards--;
-	                lastWinnerSuit = hand[i].getSuit();
-	                lastWinnerRank = hand[i].getRank();
-	            }
-	            
-            
-            
+	         {
+	            discarded[i] = false;
+	            numberPossibleCards--;
+	            lastWinnerSuit = hand[i].getSuit();
+	            lastWinnerRank = hand[i].getRank();
+	         }  
         }
         
         //what Kevin added

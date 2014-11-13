@@ -560,28 +560,14 @@ public class Player {
     //add what was played to current trick array
     //reorganize hand
     public Card[] Play(Card[] trick, int indexOfPlaceInTrick)
-    {
-      // check that a hand is being dealt
-      System.out.println("Current players hand before they discard: ");
-      for(int i=0;i<hand.length;i++)
-      {
-         if(hand[i]==null)
-            System.out.print("null\n");
-         if(hand[i].getCardVal()!=0)
-         {
-            System.out.print(i + ". " +hand[i].getCardVal() 
-                        + " " + hand[i].getSuit()+"\n");
-         }
-      }
-
+    {     
       //Index in Players hand of the card to play
       int indexToPlay=playFollowLeadCard(trick);
       
       //Set the corresponding spot in the trick to
       //the card at indexToPlay in current players hand
       Card cardToPlay = new Card();
-      cardToPlay.setCard(hand[indexToPlay].getSuit(),
-                                 hand[indexToPlay].getValue());
+      cardToPlay.setCard(hand[indexToPlay].getSuit(),hand[indexToPlay].getValue());
       cardToPlay.setCardValue(hand[indexToPlay].getCardVal());
       trick[indexOfPlaceInTrick]=cardToPlay;
       
@@ -593,7 +579,7 @@ public class Player {
       sortHand(hand.length);
       
       //Check that hand is sorted
-      System.out.println("Sorted hand of player "+indexOfPlaceInTrick+
+      /*System.out.println("Sorted hand of player "+indexOfPlaceInTrick+
                               " places after the trickWinner(after they discard)");
       for(int i=0;i<hand.length;i++)
       {
@@ -602,7 +588,7 @@ public class Player {
             System.out.println(i +". "+ hand[i].getCardVal() 
                         + " " + hand[i].getSuit());
          }
-      }
+      }*/
          
       //Check that card is added to trick
       System.out.println("Trick so far: ");
