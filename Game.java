@@ -524,7 +524,11 @@ public void addRoundScoreToGameScore(){
 			roundScore[1] +=20;
 		}
 	}
-	
+	else{
+		System.out.println("both teams won 5 tricks");
+	}
+	System.out.println("computer score after everything: "+roundScore[0]);
+	System.out.println("computer score after everything: "+roundScore[1]);
 	//computer team won the bid
 	if (bidWinner%2==0){
 		
