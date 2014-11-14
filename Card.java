@@ -72,9 +72,9 @@ public class Card {
 		if (isRook()) {
 			return 6;
 		}
-//		if(getValue()==100){
-//			return 100;
-//		}
+		if(getValue()==100){
+			return 100;
+		}
 		else {
 			int temp = value % 11;
 			if (temp > 5) temp += 1;
@@ -116,6 +116,9 @@ public class Card {
 					return 10;
 				case 11: //one
 					return 15;
+				case 100: //blank cards
+					return -1;
+					
 				default:
 					return 0;
 			}
@@ -164,9 +167,9 @@ public class Card {
     		case 11:
     			cardVal = 1;
     		break;
-//    		case 100:
-//    			cardVal = 100;
-//    		break;
+    		case 100:
+    			cardVal = -1;
+    		break;
     		default:
     			cardVal = 0;
     			
