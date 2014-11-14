@@ -105,7 +105,6 @@ public class Game {
 		       	  }   
 		     }
 		  }
-		  System.out.println("Done with bidding");
         trickWinner=bidWinner; 
 	}
 		

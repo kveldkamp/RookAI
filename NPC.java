@@ -135,7 +135,7 @@ public class NPC extends Player {
     public int bid(int highBid) {
         // bid 100 if we're the first to bid, otherwise bid the high bid + 5
         if(highBid == 0) {
-            return 50;
+            return 100;
         }
         //Make sure highbid won't exceed 200
         else{
