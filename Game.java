@@ -213,9 +213,8 @@ public class Game {
          addTrickScore(trickWinner,currentTrick);
          
       } //for loop end
-      
-      addRoundScoreToGameScore();
       addDiscardToScore();
+      addRoundScoreToGameScore();
       displayScore();
    } //playGame end
    
@@ -490,10 +489,10 @@ public void addDiscardToScore(){
 	 * and players 1 and 3 are currentTeamScores[1]
 	 */
 	if(trickWinner == 0 || trickWinner == 2){
-		currentTeamScores[0] += discardScore();
+		roundScore[0] += discardScore();
 	}
 	if(trickWinner == 1 || trickWinner == 3){
-		currentTeamScores[1] += discardScore();
+		roundScore[1] += discardScore();
 	}
 }
 /** 
@@ -513,6 +512,19 @@ public int discardScore(){
 
 
 public void addRoundScoreToGameScore(){
+	
+	//tricksWon refers to number of tricks won by computer team, adds 20 pts if its greater than 5
+	if(tricksWon!=5){
+		if(tricksWon>5){
+			roundScore[0] += 20;
+			System.out.println("computer team got 20 bonus points!");
+		}
+		else{
+			System.out.println("human team got 20 bonus points!");
+			roundScore[1] +=20;
+		}
+	}
+	
 	//computer team won the bid
 	if (bidWinner%2==0){
 		
@@ -520,7 +532,7 @@ public void addRoundScoreToGameScore(){
 		currentTeamScores[1] += roundScore[1];
 		
 		if(roundScore[0]<players[bidWinner].bidAmount){
-			currentTeamScores[0] -= (players[bidWinner].bidAmount-roundScore[0]);
+			currentTeamScores[0] -= players[bidWinner].bidAmount;
 		}
 	
 		else{
@@ -534,7 +546,7 @@ public void addRoundScoreToGameScore(){
 		currentTeamScores[0] += roundScore[0];
 		
 		if(roundScore[1]<players[bidWinner].bidAmount){
-			currentTeamScores[1] -= (players[bidWinner].bidAmount-roundScore[1]);
+			currentTeamScores[1] -= players[bidWinner].bidAmount;
 		}
 	
 		else{
@@ -542,15 +554,8 @@ public void addRoundScoreToGameScore(){
 		}
 	}
 	
-	//tricksWon refers to number of tricks won by computer team, adds 20 pts if its greater than 5
-	if(tricksWon!=5){
-		if(tricksWon>5){
-			currentTeamScores[0] += 20;
-		}
-		else{
-			currentTeamScores[1] +=20;
-		}
-	}
+	
+	
 }
 
 /** 
