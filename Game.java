@@ -434,12 +434,12 @@ public void sendKitty(){
      			  players[a].setTrump(trumpColor);
      		}		
      		
-     		//debug//
-     		System.out.println("red length"+players[bidWinner].redLength);
-     		System.out.println("green length"+players[bidWinner].greenLength);
-     		System.out.println("blue length"+players[bidWinner].blueLength);
-     		System.out.println("black length"+players[bidWinner].blackLength);
-     		//
+//     		//debug//
+//     		System.out.println("red length"+players[bidWinner].redLength);
+//     		System.out.println("green length"+players[bidWinner].greenLength);
+//     		System.out.println("blue length"+players[bidWinner].blueLength);
+//     		System.out.println("black length"+players[bidWinner].blackLength);
+//     		//
      		
      		
 			players[bidWinner].reorganizeHand((players[bidWinner].chooseDiscards()));
@@ -474,8 +474,8 @@ public void addTrickScore(int trickWinner, Card[] currentTrick){
 	}
 	
 	System.out.println("Value of trick: "+trickScore);
-	System.out.println("Team one's, Players 0 and 2, score: " + roundScore[0]);
-	System.out.println("Team two's, Players 1 and 3 (you), score: " + roundScore[1]);
+	System.out.println("Team one's, Players 0 and 2, trick score: " + roundScore[0]);
+	System.out.println("Team two's, Players 1 and 3 (you), trick score: " + roundScore[1]);
 		
 	
 }
@@ -527,8 +527,8 @@ public void addRoundScoreToGameScore(){
 	else{
 		System.out.println("both teams won 5 tricks");
 	}
-	System.out.println("computer score after everything: "+roundScore[0]);
-	System.out.println("computer score after everything: "+roundScore[1]);
+//	System.out.println("computer score after everything: "+roundScore[0]);
+//	System.out.println("computer/real score after everything: "+roundScore[1]);
 	//computer team won the bid
 	if (bidWinner%2==0){
 		
