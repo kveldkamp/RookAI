@@ -527,14 +527,14 @@ public void addRoundScoreToGameScore(){
 	else{
 		System.out.println("both teams won 5 tricks");
 	}
-<<<<<<< Updated upstream
+//<<<<<<< Updated upstream
 //	System.out.println("computer score after everything: "+roundScore[0]);
 //	System.out.println("computer/real score after everything: "+roundScore[1]);
-=======
+//=======
 	System.out.println("tricksWon"+ " " + tricksWon);
 	System.out.println("computer score after everything: "+roundScore[0]);
 	System.out.println("computer score after everything: "+roundScore[1]);
->>>>>>> Stashed changes
+//>>>>>>> Stashed changes
 	//computer team won the bid
 	if (bidWinner%2==0){
 		
@@ -589,7 +589,7 @@ public void displayFinalScore(){
 		System.out.println("The winning team is team two, Players 1 and 3 (you), with a total of : " + currentTeamScores[1]);
 		System.out.println("Second place goes to team one, Players 0 and 2, with a total of : " + currentTeamScores[0]);
 	}
-	else{
+	if(currentTeamScores[0] == currentTeamScores[1]){
 		System.out.println("You tied!");
 		System.out.println("The winning team is team two, Players 1 and 3 (you), with a total of : " + currentTeamScores[1]);
 		System.out.println("Ther other winning team is team one, Players 0 and 2, with a total of : " + currentTeamScores[0]);
